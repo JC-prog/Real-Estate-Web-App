@@ -11,3 +11,18 @@ being shortlisted, etc.)
 5. Support buyers in mortgage calculation to determine if a property is within their budget, i.e. estimating
 monthly payments based on the price of the property, interest rate, and other relevant factors.
 6. Support customers (sellers and buyers) in rating and reviewing real estate agents. 
+
+Environment Setup
+Prerequisite
+1. Install NVM
+2. Install MySQL
+   https://dev.mysql.com/downloads/mysql/
+4. install Git
+
+Backend Setup
+1. cd to Backend folder
+2. run npm i express mysql nodemon command
+
+Client Setup
+1. cd to client folder
+2. run npx create-react-app command
