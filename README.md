@@ -25,4 +25,4 @@ Backend Setup
 
 Client Setup
 1. cd to client folder
-2. run npx create-react-app command
+2. run npx create-react-app my-app --template typescript command
