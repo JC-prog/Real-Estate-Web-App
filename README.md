@@ -23,7 +23,7 @@ Prerequisite
 
 Git Clone
 1. Create Project Folder
-2. 
+2. run command git clone https://github.com/JC-prog/Real-Estate-Web-App.git
 
 Backend Setup
 1. cd to Backend folder
@@ -31,5 +31,5 @@ Backend Setup
 
 Client Setup
 1. cd to client folder
-2. run npx create-react-app . --template typescript command
+2. run command npx create-react-app . --template typescript
 
