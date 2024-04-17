@@ -27,11 +27,11 @@ Git Clone
 
 Backend Setup
 1. cd to Backend folder
-2. run npm i express mysql nodemon command
+2. run command npm install
 
 Client Setup
 1. cd to client folder
-2. run command npx install
+2. run command npm install
 
 Launch the Server
 1. cd into backend folder
