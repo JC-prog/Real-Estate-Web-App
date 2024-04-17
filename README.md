@@ -15,9 +15,15 @@ monthly payments based on the price of the property, interest rate, and other re
 Environment Setup
 Prerequisite
 1. Install NVM
-2. Install MySQL
+   https://github.com/coreybutler/nvm-windows#readme
+3. Install MySQL
    https://dev.mysql.com/downloads/mysql/
 4. install Git
+   https://git-scm.com/downloads
+
+Git Clone
+1. Create Project Folder
+2. 
 
 Backend Setup
 1. cd to Backend folder
@@ -25,4 +31,5 @@ Backend Setup
 
 Client Setup
 1. cd to client folder
-2. run npx create-react-app my-app --template typescript command
+2. run npx create-react-app . --template typescript command
+
