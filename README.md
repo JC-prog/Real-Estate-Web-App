@@ -31,5 +31,14 @@ Backend Setup
 
 Client Setup
 1. cd to client folder
-2. run command npx create-react-app . --template typescript
+2. run command npx install
+
+Launch the Server
+1. cd into backend folder
+2. run command npm start
+3. If successful, from console you will see "Connected to server!"
+4. From browser, enter localhost:8080
+5. If successful, you will see "This is landing page"
+6. Enter localhost:8080/admin
+7. If successful, you will see "This is Admin Page"
 
