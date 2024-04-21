@@ -21,7 +21,7 @@ const db = mysql.createConnection({
 });
 
 app.get("/",  (req, res)=>{
-	res.json("This is the landing page")
+	res.json("This is the landing")
 });
 
 app.get("/home",  (req, res)=>{
