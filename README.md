@@ -33,7 +33,7 @@ Client Setup
 1. cd to client folder
 2. run command npm install
 
-Launch the Server
+Launch the Backend Server
 1. cd into backend folder
 2. run command npm start
 3. If successful, from console you will see "Connected to server!"
@@ -42,3 +42,7 @@ Launch the Server
 6. Enter localhost:8080/admin
 7. If successful, you will see "This is Admin Page"
 
+Launch the Fronted Server
+1. cd into client
+2. run command npm start
+3. If succesful, webpage will launch at localhost port 3000
