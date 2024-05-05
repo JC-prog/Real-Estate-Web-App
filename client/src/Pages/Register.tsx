@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 interface RegisterProps {
-  onRegister: (username: string, email: string, password: string) => void;
+  onRegister?: (username: string, email: string, password: string) => void;
 }
 
 const Register: React.FC<RegisterProps> = ({ onRegister }) => {
@@ -23,7 +23,9 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    onRegister(username, email, password);
+    if (onRegister) {
+      onRegister(username, email, password);
+    }
   };
 
   return (
