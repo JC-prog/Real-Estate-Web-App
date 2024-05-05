@@ -1,8 +1,5 @@
 import React from 'react'
 import { CgProfile } from "react-icons/cg";
-
-
-
 import  "./Navbar.css"
 
 const Navbar = () => {
@@ -15,13 +12,13 @@ const Navbar = () => {
         </a>
       </div>
 
-      <nav className="navbarContainer">
+      <nav className="navbarOption">
         <ul>
-          <li>Buy</li>
-          <li>Sell</li>
-          <li>Agents</li>
-          <li>Properties</li>
-          <li>About Us</li>
+          <li><a href="/buy">Buy</a></li>
+          <li><a href="/sell">Sell</a></li>
+          <li><a href="/agents">Agents</a></li>
+          <li><a href="/properties">Properties</a></li>
+          <li><a href="/about">About Us</a></li>
         </ul>
       </nav>
 
@@ -35,7 +32,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbarProfile">
-        <a href="/profile"><CgProfile/></a>
+        <a href="/profile"><CgProfile size={30}/></a>
       </div>
 
     </div>

@@ -1,0 +1,31 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+}
+
+.login-container {
+    width: 30vh;
+    height: 40vh;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: left;
+    box-shadow: 2px 2px 24px #2c2c2c1a;
+}
+
+.logo-div {
+    padding: 0;
+}
+
+.login-container label {
+    float: left;
+}
+
+button {
+    margin-top: 10px;
+    
+}
