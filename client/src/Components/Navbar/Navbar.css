@@ -13,15 +13,19 @@ body {
     justify-content: space-between;
     align-items: center;
     box-shadow: 0 2px 24px #2c2c2c1a;
+    font-size: 1em;
 }
 
 .logo-div {
+    margin-left: 2rem;
     padding: 0 2rem;
+    width: 5vh;
+    height: auto;
 }
 
 .logo-div img {
-    width: 4vh;
-    height: 4vh;
+    max-width: 100%;
+    height: auto;
 }
 
 .navbarOption {
@@ -48,7 +52,13 @@ nav a {
     font-weight: bold;
 }
 
-.navbarProfile {
-    width: 5vh;
-    height: 4vh;
+.navbarProfile a {
+    margin-right: 2rem;
+    padding: 0.3rem 2rem;
+    border: solid black;
+    border-radius: 1rem;
+    border-width: 0.1rem;
+    text-decoration: none;
+    color: #176684;
+    font-weight: bold;
 }

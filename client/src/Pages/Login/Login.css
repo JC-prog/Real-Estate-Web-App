@@ -7,14 +7,19 @@ body {
 }
 
 .login-container {
-    width: 30vh;
-    height: 40vh;
-    margin: auto;
+    margin: 5rem 50rem;
+    padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;
     text-align: left;
     box-shadow: 2px 2px 24px #2c2c2c1a;
+    background-color: #F6FAFE;
+}
+
+.login-container form {
+    padding: 5vh;
+
 }
 
 .logo-div {
@@ -23,6 +28,7 @@ body {
 
 .login-container label {
     float: left;
+    font-size: 1em;
 }
 
 button {

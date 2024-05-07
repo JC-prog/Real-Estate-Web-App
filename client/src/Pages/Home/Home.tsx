@@ -1,14 +1,15 @@
 // Component
 import Navbar from "../../Components/Navbar/Navbar"
+import  "./Home.css"
 
 const HomePage = () => {
     return (
-      <div>
+      <>
         <Navbar />
-        <div>
+        <div className="landing-page-contaner">
             <img src="/homepage-apartment.jpg"></img>
         </div>
-      </div>
+      </>
     );
   };
   

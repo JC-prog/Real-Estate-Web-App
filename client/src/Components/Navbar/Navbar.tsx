@@ -1,5 +1,4 @@
-import React from 'react'
-import { CgProfile } from "react-icons/cg";
+
 import  "./Navbar.css"
 
 const Navbar = () => {
@@ -25,14 +24,14 @@ const Navbar = () => {
       <div className="navbarSearch">
         <input
             type="text"
-            placeholder="Search ..."
+            placeholder="Search for a property"
             //value={search}
             //onChange={(e) => setSearch(e.target.value)}
           />
       </div>
 
       <div className="navbarProfile">
-        <a href="/profile"><CgProfile size={30}/></a>
+        <a href="/Login">Login</a>
       </div>
 
     </div>
