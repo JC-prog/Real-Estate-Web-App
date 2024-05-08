@@ -1,14 +1,15 @@
 import React from 'react';
 import {BrowserRouter, Routes, Route} from "react-router-dom"
-
+import Navbar from "./Components/Navbar"
+import "./App.css"
 // Components
 
 import Card from "./Components/Card/Card"
 
 // Pages
-import Home from "./Pages/Home/Home"
-import Login from "./Pages/Login/Login"
-import Register from "./Pages/Register/Register"
+import Home from "./Pages/Home"
+import Login from "./Pages/Login"
+import Register from "./Pages/Register"
 
 function App() {
 
@@ -16,6 +17,7 @@ function App() {
         <>
             <div>
                 <BrowserRouter>
+                    <Navbar></Navbar>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
                         <Route path="/Login" element={<Login/>}/>

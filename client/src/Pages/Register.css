@@ -1,0 +1,70 @@
+.register-card-container {
+    height: 100%;
+    margin: 10vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.register-container {
+    width: 80%; /* Adjust width as needed */
+    max-width: 400px; /* Maximum width to maintain readability */
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logo-div {
+    margin-bottom: 10px;
+}
+
+.register-container form {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+}
+
+.register-container label {
+    margin-bottom: 5px;
+    padding: 10px 5px;
+}
+
+.register-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.register-container button {
+    width: 50%;
+    height: 100%;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-container button:hover {
+    background-color: #0056b3;
+}
+
+.existing-user-div {
+    display: flex;
+    justify-content: center;
+}
+
+.existing-user-div a {
+    color: royalblue;
+}

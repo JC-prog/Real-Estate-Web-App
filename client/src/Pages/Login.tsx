@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Navbar from "../../Components/Navbar/Navbar"
+import Logo from "../Components/Logo";
 import  "./Login.css"
 
 interface LoginProps {
@@ -26,12 +26,11 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
   };
 
   return (
-    <div>
-      <Navbar/>
+    <div className='login-card-container'>
       <div className="login-container">
         <form onSubmit={handleSubmit}>
           <div className="logo-div">
-            <img src="/grpnaem-Logo.png"></img>
+            <Logo />
           </div>
           <h2>Login</h2>
           <p>Enter your credentials to access your account</p>
@@ -55,8 +54,13 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
               required
             />
           </div>
-          <button type="submit">Continue</button>
+          <div className='button-div'>
+            <button type="submit">Continue</button>
+          </div>
         </form>
+        <div className="new-user-div">
+          <p>New user? <a href="/register">Create an account</a></p>
+        </div>
       </div>
     </div>
   );
