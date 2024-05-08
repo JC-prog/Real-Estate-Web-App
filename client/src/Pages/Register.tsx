@@ -72,7 +72,7 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
             <button type="submit">Register</button>
           </div>
           <div className="existing-user-div">
-            <p>Existing user? <a href="/loginr">Login here</a></p>
+            <p>Existing user? <a href="/login">Login here</a></p>
           </div>
         </form>
       </div>
