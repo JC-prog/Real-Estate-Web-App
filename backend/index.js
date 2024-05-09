@@ -1,11 +1,13 @@
 import express from "express";
 import mysql from "mysql";
+import cors from 'cors';
 
 // Routes
 import adminRoute from './routes/admin.js'
 import agentRoute from './routes/agent.js'
 import buyerRoute from './routes/buyer.js'
 import sellerRoute from './routes/seller.js'
+import loginRoute from './routes/login.js'
 
 const port = 8080;
 
@@ -16,7 +18,7 @@ const app = express();
 const db = mysql.createConnection({
 	host: "localhost",
 	user: "root",
-	password: "",
+	password: " admin",
 	database: "realestate"
 });
 
@@ -27,11 +29,15 @@ app.get("/",  (req, res)=>{
 app.get("/home",  (req, res)=>{
 	res.json("This is the Home")
 });
+ 
+app.use(cors());
 
+app.use("/login", loginRoute);
 app.use("/admin", adminRoute);
 app.use("/agent", agentRoute);
 app.use("/buyer", buyerRoute);
 app.use("/seller", sellerRoute);
+
 
 app.listen(port, ()=>{
 	console.log("Connected to server!")
