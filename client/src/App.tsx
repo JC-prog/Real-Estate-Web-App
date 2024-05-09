@@ -4,7 +4,7 @@ import Navbar from "./Components/Navbar"
 import "./App.css"
 // Components
 
-import Card from "./Components/Card/Card"
+import Card from "./Components/Card"
 
 // Pages
 import Home from "./Pages/Home"

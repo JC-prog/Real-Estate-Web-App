@@ -63,8 +63,15 @@
 .new-user-div {
     display: flex;
     justify-content: center;
-}
-
-.new-user-div a {
+    align-items: center; 
+    flex-direction: column;
+    padding: 1px;
+  }
+  
+  .new-user-div p {
+    margin: 5px 0; 
+  }
+  
+  .new-user-div a {
     color: royalblue;
-}
+  }

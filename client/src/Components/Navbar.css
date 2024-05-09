@@ -16,7 +16,7 @@ nav {
     height: inherit;
 }
 
-nav ul {
+.navbar-menu ul {
     padding: 0;
     margin: 0;
     list-style: none;
@@ -26,9 +26,18 @@ nav ul {
 }
 
 .navbar-menu a {
+    padding: 0.5rem 1rem;
     color: #176684;
     font-weight: bold;
     text-decoration: none;
+    border-radius: 10px;
+    border: solid white;
+}
+
+.navbar-menu a:hover {
+    background-color: white;
+    border: solid #176684;
+    color: #176684;
 }
 
 .navbar-profile {
@@ -55,4 +64,9 @@ nav ul {
     text-decoration: none;
     color: white;
     font-weight: bold;
+}
+
+.navbar-profile a:hover {
+    background-color: white;
+    color: #176684;
 }

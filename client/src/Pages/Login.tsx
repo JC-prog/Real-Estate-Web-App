@@ -59,7 +59,8 @@ const Login: React.FC<LoginProps> = ({ onLogin }) => {
           </div>
         </form>
         <div className="new-user-div">
-          <p>New user? <a href="/register">Create an account</a></p>
+          <p>Dont have an account? <a href="/register">Create an account</a></p>
+          <p>Forget your password? <a href="/register">Click here</a></p>
         </div>
       </div>
     </div>
