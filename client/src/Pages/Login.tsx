@@ -1,13 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect,  useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AxiosResponse, AxiosError } from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import Logo from "../Components/Logo";
 import  "./Login.css"
+import api from '../api/loginApi'
 
+interface User {
+  username: string;
+  password: string;
+}
+
+interface ApiResponse {
+  data: User[];
+  status: number;
+}
+
+interface ApiError {
+  message: string;
+  status: number;
+}
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [responseReceived, setResponseReceived] = useState(false);
   const navigate = useNavigate();
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,35 +34,36 @@ const Login: React.FC = () => {
     setPassword(event.target.value);
   };
 
-  const handleApiResponse = () => {
-    // Assuming you set responseReceived to true upon receiving the response
-    setResponseReceived(true);
+  const handleApiResponse = async () => {
+    
+    const userData = { username, password};
+    
+    try {
+      const response: AxiosResponse = await api.post('/api/auth/login', userData);
 
-    // Redirect to a specific route upon receiving the response
-    navigate('/');
+      if (response.data == 'No Data') {
+        
+        return;
+
+      } else {
+        // Redirect if user data is available
+        navigate('/');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error, such as displaying an error message to the user
+    }
   };
-
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ username, password }),
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to login');
-      }
-      
-      console.log(response);
+      const testReceived = handleApiResponse();
+      console.log(testReceived);
       // Call function to handle response and redirect
-      handleApiResponse();
-
+      //handleApiResponse(testReceived);
+  
       // Handle success response here, such as redirecting to another page
     } catch (error) {
       console.error('Error:', error);

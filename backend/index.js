@@ -1,18 +1,20 @@
 import express from "express";
 import mysql from "mysql";
 import cors from 'cors';
+import bodyParser from "body-parser";
+import cookieParser from "cookie-parser";
 
 // Routes
-import adminRoute from './routes/admin.js'
-import agentRoute from './routes/agent.js'
-import buyerRoute from './routes/buyer.js'
-import sellerRoute from './routes/seller.js'
-import loginRoute from './routes/login.js'
+import authRoute from "./routes/auth-route.js";
+
 
 const port = 8080;
 
 // Express App
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+app.use(cookieParser());
 
 // Database
 const db = mysql.createConnection({
@@ -29,14 +31,10 @@ app.get("/",  (req, res)=>{
 app.get("/home",  (req, res)=>{
 	res.json("This is the Home")
 });
- 
-app.use(cors());
 
-app.use("/login", loginRoute);
-app.use("/admin", adminRoute);
-app.use("/agent", agentRoute);
-app.use("/buyer", buyerRoute);
-app.use("/seller", sellerRoute);
+app.use("/api/auth", authRoute);
+app.use("/api/sell", sellRoute)
+
 
 
 app.listen(port, ()=>{
