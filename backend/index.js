@@ -6,7 +6,7 @@ import cookieParser from "cookie-parser";
 
 // Routes
 import authRoute from "./routes/auth-route.js";
-
+import sellRoute from "./routes/sell-route.js";
 
 const port = 8080;
 
@@ -33,7 +33,7 @@ app.get("/home",  (req, res)=>{
 });
 
 app.use("/api/auth", authRoute);
-app.use("/api/sell", sellRoute)
+app.use("/api/sell", sellRoute);
 
 
 
