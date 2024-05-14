@@ -4,12 +4,12 @@ import Navbar from "./Components/Navbar"
 import "./App.css"
 // Components
 
-import Card from "./Components/Card"
-
 // Pages
 import Home from "./Pages/Home"
+import Buy from "./Pages/User/Buy"
 import Login from "./Pages/Login"
 import Register from "./Pages/Register"
+import AgentsHomePage from "./Pages/Agents/AgentsHome"
 
 function App() {
 
@@ -20,8 +20,10 @@ function App() {
                     <Navbar></Navbar>
                     <Routes>
                         <Route path="/" element={<Home/>}/>
+                        <Route path="/buy" element={<Buy/>}/>
                         <Route path="/login" element={<Login/>}/>
                         <Route path="/register" element={<Register/>}/>
+                        <Route path="/agents" element={<AgentsHomePage/>}/>
                     </Routes>
                 </BrowserRouter>
             </div>

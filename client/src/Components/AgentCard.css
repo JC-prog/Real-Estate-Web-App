@@ -1,0 +1,40 @@
+.agent-card-container {
+    border: 1px solid hsl(0, 0%, 80%);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+    padding: 10px;
+    margin: 10px;
+    text-align: left;
+    max-width: 250px;
+}
+
+.agent-card-container img {
+    width: 100%;
+    height: auto;
+}
+
+.agent-card-container h2 p{
+    margin: 1px;
+    font-size: 1rem;
+}
+
+.agent-card-button-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.agent-card-button-div button {
+    text-align: center;
+    width: 70%;
+    color: white;
+    background-color: royalblue;
+    border-radius: 5px;
+    cursor: pointer
+}
+
+.agent-card-button-div button:hover {
+    color: royalblue;
+    font-weight: bold;
+    background-color: white;
+}

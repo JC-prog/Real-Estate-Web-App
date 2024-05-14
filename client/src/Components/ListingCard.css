@@ -1,0 +1,19 @@
+.listing-div-wrapper {
+    width: 75%;
+    height: 100%;
+    border: 1px solid hsl(0, 2%, 10%);
+    border-radius: 10px;
+    box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
+    margin: 10px;
+    max-width: 500px;
+}
+
+.listing-div-wrapper img{
+    width: 100%;
+    padding: 10px;
+    border: 1px solid hsl(0, 2%, 10%);
+}
+
+.description-div {
+    padding: 10px;
+}
