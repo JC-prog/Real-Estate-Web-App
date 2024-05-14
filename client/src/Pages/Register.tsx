@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { AxiosResponse, AxiosError } from 'axios';
 import Logo from "../Components/Logo";
 import  "./Register.css"
+import api from '../api/loginApi'
 
-interface RegisterProps {
-  onRegister?: (username: string, email: string, password: string) => void;
-}
-
-const Register: React.FC<RegisterProps> = ({ onRegister }) => {
+const Register: React.FC = () => {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [responseReceived, setResponseReceived] = useState(false);
+  const navigate = useNavigate();
 
   const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUsername(event.target.value);
@@ -23,10 +24,40 @@ const Register: React.FC<RegisterProps> = ({ onRegister }) => {
     setPassword(event.target.value);
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleApiResponse = async () => {
+    
+    const userData = { username, email, password};
+    
+    try {
+      const response: AxiosResponse = await api.post('api/auth/register', userData);
+
+      if (response.status == 400) {
+        
+        return;
+
+      } else {
+        // Redirect if user data is available
+        navigate('/login');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error, such as displaying an error message to the user
+    }
+  };
+
+  const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
-    if (onRegister) {
-      onRegister(username, email, password);
+
+    try {
+      const testReceived = handleApiResponse();
+      console.log(testReceived);
+      // Call function to handle response and redirect
+      //handleApiResponse(testReceived);
+  
+      // Handle success response here, such as redirecting to another page
+    } catch (error) {
+      console.error('Error:', error);
+      // Handle error, such as displaying an error message to the user
     }
   };
 
