@@ -23,6 +23,8 @@ export const getProperties = async (req, res) => {
         res.status(201).send({
            results
         });
+
+        dbService.disconnect();
         
     } catch (err) {
         console.log(err);
