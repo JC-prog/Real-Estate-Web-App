@@ -11,6 +11,7 @@ import "./App.css";
 import Home from "./Pages/Home";
 
 import Buy from "./Pages/User/Buy";
+import Sell from "./Pages/User/Sell";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import UserProfile from "./Pages/User/UserProfile";
@@ -33,6 +34,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path="/buy" element={<Buy />} />
+            <Route path="/sell" element={<Sell />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route
