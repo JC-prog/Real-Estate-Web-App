@@ -8,6 +8,7 @@ interface ListingCardProps {
     numberOfBathrooms: number;
     price: number;
     propertyType: string;
+    squareFootage: number;
 }
 
 const ListingCard: React.FC<ListingCardProps> = ({
@@ -16,7 +17,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
     numberOfBedrooms,
     numberOfBathrooms,
     price,
-    propertyType
+    propertyType,
+    squareFootage
 }) => {
     return (
         <div className='listing-div-wrapper'>
@@ -30,6 +32,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
                 <p>{numberOfBathrooms} Bathrooms</p>
                 <p>${price}</p> {/* Format the price to 2 decimal places */}
                 <p>{propertyType}</p>
+                <p>{squareFootage}FT</p>
             </div>
         </div>
     );

@@ -3,6 +3,15 @@ import jwt from "jsonwebtoken";
 import DbService from "../service/dbService.js";
 import config from '../database/dbConfig.js'
 
+// Create JWT
+const maxAge = 3 * 24 * 60 * 60;
+const createToken = (id) => {
+  return jwt.sign({ id }, 'net ninja secret', {
+    expiresIn: maxAge
+  });
+};
+
+
 export const register = async (req, res) => {
   
     // Create an instance of DBservice
@@ -43,28 +52,6 @@ export const register = async (req, res) => {
     } catch (err) {
         console.error("Error: ", err);
     }
-    /*
-    console.log(req.body);
-    
-    const {username, email, password } = req.body;
-
-    try {
-      // Hash Password
-      const hashedPassword = await bcrypt.hash(password, 10);
-
-      // Create new user
-        const query = "SELECT * from user";
-        const result = dbService.query(query);
-        
-        console.log(result);
-        
-        
-      res.status(201).json({message: "User created successfully"});
-
-    } catch (err) {
-        console.log(err);
-        res.status(500).json({message: "Failed to create user!"})
-    } */
 };
 
 export const login = async (req, res) => {
@@ -75,14 +62,26 @@ export const login = async (req, res) => {
         await dbService.connect();
 
         // Check for user
-        const query = "SELECT 1 FROM user WHERE username = ? AND password = ? ";
+        const query = "SELECT * FROM user WHERE username = ? AND password = ? LIMIT 1";
         const params = [username, password];
 
         const results = await dbService.query(query, params);
 
         if (results.length > 0) {
             console.log("User Exist");
-            res.status(200).json({ message: "User Exist"});
+
+            const token = createToken(results.id);
+            console.log("token" + token);
+            console.log(results);
+            // Create a JSON object with the user details
+            const userJson = {
+                username: username,
+                role: results.role,
+                token: token // Optionally include the token if needed
+            };
+
+            res.cookie('jwt', token, { httpOnly: true, maxAge: maxAge * 1000 });
+            res.status(200).json(userJson);
         } else {
             console.log("No User!");
             res.status(400).json({ message: "No User!" });

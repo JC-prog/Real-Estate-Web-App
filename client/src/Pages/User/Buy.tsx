@@ -14,6 +14,7 @@ interface Property {
     numberOfBathrooms: number;
     price: number;
     propertyType: string;
+    squareFootage: number;
 }
 
 interface ApiResponse {
@@ -52,6 +53,7 @@ const BuyPage: React.FC = () => {
                     numberOfBathrooms={property.numberOfBathrooms}
                     price={property.price}
                     propertyType={property.propertyType}
+                    squareFootage={property.squareFootage}
                 />
             ))}
         </div>

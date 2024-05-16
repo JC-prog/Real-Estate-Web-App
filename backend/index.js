@@ -1,11 +1,11 @@
 import express from "express";
-import mysql from "mysql";
 import cors from 'cors';
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
 
 // Routes
 import authRoute from "./routes/auth-route.js";
+import adminRoute from "./routes/admin-route.js"
 import buyRoute from "./routes/buy-route.js";
 import sellRoute from "./routes/sell-route.js";
 import agentsRoute from "./routes/agents-route.js";
@@ -26,7 +26,9 @@ app.get("/home",  (req, res)=>{
 	res.json("This is the Home")
 });
 
+// Routes
 app.use("/api/auth", authRoute);
+app.use("/api/admin", adminRoute);
 app.use("/api/buy", buyRoute);
 app.use("/api/sell", sellRoute);
 app.use("/api/agents", agentsRoute);
