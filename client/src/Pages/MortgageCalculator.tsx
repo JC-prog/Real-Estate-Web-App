@@ -15,8 +15,8 @@ import {
 interface NewPurposeFormProps {
   principal: number;
   setPrincipal: (principal: number) => void;
-  interestRate: number;
-  setInterestRate: (interestRate: number) => void;
+  interestRate: string;
+  setInterestRate: (interestRate: string) => void;
   loanTerm: number;
   setLoanTerm: (loanTerm: number) => void;
   monthlyPayment: number;
@@ -47,7 +47,9 @@ function NewPurchaseForm({
 }: NewPurposeFormProps) {
   const calculateMortgage = () => {
     // Same calculation logic from the previous examples
-    const monthlyInterestRate = interestRate / 100 / 12;
+    const monthlyInterestRate = parseFloat(interestRate) / 100 / 12;
+
+    console.log("interestrate", parseFloat(interestRate));
     const totalPayments = loanTerm * 12;
     const payment =
       (principal * monthlyInterestRate) /
@@ -66,9 +68,12 @@ function NewPurchaseForm({
           fullWidth={true}
           value={principal}
           onChange={(event) => {
-            const newValue = parseFloat(event.target.value);
-            if (!isNaN(newValue)) {
-              setPrincipal(newValue);
+            const inputValue = event.target.value;
+            if (inputValue != "") {
+              // there is an input value
+              setPrincipal(parseFloat(inputValue));
+            } else {
+              setPrincipal(0);
             }
           }}
         />
@@ -80,9 +85,11 @@ function NewPurchaseForm({
           fullWidth={true}
           value={interestRate}
           onChange={(event) => {
-            const newValue = parseFloat(event.target.value);
-            if (!isNaN(newValue)) {
+            const newValue = event.target.value;
+            if (newValue != "") {
               setInterestRate(newValue);
+            } else {
+              setInterestRate("");
             }
           }}
         />
@@ -93,7 +100,14 @@ function NewPurchaseForm({
           label="Loan Term (Years)"
           value={loanTerm}
           fullWidth={true}
-          onChange={(event) => setLoanTerm(parseFloat(event.target.value))}
+          onChange={(event) => {
+            const newValue = event.target.value;
+            if (newValue != "") {
+              setLoanTerm(parseFloat(newValue));
+            } else {
+              setLoanTerm(0);
+            }
+          }}
         />
         <div className="calculate-button">
           <Button variant="contained" onClick={calculateMortgage}>
@@ -127,7 +141,7 @@ function RefinancingForm({
     const companyInterestRate = 2.8;
     const altmonthlyInterestRate = companyInterestRate / 100 / 12;
 
-    const monthlyInterestRate = interestRate / 100 / 12;
+    const monthlyInterestRate = parseFloat(interestRate) / 100 / 12;
     const totalPayments = loanTerm * 12;
     const payment =
       (principal * monthlyInterestRate) /
@@ -160,9 +174,11 @@ function RefinancingForm({
           fullWidth={true}
           value={principal}
           onChange={(event) => {
-            const newValue = parseFloat(event.target.value);
-            if (!isNaN(newValue)) {
-              setPrincipal(newValue);
+            const newValue = event.target.value;
+            if (newValue != "") {
+              setPrincipal(parseFloat(newValue));
+            } else {
+              setPrincipal(0);
             }
           }}
         />
@@ -174,9 +190,11 @@ function RefinancingForm({
           fullWidth={true}
           value={loanTerm}
           onChange={(event) => {
-            const newValue = parseFloat(event.target.value);
-            if (!isNaN(newValue)) {
-              setLoanTerm(newValue);
+            const newValue = event.target.value;
+            if (newValue != "") {
+              setLoanTerm(parseFloat(newValue));
+            } else {
+              setLoanTerm(0);
             }
           }}
         />
@@ -186,11 +204,14 @@ function RefinancingForm({
           required
           label="Current Interest Rate"
           fullWidth={true}
+          inputProps={{ maxLength: 4 }}
           value={interestRate}
           onChange={(event) => {
-            const newValue = parseFloat(event.target.value);
-            if (!isNaN(newValue)) {
+            const newValue = event.target.value;
+            if (newValue != "") {
               setInterestRate(newValue);
+            } else {
+              setInterestRate("");
             }
           }}
         />
@@ -211,7 +232,7 @@ enum Purpose {
 
 const MortgageCalculator = () => {
   const [principal, setPrincipal] = useState(0);
-  const [interestRate, setInterestRate] = useState(0);
+  const [interestRate, setInterestRate] = useState("");
   const [loanTerm, setLoanTerm] = useState(0);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
   const [currPurpose, setCurrPurpose] = useState<Purpose>(Purpose.NEW_PURCHASE);
