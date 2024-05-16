@@ -3,7 +3,6 @@
   height: auto;
   display: flex;
   justify-content: center;
-  font-size: 3rem;
   align-items: center;
 }
 
@@ -14,8 +13,9 @@
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 8px;
-
+  font-size: 3rem;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: lightgray;
 }
 
 /* to hold the calculations */
@@ -36,46 +36,45 @@
   border: 2px black;
 }
 
+.second-columns {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin-left: 10px;
+  background-color: #dfdfdf;
+}
 .new-purchase-form {
   display: flex;
   flex-direction: column;
   border: 2px black;
   gap: 20px;
-  padding: 20px;
+  padding: 1ch;
 }
 .refinancing-form {
   display: flex;
   flex-direction: column;
   border: 2px black;
   gap: 20px;
-  padding: 20px;
-}
-.second-columns {
-  display: flex;
-  flex-direction: column;
-  width: 400px;
-  margin: 10px;
-  border: 3px solid;
-  background-color: #dfdfdf;
+  padding: 10px;
 }
 
 .calculate-button {
-  /* display: flex; Enable flexbox for the button */
-  /*justify-content: center; /* Center content horizontally */
-  /*align-items: center; /* Center content vertically (optional) */
-  /* Add other styles for the button (optional) */
   display: flex;
   justify-content: center;
 }
 
 .refinancing-columns {
   width: 400px;
-  margin: 10px;
-  border: 3px solid;
+  margin-left: 10px;
   background-color: #dfdfdf;
 }
 
 .input-groups {
   display: flex;
   gap: 20px;
+}
+
+.purpose-buttons {
+  gap: 20px;
+  padding: 10px;
 }
