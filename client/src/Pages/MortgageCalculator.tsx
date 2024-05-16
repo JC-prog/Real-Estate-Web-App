@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import "./Mortgage.css";
-import { Button, ButtonGroup, TextField } from "@mui/material";
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { blue, blueGrey, lightGreen } from "@mui/material/colors";
 
 //pass in the props so that PurchaseForm can use them
 interface NewPurposeFormProps {
@@ -14,6 +24,8 @@ interface NewPurposeFormProps {
   setMonthlyPayment: (setMonthlyPayment: number) => void;
   altmonthlyPayment: number;
   setAltMonthlyPayment: (setAltMonthlyPayment: number) => void;
+  totalSavings: number;
+  setTotalSavings: (setTotalSavings: number) => void;
 }
 
 //for the Purchase Form
@@ -27,7 +39,8 @@ function NewPurchaseForm({
   monthlyPayment,
   setMonthlyPayment,
   altmonthlyPayment,
-  setAltMonthlyPayment,
+  totalSavings,
+  setTotalSavings,
 }: NewPurposeFormProps) {
   const calculateMortgage = () => {
     // Same calculation logic from the previous examples
@@ -99,6 +112,8 @@ function RefinancingForm({
   setMonthlyPayment,
   altmonthlyPayment,
   setAltMonthlyPayment,
+  totalSavings,
+  setTotalSavings,
 }: NewPurposeFormProps) {
   const calculateRefinance = () => {
     //for refinancing
@@ -112,6 +127,9 @@ function RefinancingForm({
       (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
     setMonthlyPayment(payment);
 
+    const totalSavings = monthlyInterestRate - altmonthlyInterestRate;
+    setTotalSavings(totalSavings);
+
     console.log(totalPayments);
     console.log(monthlyInterestRate);
     //current loan * monthly interest rate) / 1 -
@@ -121,7 +139,6 @@ function RefinancingForm({
       (principal * altmonthlyInterestRate) /
       (1 - Math.pow(1 + altmonthlyInterestRate, -totalPayments));
     setAltMonthlyPayment(alternatepayment);
-    console.log(altmonthlyPayment);
   };
 
   return (
@@ -191,6 +208,7 @@ const MortgageCalculator = () => {
 
   //for refinancing
   const [altmonthlyPayment, setAltMonthlyPayment] = useState(0);
+  const [totalSavings, setTotalSavings] = useState(0);
 
   console.log("now currPurpose is", currPurpose);
 
@@ -227,6 +245,8 @@ const MortgageCalculator = () => {
                 monthlyPayment={monthlyPayment}
                 setAltMonthlyPayment={setAltMonthlyPayment}
                 altmonthlyPayment={altmonthlyPayment}
+                totalSavings={totalSavings}
+                setTotalSavings={setTotalSavings}
               />
             ) : (
               <RefinancingForm
@@ -240,6 +260,8 @@ const MortgageCalculator = () => {
                 monthlyPayment={monthlyPayment}
                 setAltMonthlyPayment={setAltMonthlyPayment}
                 altmonthlyPayment={altmonthlyPayment}
+                totalSavings={totalSavings}
+                setTotalSavings={setTotalSavings}
               />
             )}
           </div>
@@ -262,22 +284,46 @@ const MortgageCalculator = () => {
             <div className="refinancing-columns">
               {monthlyPayment > 0 && (
                 <div className="result">
-                  <h4>
-                    Compare interest rate and refinance to a better home package
-                  </h4>
-                  <p>Monthly Repayment : ${monthlyPayment.toFixed(2)}</p>
-                  <p>
-                    Current Repayment : ${parseFloat(monthlyPayment.toFixed(2))}
-                  </p>
-                  <p>
-                    {/* based on better interest rates */}
-                    New Repayment : ${parseFloat(altmonthlyPayment.toFixed(2))}
-                  </p>
-                  <p>
-                    Savings :{" "}
-                    {parseFloat(monthlyPayment.toFixed(2)) -
-                      parseFloat(altmonthlyPayment.toFixed(2))}
-                  </p>
+                  <Card sx={{ maxWidth: 500 }}>
+                    <CardMedia
+                      component="img"
+                      alt="Refinance Pic"
+                      height="200"
+                      image="./HousePic.jpg"
+                    />
+                    <CardContent>
+                      <Typography
+                        gutterBottom
+                        variant="h6"
+                        component="div"
+                        align="center"
+                      >
+                        Compare interest rate and refinance to a better home
+                        package
+                      </Typography>
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                        align="left"
+                      >
+                        <p>Monthly Repayment : ${monthlyPayment.toFixed(2)}</p>
+                        <p>
+                          Current Repayment : $
+                          {parseFloat(monthlyPayment.toFixed(2))}
+                        </p>
+                        <p>
+                          {/* based on better interest rates */}
+                          New Repayment : $
+                          {parseFloat(altmonthlyPayment.toFixed(2))}
+                        </p>
+                        <p>Savings : </p>
+                      </Typography>
+                    </CardContent>
+                    <CardActions>
+                      <Button size="small">Share</Button>
+                      <Button size="small">Learn More</Button>
+                    </CardActions>
+                  </Card>
                 </div>
               )}
             </div>
