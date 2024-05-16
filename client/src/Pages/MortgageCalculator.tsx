@@ -213,124 +213,134 @@ const MortgageCalculator = () => {
   console.log("now currPurpose is", currPurpose);
 
   return (
-    <div className="calculator">
-      <h1>Mortgage Calculator</h1>
-      <form onSubmit={(e) => e.preventDefault()}>
-        <div className="container">
-          {/* <div className="mortgage-calculator-info">
+    <>
+      <div className="mortgage-calculator">
+        <div className="calculator">
+          <form onSubmit={(e) => e.preventDefault()}>
+            <div className="container">
+              {/* <div className="mortgage-calculator-info">
             Budget your monthly expenses properly and find out how much you need
             to set aside for your monthly repayments with our Mortgage
             Calculator.
           </div> */}
-          <div className="first-columns">
-            <div className="purpose-buttons">
-              <ButtonGroup fullWidth>
-                <Button onClick={() => setCurrPurpose(Purpose.NEW_PURCHASE)}>
-                  New Purchase{" "}
-                </Button>
-                <Button onClick={() => setCurrPurpose(Purpose.REFINANCING)}>
-                  Refinancing
-                </Button>
-              </ButtonGroup>
-            </div>
-            {currPurpose === Purpose.NEW_PURCHASE ? (
-              <NewPurchaseForm
-                principal={principal}
-                setPrincipal={setPrincipal}
-                interestRate={interestRate}
-                setInterestRate={setInterestRate}
-                loanTerm={loanTerm}
-                setLoanTerm={setLoanTerm}
-                setMonthlyPayment={setMonthlyPayment}
-                monthlyPayment={monthlyPayment}
-                setAltMonthlyPayment={setAltMonthlyPayment}
-                altmonthlyPayment={altmonthlyPayment}
-                totalSavings={totalSavings}
-                setTotalSavings={setTotalSavings}
-              />
-            ) : (
-              <RefinancingForm
-                principal={principal}
-                setPrincipal={setPrincipal}
-                interestRate={interestRate}
-                setInterestRate={setInterestRate}
-                loanTerm={loanTerm}
-                setLoanTerm={setLoanTerm}
-                setMonthlyPayment={setMonthlyPayment}
-                monthlyPayment={monthlyPayment}
-                setAltMonthlyPayment={setAltMonthlyPayment}
-                altmonthlyPayment={altmonthlyPayment}
-                totalSavings={totalSavings}
-                setTotalSavings={setTotalSavings}
-              />
-            )}
-          </div>
-          {/* if Refinance is chosen it will fly to this column */}
-          {currPurpose === Purpose.NEW_PURCHASE ? (
-            <div className="second-columns">
-              {monthlyPayment > 0 && (
-                <div className="result">
-                  <h4>Mortgage Required</h4>
-                  <p>Monthly mortgage payment : ${monthlyPayment.toFixed(2)}</p>
-                  <p>
-                    Yearly Mortgage payment : $
-                    {12 * parseFloat(monthlyPayment.toFixed(2))}
-                  </p>
-                  <p>Years to pay off : {loanTerm} years</p>
+              <div className="first-columns">
+                <div className="mortgage-header">Mortgage Calculator</div>
+                <div className="purpose-buttons">
+                  <ButtonGroup fullWidth>
+                    <Button
+                      onClick={() => setCurrPurpose(Purpose.NEW_PURCHASE)}
+                    >
+                      New Purchase{" "}
+                    </Button>
+                    <Button onClick={() => setCurrPurpose(Purpose.REFINANCING)}>
+                      Refinancing
+                    </Button>
+                  </ButtonGroup>
+                </div>
+                {currPurpose === Purpose.NEW_PURCHASE ? (
+                  <NewPurchaseForm
+                    principal={principal}
+                    setPrincipal={setPrincipal}
+                    interestRate={interestRate}
+                    setInterestRate={setInterestRate}
+                    loanTerm={loanTerm}
+                    setLoanTerm={setLoanTerm}
+                    setMonthlyPayment={setMonthlyPayment}
+                    monthlyPayment={monthlyPayment}
+                    setAltMonthlyPayment={setAltMonthlyPayment}
+                    altmonthlyPayment={altmonthlyPayment}
+                    totalSavings={totalSavings}
+                    setTotalSavings={setTotalSavings}
+                  />
+                ) : (
+                  <RefinancingForm
+                    principal={principal}
+                    setPrincipal={setPrincipal}
+                    interestRate={interestRate}
+                    setInterestRate={setInterestRate}
+                    loanTerm={loanTerm}
+                    setLoanTerm={setLoanTerm}
+                    setMonthlyPayment={setMonthlyPayment}
+                    monthlyPayment={monthlyPayment}
+                    setAltMonthlyPayment={setAltMonthlyPayment}
+                    altmonthlyPayment={altmonthlyPayment}
+                    totalSavings={totalSavings}
+                    setTotalSavings={setTotalSavings}
+                  />
+                )}
+              </div>
+              {/* if Refinance is chosen it will fly to this column */}
+              {currPurpose === Purpose.NEW_PURCHASE ? (
+                <div className="second-columns">
+                  {monthlyPayment > 0 && (
+                    <div className="result">
+                      <h4>Mortgage Required</h4>
+                      <p>
+                        Monthly mortgage payment : ${monthlyPayment.toFixed(2)}
+                      </p>
+                      <p>
+                        Yearly Mortgage payment : $
+                        {12 * parseFloat(monthlyPayment.toFixed(2))}
+                      </p>
+                      <p>Years to pay off : {loanTerm} years</p>
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <div className="refinancing-columns">
+                  {monthlyPayment > 0 && (
+                    <div className="result">
+                      <Card sx={{ maxWidth: 500 }}>
+                        <CardMedia
+                          component="img"
+                          alt="Refinance Pic"
+                          height="200"
+                          image="./HousePic.jpg"
+                        />
+                        <CardContent>
+                          <Typography
+                            gutterBottom
+                            variant="h6"
+                            component="div"
+                            align="center"
+                          >
+                            Compare interest rate and refinance to a better home
+                            package
+                          </Typography>
+                          <Typography
+                            variant="body2"
+                            color="text.secondary"
+                            align="left"
+                          >
+                            <p>
+                              Monthly Repayment : ${monthlyPayment.toFixed(2)}
+                            </p>
+                            <p>
+                              Current Repayment : $
+                              {parseFloat(monthlyPayment.toFixed(2))}
+                            </p>
+                            <p>
+                              {/* based on better interest rates */}
+                              New Repayment : $
+                              {parseFloat(altmonthlyPayment.toFixed(2))}
+                            </p>
+                            <p>Savings : </p>
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button size="small">Share</Button>
+                          <Button size="small">Learn More</Button>
+                        </CardActions>
+                      </Card>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
-          ) : (
-            <div className="refinancing-columns">
-              {monthlyPayment > 0 && (
-                <div className="result">
-                  <Card sx={{ maxWidth: 500 }}>
-                    <CardMedia
-                      component="img"
-                      alt="Refinance Pic"
-                      height="200"
-                      image="./HousePic.jpg"
-                    />
-                    <CardContent>
-                      <Typography
-                        gutterBottom
-                        variant="h6"
-                        component="div"
-                        align="center"
-                      >
-                        Compare interest rate and refinance to a better home
-                        package
-                      </Typography>
-                      <Typography
-                        variant="body2"
-                        color="text.secondary"
-                        align="left"
-                      >
-                        <p>Monthly Repayment : ${monthlyPayment.toFixed(2)}</p>
-                        <p>
-                          Current Repayment : $
-                          {parseFloat(monthlyPayment.toFixed(2))}
-                        </p>
-                        <p>
-                          {/* based on better interest rates */}
-                          New Repayment : $
-                          {parseFloat(altmonthlyPayment.toFixed(2))}
-                        </p>
-                        <p>Savings : </p>
-                      </Typography>
-                    </CardContent>
-                    <CardActions>
-                      <Button size="small">Share</Button>
-                      <Button size="small">Learn More</Button>
-                    </CardActions>
-                  </Card>
-                </div>
-              )}
-            </div>
-          )}
+          </form>
         </div>
-      </form>
-    </div>
+      </div>
+    </>
   );
 };
 
