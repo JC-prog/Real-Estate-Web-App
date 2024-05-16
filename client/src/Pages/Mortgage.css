@@ -1,4 +1,4 @@
-.calculator h1 {
+.calculator {
   color: black;
   height: auto;
   display: flex;
@@ -7,10 +7,27 @@
   align-items: center;
 }
 
+.mortgage-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
 /* to hold the calculations */
 .container {
   display: flex;
   justify-content: center;
+  width: auto; /* Adjust width as needed */
+  max-width: auto; /* Maximum width to maintain readability */
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .mortgage-calculator-info {
@@ -34,6 +51,8 @@
   padding: 20px;
 }
 .second-columns {
+  display: flex;
+  flex-direction: column;
   width: 400px;
   margin: 10px;
   border: 3px solid;
