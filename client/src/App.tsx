@@ -9,12 +9,17 @@ import "./App.css";
 
 // Pages
 import Home from "./Pages/Home";
-import Admin from "./Pages/Admin/AdminHome";
+
 import Buy from "./Pages/User/Buy";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import MortgageCalculator from "./Pages/MortgageCalculator";
 import AgentsHomePage from "./Pages/Agents/AgentsHome";
+
+// Admin Pages
+import Admin from "./Pages/Admin/AdminHome";
+import AdminCreateUser from "./Pages/Admin/AdminCreateUser";
+import AdminViewUsers from "./Pages/Admin/AdminViewUsers";
 
 function App() {
   return (
@@ -25,7 +30,7 @@ function App() {
           <Navbar></Navbar>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/admin" element={<Admin />}/>
+
             <Route path="/buy" element={<Buy />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
@@ -34,6 +39,11 @@ function App() {
               element={<MortgageCalculator />}
             />
             <Route path="/agents" element={<AgentsHomePage />} />
+
+            <Route path="/admin" element={<Admin />}/>
+            <Route path="/admin/create-user" element={<AdminCreateUser />}/>
+            <Route path="/admin/view-users" element={<AdminViewUsers />}/>
+
           </Routes>
         </BrowserRouter>
       </div>
