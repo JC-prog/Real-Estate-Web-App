@@ -72,11 +72,11 @@ export const login = async (req, res) => {
 
             const token = createToken(results.id);
             console.log("token" + token);
-            console.log(results);
+            console.log(results[0].role);
             // Create a JSON object with the user details
             const userJson = {
                 username: username,
-                role: results.role,
+                role: results[0].role,
                 token: token // Optionally include the token if needed
             };
 
