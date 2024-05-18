@@ -33,8 +33,8 @@ const BuyPage: React.FC = () => {
             console.log('API response:', response.data); // Debugging line
             setProperties(response.data.results);
           } catch (error) {
-            setError('Failed to fetch agents');
-            console.error('Error fetching agents:', error);
+            setError('Failed to fetch Listing');
+            console.error('Error fetching Listing:', error);
           } finally {
             setLoading(false);
           }
