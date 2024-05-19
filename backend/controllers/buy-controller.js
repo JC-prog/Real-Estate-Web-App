@@ -1,6 +1,6 @@
 import DbService from "../service/dbService.js";
-import config from '../database/dbConfig.js'
-// import config from '../database/dbConfigAzure.js'// uncomment this to connect to azure db
+// import config from '../database/dbConfig.js'
+import config from '../database/dbConfigAzure.js'// uncomment this to connect to azure db
 
 export const getProperties = async (req, res) => {
     // Create an instance of DBservice
