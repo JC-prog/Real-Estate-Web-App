@@ -3,8 +3,36 @@
     padding: 0;
 }
 
+
+.title{
+    text-align: center;
+}
+
 .container{
     display: flex;
-    flex-flow: column wrap;
+    /* flex-flow: column wrap; */
+    justify-content: center; 
     align-items: center;
+    gap: 1rem;
+}
+
+.action-btns-wrapper{
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1rem;
+    width: max-content;
+}
+
+.action-btn{
+    padding: 10px;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: lightgrey;
+    height: 100%;
+    width: 100%;
 }

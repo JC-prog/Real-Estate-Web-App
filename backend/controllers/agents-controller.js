@@ -1,5 +1,5 @@
 import DbService from "../service/dbService.js";
-import config from '../database/dbConfig.js'
+import config from '../database/dbConfigAzure.js'
 
 export const getAgents = async (req, res) => {
     // Create an instance of DBservice
