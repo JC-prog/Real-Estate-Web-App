@@ -1,5 +1,12 @@
-.buy-home-container {
+/* .buy-home-container {
     width: 100%;
     display: flex;
     flex-direction: row;
+} */
+
+.buy-home-container{
+    display: grid;
+    gap: 5rem;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    padding: 2% 5%;
 }

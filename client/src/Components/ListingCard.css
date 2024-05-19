@@ -1,12 +1,13 @@
 .listing-div-wrapper {
-    width: 75%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    padding: 1rem;
+    width: 350px;
     height: 100%;
     border: 1px solid hsl(0, 2%, 10%);
     border-radius: 10px;
     box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
-    margin: 10px;
-    max-width: 500px;
-    display: block;
 }
 
 .listing-image-wrapper {
@@ -19,6 +20,18 @@
     border: 1px solid hsl(0, 2%, 10%);
 }
 
+.listing-title{
+    font-size: large;
+    text-align: center;
+    padding-bottom: 3%;
+    padding-top: 0%;
+}
+
 .description-div {
-    padding: 10px;
+    width: 75%;
+    display: flex;
+    flex-flow: column wrap;
+    gap:10px;
+    align-items:self-start;
+    
 }
