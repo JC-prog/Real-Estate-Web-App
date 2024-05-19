@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./Sell.css";
-import createListingForm from "../../Components/CreateListing";
+//import CreateListingForm from "../../Components/CreateListing";
 
 const form = "";
 

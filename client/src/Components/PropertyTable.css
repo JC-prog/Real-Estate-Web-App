@@ -1,0 +1,39 @@
+.button-container {
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px; /* Adds spacing between the buttons */
+}
+
+.property-state-btn,
+.property-view-btn {
+    width: 120px; /* Set a static width */
+    height: 40px; /* Set a static height */
+    padding: 10px 20px; /* Adjust padding if needed */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Example styles for buttons */
+.property-state-btn {
+    background-color: #4CAF50; /* Green */
+    color: white;
+}
+
+.property-state-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+}
+
+.property-view-btn {
+    background-color: #008CBA; /* Blue */
+    color: white;
+}
+
+.property-view-btn:hover {
+    background-color: #007bb5; /* Darker blue on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+}

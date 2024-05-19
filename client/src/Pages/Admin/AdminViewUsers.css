@@ -1,3 +1,31 @@
+.admin-view-users h1{
+    margin-left: 20px;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Adds spacing between the buttons */
+    margin-top: 20px; /* Adjust the top margin if needed */
+    margin-left: 20px;
+}
+
+.get-all-users-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width: 150px;
+    height: 40px;
+}
+
+.get-all-users-btn:hover {
+    background-color: #45a049; /* Darker green on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+}
+
 .table-container {
     margin: 20px;
     overflow-x: auto;

@@ -1,6 +1,7 @@
 // Imports
 import React, { useEffect, useState } from 'react';
 import PropertyTable from "../../Components/PropertyTable";
+import { useNavigate } from 'react-router-dom';
 import api from '../../api/loginApi';
 
 // Component
@@ -29,6 +30,7 @@ const AdminViewListings: React.FC = () => {
     const [properties, setProperties] = useState<Property[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
      // Function to fetch property data
      const getAllpropertyData = async () => {
@@ -59,10 +61,17 @@ const AdminViewListings: React.FC = () => {
         }
     };
 
+    const redirectAdminDashboard = () => {
+        navigate('/admin');
+    };
+
     return (
-        <div className="admin-view-propertys">
+        <div className="admin-view-properties">
             <h1>View Properties</h1>
-            <button onClick={getAllpropertyData}>Get All properties</button>
+            <div className="button-container">
+                <button className="get-all-properties-btn" onClick={getAllpropertyData}>Get All Properties</button>
+                <button className="get-all-properties-btn" onClick={redirectAdminDashboard}>Back</button>
+            </div>
 
             <div className="table-container">
                 <table className="custom-table">

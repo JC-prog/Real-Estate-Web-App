@@ -66,13 +66,14 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
                     <td>{property.propertyAddress}</td>
                     <td>{property.propertyStatus}</td>
                     <td>
-                        <div>
-                            <button
+                        <div className="button-container">
+                            <button className="property-state-btn"
                                 onClick={() => handlepropertyStateButton(property.propertyId, property.propertyName)}
                             >
-                                {property.propertyStatus === 'active' ? 'Suspend' : 'Unsuspend'}
+                                {property.propertyStatus === 'Listed' ? 'Delist' : 'List'}
                             </button>
-                            <button onClick={() => handleViewButton(property.propertyId, property.propertyName)}>View</button>
+                            <button className="property-view-btn"
+                                onClick={() => handleViewButton(property.propertyId, property.propertyName)}>View</button>
                         </div>
                     </td>
                 </tr>
