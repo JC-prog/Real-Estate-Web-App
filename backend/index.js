@@ -9,6 +9,7 @@ import adminRoute from "./routes/admin-route.js"
 import buyRoute from "./routes/buy-route.js";
 import sellRoute from "./routes/sell-route.js";
 import agentsRoute from "./routes/agents-route.js";
+import userRoute from "./routes/user-route.js";
 
 const port = 8080;
 
@@ -32,6 +33,7 @@ app.use("/api/admin", adminRoute);
 app.use("/api/buy", buyRoute);
 app.use("/api/sell", sellRoute);
 app.use("/api/agents", agentsRoute);
+app.use("/api/user", userRoute)
 
 
 

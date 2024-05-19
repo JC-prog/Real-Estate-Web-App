@@ -20,7 +20,7 @@ export const register = async (req, res) => {
     try {
         await dbService.connect();
 
-        const {username, email, password} = req.body;
+        const {username, email, password, role} = req.body;
 
         console.log("Registration Post Started");
 
@@ -34,8 +34,8 @@ export const register = async (req, res) => {
         console.log(results);
 
         if (results.length == 0) {
-            const insertQuery = "INSERT INTO user (username, email, password) VALUES (?, ?, ?)";
-            const insertParams = [username, email, password];
+            const insertQuery = "INSERT INTO user (username, email, password, role) VALUES (?, ?, ?, ?)";
+            const insertParams = [username, email, password, role];
 
             dbService.query(insertQuery, insertParams);
 
@@ -72,11 +72,11 @@ export const login = async (req, res) => {
 
             const token = createToken(results.id);
             console.log("token" + token);
-            console.log(results);
+            console.log(results[0].role);
             // Create a JSON object with the user details
             const userJson = {
                 username: username,
-                role: results.role,
+                role: results[0].role,
                 token: token // Optionally include the token if needed
             };
 

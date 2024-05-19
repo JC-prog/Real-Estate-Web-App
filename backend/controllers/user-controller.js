@@ -1,19 +1,23 @@
 import DbService from "../service/dbService.js";
 import config from '../database/dbConfig.js'
 
-export const getAgents = async (req, res) => {
+export const viewUser = async (req, res) => {
     // Create an instance of DBservice
     const dbService = new DbService(config);
+
+    const {userId} = req.body;
 
     try {
 
         await dbService.connect();
 
-        console.log("Agent GET Started");
+        console.log("View User GET Started");
+
+        console.log(req.body);
 
         // Query
-        const query = "SELECT * FROM agents";
-        const params = [];
+        const query = "SELECT * FROM user WHERE id = ? LIMIT 1";
+        const params = [userId];
 
         // Execute Query
         const results = await dbService.query(query, params);
@@ -28,6 +32,6 @@ export const getAgents = async (req, res) => {
         
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: "Failed to retrieve agents!" });
+        res.status(500).json({ message: "Failed to retrieve Users!" });
     }
 };
