@@ -1,12 +1,14 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import DbService from "../service/dbService.js";
-// import config from '../database/dbConfigAzure.js'// uncomment this to connect to azure db
+import config from '../database/dbConfigAzure.js'// uncomment this to connect to azure db
 
 // Create JWT
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, 'randomKey', {
+
+     return jwt.sign({ id }, 'randomKey', {
+
     expiresIn: maxAge
   });
 };
@@ -34,7 +36,9 @@ export const register = async (req, res) => {
         console.log(results);
 
         if (results.length == 0) {
+
             const insertQuery = "INSERT INTO users (username, email, password, role, state) VALUES (?, ?, ?, ?, Active)";
+
             const insertParams = [username, email, password, role];
 
             dbService.query(insertQuery, insertParams);

@@ -1,12 +1,14 @@
 .listing-div-wrapper {
-    width: 75%;
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    padding: 1rem;
+    width: 350px;
     height: 100%;
     border: 1px solid hsl(0, 2%, 10%);
     border-radius: 10px;
     box-shadow: 5px 5px 5px hsla(0, 0%, 0%, 0.1);
-    margin: 10px;
-    max-width: 500px;
-    display: block;
+    background-color: #1F88AF;
 }
 
 .listing-image-wrapper {
@@ -15,10 +17,37 @@
 
 .listing-image-wrapper img{
     width: 100%;
-    padding: 10px;
-    border: 1px solid hsl(0, 2%, 10%);
+    /* padding: 10px; */
+    /* border: 1px solid hsl(0, 2%, 10%); */
+    border-radius: 10%;
+}
+
+.image-listing{
+    /* border-radius: 50px; */
+}
+
+.listing-title{
+    font-size: large;
+    text-align: center;
+    padding-bottom: 3%;
+    padding-top: 0%;
+    color:#F8F8F8F8
+}
+
+
+p{
+    color: black;
 }
 
 .description-div {
-    padding: 10px;
+    background-color: #F8F8F8F8;
+    margin-top:2%;
+    /* border: 1px solid; */
+    border-radius: 5px;
+    width: 90%;
+    display: flex;
+    flex-flow: column wrap;
+    gap:10px;
+    align-items:center;
+    
 }

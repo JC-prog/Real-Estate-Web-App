@@ -47,11 +47,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
   return (
     <div className="listing-div-wrapper">
+        <h2 className='listing-title'>{propertyName}</h2>
       <div className="listing-image-wrapper">
-        <img src="./apartment-sample.jpg" alt="property" />
+        <img className='image-listing' src="./apartment-sample.jpg" alt="property" />
       </div>
       <div className="description-div">
-        <h2>{propertyName}</h2>
         <p>{propertyAddress}</p>
         <p>{propertyType}</p>
         <p>{numberOfRooms} Room</p>

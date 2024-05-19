@@ -65,7 +65,7 @@ const Login: React.FC = () => {
                 setCookie('token', token, { path: '/' });
 
                 console.log(response.data.role);
-                if (response.data.role == "admin") {
+                if (response.data.role == "Admin") {
                     navigate("/admin");
                 } else {
                     navigate('/');
