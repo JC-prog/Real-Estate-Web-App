@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import DbService from "../service/dbService.js";
-import config from '../database/dbConfigAzure.js'
+// import config from '../database/dbConfigAzure.js'// uncomment this to connect to azure db
 
 // Create JWT
 const maxAge = 3 * 24 * 60 * 60;
