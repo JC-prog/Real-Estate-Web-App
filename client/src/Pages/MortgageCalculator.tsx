@@ -45,8 +45,8 @@ function NewPurchaseForm({
   isFormVisible,
   setIsFormVisible,
 }: NewPurposeFormProps) {
+  const interestRateRegex = /^\d+(\.\d{0,2})?(%?)$/;
   const calculateMortgage = () => {
-    // Same calculation logic from the previous examples
     const monthlyInterestRate = parseFloat(interestRate) / 100 / 12;
 
     console.log("interestrate", parseFloat(interestRate));
@@ -68,13 +68,9 @@ function NewPurchaseForm({
           fullWidth={true}
           value={principal}
           onChange={(event) => {
-            const inputValue = event.target.value;
-            if (inputValue != "") {
-              // there is an input value
-              setPrincipal(parseFloat(inputValue));
-            } else {
-              setPrincipal(0);
-            }
+            const inputValue = setPrincipal(
+              parseFloat(event.target.value) || 0
+            );
           }}
         />
       </div>
@@ -83,10 +79,11 @@ function NewPurchaseForm({
           required
           label="Interest Rate"
           fullWidth={true}
+          inputProps={{ pattern: interestRateRegex }}
           value={interestRate}
           onChange={(event) => {
             const newValue = event.target.value;
-            if (newValue != "") {
+            if (newValue !== "") {
               setInterestRate(newValue);
             } else {
               setInterestRate("");
@@ -102,7 +99,8 @@ function NewPurchaseForm({
           fullWidth={true}
           onChange={(event) => {
             const newValue = event.target.value;
-            if (newValue != "") {
+            console.log("newvalue", newValue);
+            if (newValue !== "") {
               setLoanTerm(parseFloat(newValue));
             } else {
               setLoanTerm(0);
@@ -139,24 +137,22 @@ function RefinancingForm({
   const calculateRefinance = () => {
     //for refinancing
     const companyInterestRate = 2.8;
-    const altmonthlyInterestRate = companyInterestRate / 100 / 12;
-
     const monthlyInterestRate = parseFloat(interestRate) / 100 / 12;
     const totalPayments = loanTerm * 12;
     const payment =
       (principal * monthlyInterestRate) /
       (1 - Math.pow(1 + monthlyInterestRate, -totalPayments));
-    setMonthlyPayment(payment);
 
     //we have interestRate of 2.8%, if their current interest is higher, we can help them to refinance and show potential saving
+    const altmonthlyInterestRate = companyInterestRate / 100 / 12;
     const alternatepayment =
       (principal * altmonthlyInterestRate) /
       (1 - Math.pow(1 + altmonthlyInterestRate, -totalPayments));
-    setAltMonthlyPayment(alternatepayment);
 
+    setMonthlyPayment(payment);
+    setAltMonthlyPayment(alternatepayment);
     //calculate the savings if they had a better interest rate
-    const totalSavings = payment - alternatepayment;
-    setTotalSavings(totalSavings);
+    setTotalSavings(payment - alternatepayment);
 
     setIsFormVisible(true);
 
@@ -175,7 +171,8 @@ function RefinancingForm({
           value={principal}
           onChange={(event) => {
             const newValue = event.target.value;
-            if (newValue != "") {
+
+            if (newValue !== "") {
               setPrincipal(parseFloat(newValue));
             } else {
               setPrincipal(0);
@@ -191,7 +188,7 @@ function RefinancingForm({
           value={loanTerm}
           onChange={(event) => {
             const newValue = event.target.value;
-            if (newValue != "") {
+            if (newValue !== "") {
               setLoanTerm(parseFloat(newValue));
             } else {
               setLoanTerm(0);
@@ -208,7 +205,7 @@ function RefinancingForm({
           value={interestRate}
           onChange={(event) => {
             const newValue = event.target.value;
-            if (newValue != "") {
+            if (newValue !== "") {
               setInterestRate(newValue);
             } else {
               setInterestRate("");
@@ -230,17 +227,38 @@ enum Purpose {
   REFINANCING = "REFINANCING",
 }
 
+interface MortgageDetails {
+  principal: number;
+  interestRate: string;
+  loanTerm: number;
+  monthlyPayment: number;
+  altMonthlyPayment: number;
+  totalSavings: number;
+  isFormVisible: boolean;
+}
+
 const MortgageCalculator = () => {
   const [principal, setPrincipal] = useState(0);
   const [interestRate, setInterestRate] = useState("");
   const [loanTerm, setLoanTerm] = useState(0);
   const [monthlyPayment, setMonthlyPayment] = useState(0);
+
+  //set a state which stores the details
+  const [mortgateDetails, setMortgateDetails] = useState<
+    MortgageDetails | undefined
+  >(undefined);
+
+  //define some functions that will help to validate input
+  const handleInput = (event: { target: { value: any } }) => {
+    setAltMonthlyPayment(event.target.value || undefined);
+  };
+
+  //to differentiate between refinance or mortgage
   const [currPurpose, setCurrPurpose] = useState<Purpose>(Purpose.NEW_PURCHASE);
 
   //for refinancing
   const [altmonthlyPayment, setAltMonthlyPayment] = useState(0);
   const [totalSavings, setTotalSavings] = useState(0);
-
   const [isFormVisible, setIsFormVisible] = useState(false);
 
   return (
@@ -256,18 +274,32 @@ const MortgageCalculator = () => {
           </div> */}
               <div className="first-columns">
                 <div className="mortgage-header">Mortgage Calculator</div>
+                {/* Choose Mortgage Calculator or Refinance */}
                 <div className="purpose-buttons">
                   <ButtonGroup fullWidth>
                     <Button
-                      onClick={() => setCurrPurpose(Purpose.NEW_PURCHASE)}
+                      onClick={() => {
+                        setCurrPurpose(Purpose.NEW_PURCHASE);
+                        setPrincipal(0);
+                        setInterestRate("");
+                        setLoanTerm(0);
+                      }}
                     >
                       New Purchase{" "}
                     </Button>
-                    <Button onClick={() => setCurrPurpose(Purpose.REFINANCING)}>
+                    <Button
+                      onClick={() => {
+                        setCurrPurpose(Purpose.REFINANCING);
+                        setPrincipal(0);
+                        setInterestRate("");
+                        setLoanTerm(0);
+                      }}
+                    >
                       Refinancing
                     </Button>
                   </ButtonGroup>
                 </div>
+                {/* based on the options, the selected form will appear */}
                 {currPurpose === Purpose.NEW_PURCHASE ? (
                   <NewPurchaseForm
                     principal={principal}
@@ -347,7 +379,9 @@ const MortgageCalculator = () => {
                                 </p>
                                 <p>
                                   Yearly Mortgage payment : $
-                                  {12 * parseFloat(monthlyPayment.toFixed(2))}
+                                  {(
+                                    12 * parseFloat(monthlyPayment.toFixed(2))
+                                  ).toFixed(2)}
                                 </p>
                                 <p>Years to pay off : {loanTerm} years</p>
                               </Typography>
@@ -400,7 +434,9 @@ const MortgageCalculator = () => {
                             >
                               <p>
                                 Yearly Repayment : ${" "}
-                                {parseFloat(monthlyPayment.toFixed(2)) * 12}
+                                {(
+                                  parseFloat(monthlyPayment.toFixed(2)) * 12
+                                ).toFixed(2)}
                               </p>
                               <p>
                                 Current Monthly Repayment : $
