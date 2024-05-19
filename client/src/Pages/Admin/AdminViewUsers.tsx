@@ -1,5 +1,6 @@
 // Imports
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import UserTable from "../../Components/UserTable"
 import api from '../../api/loginApi';
 
@@ -31,6 +32,7 @@ const AdminViewUsers: React.FC = () => {
     const [users, setUsers] = useState<Users[]>([]);
     const [loading, setLoading] = useState<boolean>(false);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
 
      // Function to fetch user data
      const getAllUserData = async () => {
@@ -62,11 +64,18 @@ const AdminViewUsers: React.FC = () => {
         }
     };
 
+    const redirectAdminDashboard = () => {
+        navigate('/admin');
+    };
+
     return (
         <div className="admin-view-users">
             <h1>View Users</h1>
-            <button onClick={getAllUserData}>Get All Users</button>
-
+            <div className="button-container">
+                <button className="get-all-users-btn" onClick={getAllUserData}>Get All Users</button>
+                <button className="get-all-users-btn" onClick={redirectAdminDashboard}>Back</button>
+            </div>
+            
             <div className="table-container">
                 <table className="custom-table">
                     <thead>

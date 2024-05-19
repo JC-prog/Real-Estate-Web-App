@@ -1,5 +1,6 @@
 import DbService from "../service/dbService.js";
-import config from '../database/dbConfig.js'
+//import config from '../database/dbConfig.js'
+import config from '../database/dbConfigAzure.js';
 
 export const getAllUsers = async (req, res) => {
     // Create an instance of DBservice
@@ -12,7 +13,7 @@ export const getAllUsers = async (req, res) => {
         console.log("User GET Started");
 
         // Query
-        const query = "SELECT id, userName, email, role, state FROM user";
+        const query = "SELECT id, userName, email, role, state FROM users";
         const params = [];
 
         // Execute Query
@@ -42,7 +43,7 @@ export const handleUserState = async (req, res) => {
         console.log("User State Handling Started");
 
         // Query
-        const query = "SELECT id, username, state FROM user WHERE id = ? AND username = ? LIMIT 1";
+        const query = "SELECT id, username, state FROM users WHERE id = ? AND username = ? LIMIT 1";
         const params = [userId, userName];
 
         console.log(params);
@@ -53,19 +54,19 @@ export const handleUserState = async (req, res) => {
         if (results.length > 0) {
             console.log("User Exist");
 
-            const updateQuery = "UPDATE user SET state = ? WHERE id = ?";
+            const updateQuery = "UPDATE users SET state = ? WHERE id = ?";
             var updateParams = [];
 
 
-            if (results[0].state == "active") {
+            if (results[0].state == "Active") {
 
                 console.log(results[0].id);
 
-                updateParams = ["suspended", results[0].id];
+                updateParams = ["Inactive", results[0].id];
 
-            } else if(results[0].state == "suspended") {
+            } else if(results[0].state == "Inactive") {
 
-                updateParams = ["active", results[0].id];
+                updateParams = ["Active", results[0].id];
             }
 
             console.log(updateQuery);
@@ -91,3 +92,32 @@ export const handleUserState = async (req, res) => {
     }
 
 }
+
+export const getAllProperties = async (req, res) => {
+    // Create an instance of DBservice
+    const dbService = new DbService(config);
+
+    try {
+
+        await dbService.connect();
+
+        console.log("User GET Started");
+
+        // Query
+        const query = "SELECT* FROM properties";
+        const params = [];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(201).send({
+           results
+        });
+        
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Failed to retrieve properties!" });
+    }
+};

@@ -1,4 +1,4 @@
-.admin-view-users h1{
+.admin-view-properties h1{
     margin-left: 20px;
 }
 
@@ -10,7 +10,7 @@
     margin-left: 20px;
 }
 
-.get-all-users-btn {
+.get-all-properties-btn {
     padding: 10px 20px;
     background-color: #4CAF50; /* Green background */
     color: white;
@@ -21,7 +21,7 @@
     height: 40px;
 }
 
-.get-all-users-btn:hover {
+.get-all-properties-btn:hover {
     background-color: #45a049; /* Darker green on hover */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
 }

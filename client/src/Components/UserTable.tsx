@@ -68,13 +68,14 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
                     <td>{user.userRole}</td>
                     <td>{user.userState}</td>
                     <td>
-                        <div>
-                            <button
+                        <div className="button-container">
+                            <button className="user-state-btn"
                                 onClick={() => handleUserStateButton(user.userId, user.userName)}
                             >
-                                {user.userState === 'active' ? 'Suspend' : 'Unsuspend'}
+                                {user.userState === 'Active' ? 'Deactivate' : 'Activate'}
                             </button>
-                            <button onClick={() => handleViewButton(user.userId, user.userName)}>View</button>
+                            <button className="user-view-btn"
+                            onClick={() => handleViewButton(user.userId, user.userName)}>View</button>
                         </div>
                     </td>
                 </tr>
