@@ -1,12 +1,12 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import DbService from "../service/dbService.js";
-// import config from '../database/dbConfigAzure.js'// uncomment this to connect to azure db
+import config from '../database/dbConfigAzure.js'// uncomment this to connect to azure db
 
 // Create JWT
 const maxAge = 3 * 24 * 60 * 60;
 const createToken = (id) => {
-  return jwt.sign({ id }, 'net ninja secret', {
+  return jwt.sign({ id }, 'secretkey', {
     expiresIn: maxAge
   });
 };
@@ -25,7 +25,7 @@ export const register = async (req, res) => {
         console.log("Registration Post Started");
 
         // Query
-        const query = "SELECT * FROM user WHERE username = ? OR email = ?";
+        const query = "SELECT * FROM users WHERE username = ? OR email = ?";
         const params = [username, email];
 
         // Execute Query
@@ -34,7 +34,7 @@ export const register = async (req, res) => {
         console.log(results);
 
         if (results.length == 0) {
-            const insertQuery = "INSERT INTO user (username, email, password, role) VALUES (?, ?, ?, ?)";
+            const insertQuery = "INSERT INTO users (username, email, password, role) VALUES (?, ?, ?, ?)";
             const insertParams = [username, email, password, role];
 
             dbService.query(insertQuery, insertParams);
@@ -62,7 +62,7 @@ export const login = async (req, res) => {
         await dbService.connect();
 
         // Check for user
-        const query = "SELECT * FROM user WHERE username = ? AND password = ? LIMIT 1";
+        const query = "SELECT * FROM users WHERE username = ? AND password = ? LIMIT 1";
         const params = [username, password];
 
         const results = await dbService.query(query, params);
