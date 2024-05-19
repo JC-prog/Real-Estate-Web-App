@@ -26,7 +26,7 @@ const Admin: React.FC = () => {
 
             <div>
                 <h2>Listing Management</h2>
-                <button onClick={() => handleClick("/admin/create-user")}>View Listings</button>
+                <button onClick={() => handleClick("/admin/view-listings")}>View Listings</button>
             </div>
 
             <div>

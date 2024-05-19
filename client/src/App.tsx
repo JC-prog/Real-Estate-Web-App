@@ -21,6 +21,7 @@ import AgentsHomePage from "./Pages/Agents/AgentsHome";
 import Admin from "./Pages/Admin/AdminHome";
 import AdminCreateUser from "./Pages/Admin/AdminCreateUser";
 import AdminViewUsers from "./Pages/Admin/AdminViewUsers";
+import AdminViewListings from "./Pages/Admin/AdminViewListings";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
             <Route path="/admin/create-user" element={<AdminCreateUser />}/>
             <Route path="/admin/view-users" element={<AdminViewUsers />}/>
             <Route path="/user/:userId" element={<UserProfile />} />
+            <Route path="/admin/view-listings" element={<AdminViewListings />} />
 
           </Routes>
         </BrowserRouter>
