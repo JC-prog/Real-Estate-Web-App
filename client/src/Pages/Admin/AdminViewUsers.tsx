@@ -66,9 +66,25 @@ const AdminViewUsers: React.FC = () => {
         <div className="admin-view-users">
             <h1>View Users</h1>
             <button onClick={getAllUserData}>Get All Users</button>
-            {loading && <p>Loading...</p>}
-            {error && <p>{error}</p>}
-            {!loading && !error && <UserTable data={users} />}
+
+            <div className="table-container">
+                <table className="custom-table">
+                    <thead>
+                        <tr>
+                            <th>User ID</th>
+                            <th>User Name</th>
+                            <th>User Email</th>
+                            <th>User Role</th>
+                            <th>User State</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <UserTable data={users} />
+                    </tbody>
+                </table>
+            </div>
+            
         </div>
     );
 };

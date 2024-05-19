@@ -13,6 +13,7 @@ import Home from "./Pages/Home";
 import Buy from "./Pages/User/Buy";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
+import UserProfile from "./Pages/User/UserProfile";
 import MortgageCalculator from "./Pages/MortgageCalculator";
 import AgentsHomePage from "./Pages/Agents/AgentsHome";
 
@@ -43,6 +44,7 @@ function App() {
             <Route path="/admin" element={<Admin />}/>
             <Route path="/admin/create-user" element={<AdminCreateUser />}/>
             <Route path="/admin/view-users" element={<AdminViewUsers />}/>
+            <Route path="/user/:userId" element={<UserProfile />} />
 
           </Routes>
         </BrowserRouter>
