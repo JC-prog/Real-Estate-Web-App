@@ -1,19 +1,19 @@
 import DbService from "../service/dbService.js";
-// import config from '../database/dbConfig.js'
 import config from '../database/dbConfigAzure.js';
 
-export const getProperties = async (req, res) => {
-    // Create an instance of DBservice
+// Table Name
+const tableName = "properties";
+
+// Get All Propertys
+export const listProperties = async (req, res) => {
+
     const dbService = new DbService(config);
 
     try {
-
-        await dbService.connect();
-
-        console.log("Properties GET Started");
+        console.log("List Properties started");
 
         // Query
-        const query = "SELECT * FROM properties";
+        const query = 'SELECT * FROM ${tableName}';
         const params = [];
 
         // Execute Query
@@ -21,30 +21,71 @@ export const getProperties = async (req, res) => {
 
         console.log(results);
 
-        res.status(201).send({
-           results
-        });
+        res.status(200).send({ results });
 
-        dbService.disconnect();
-        
     } catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Failed to retrieve properties!" });
+
+        res.status(500).send();
+
+    } finally {
+        
+        await dbService.disconnect();
+      
     }
 };
 
-export const viewProperty = async (req, res) => {
+// Get Property
+export const getProperty = async (req, res) => {
+    // Create an instance of DBservice
+    const dbService = new DbService(config);
+
+    const {PropertyId} = req.body;
+
+    try {
+        await dbService.connect();
+
+        console.log("GET Property Started");
+
+        // Query
+        const query = 'SELECT * FROM ${tableName} WHERE id = ? LIMIT 1';
+        const params = [propertyId];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(201).send({ results });
+
+        await dbService.disconnect();
+        
+    } catch (err) {
+
+        console.log(err);
+        res.status(500).json({ message: "Failed to retrieve Property!" });
+
+    } finally {
+
+        await dbService.disconnect();
+
+    }
+};
+
+// Create Property
+export const createProperty = async (req, res) => {
+  
     // Create an instance of DBservice
     const dbService = new DbService(config);
 
     try {
-
         await dbService.connect();
 
-        console.log("Properties GET Started");
+        const {Propertyname, email, password, role} = req.body;
+
+        console.log("Create Property Started");
 
         // Query
-        const query = "SELECT * FROM properties";
+        const query = '';
         const params = [];
 
         // Execute Query
@@ -52,14 +93,80 @@ export const viewProperty = async (req, res) => {
 
         console.log(results);
 
-        res.status(201).send({
-           results
-        });
+        res.status(200).json({ message: "Create Property Successful" });
 
-        dbService.disconnect();
-        
     } catch (err) {
-        console.log(err);
-        res.status(500).json({ message: "Failed to retrieve property!" });
+
+        res.status(500).json({ message: "Create Property Fail!" });
+
+    } finally {
+    
+        await dbService.disconnect();
+    
+    }
+};
+
+// Update Property
+export const updateProperty = async (req, res) => {
+    const dbService = new DbService(config);
+
+    try {
+        const { propertyId } = req.params;
+        const { propertyName } = req.body;
+
+        console.log("Update Property Started");
+
+        // Query
+        const query = `UPDATE ${tableName} SET Propertyname = ? WHERE propertyId = ?`;
+        const params = [];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(200).json({ message: "Update Property Successful" });
+
+    } catch (err) {
+
+        console.error('Error updating Property:', err);
+        res.status(500).json({ message: "Update Property Failed!" });
+
+    } finally {
+
+        await dbService.disconnect();
+
+    }
+};
+
+// Delete Property
+export const deleteProperty = async (req, res) => {
+    const dbService = new DbService(config);
+
+    try {
+        const { PropertyId } = req.params;
+
+        console.log("Delete Property Started");
+
+        // Query
+        const query = `DELETE FROM ${tableName} WHERE id = ?`;
+        const params = [propertyId];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(200).json({ message: "Delete Property Successful" });
+
+    } catch (err) {
+
+        console.error('Error deleting Property:', err);
+        res.status(500).json({ message: "Delete Property Failed!" });
+
+    } finally {
+
+        await dbService.disconnect();
+
     }
 };
