@@ -1,4 +1,5 @@
-import React from "react";
+import React,{useState} from "react";
+import Axios from 'axios';
 import "./ListingCard.css";
 
 interface ListingCardProps {
@@ -24,6 +25,7 @@ interface ListingCardProps {
   listingDate: number;
 }
 
+
 const ListingCard: React.FC<ListingCardProps> = ({
   // propertyName,
   // address,
@@ -45,6 +47,14 @@ const ListingCard: React.FC<ListingCardProps> = ({
   sellerId,
   listingDate,
 }) => {
+
+  const handleAddWatchlist = () => {
+    Axios.post('http://localhost:8080',{
+      userID : "id001",
+      propertyID : "prop001"
+    })
+  }
+
   return (
     <div className="listing-div-wrapper">
         <h2 className='listing-title'>{propertyName}</h2>
@@ -58,6 +68,10 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <p>{area}sqft</p>
         <p>${price}</p> {/* Format the price to 2 decimal places */}
         <p>S${pricePerSquareFeet}PSF</p>
+      </div>
+      <div className="btn-wrapper">
+        <button  id="viewBtn">View</button>
+        <button onClick={handleAddWatchlist} id="watchlistBtn">Add to Watchlist</button>
       </div>
     </div>
   );

@@ -32,3 +32,20 @@ export const getProperties = async (req, res) => {
         res.status(500).json({ message: "Failed to retrieve agents!" });
     }
 };
+
+export const updateWatchlist = async (req, res) => {
+        // Create an instance of DBservice
+        const dbService = new DbService(config);
+
+        try {
+            await dbService.connect();
+            console.log("Properties Update View Started");
+
+            //Query
+            // const query = ""
+        }
+        catch(err){
+            console.log(err);
+            res.status(500).json({ mesage: "Failed to retrieve agents!"});
+        }
+};
