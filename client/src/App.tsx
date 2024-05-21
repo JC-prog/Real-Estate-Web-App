@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import Navbar from "./Components/Navbar";
 import "./App.css";
@@ -12,6 +12,7 @@ import Home from "./Pages/Home";
 
 import Buy from "./Pages/User/Buy";
 import Sell from "./Pages/User/Sell";
+import RateAgent from "./Pages/User/RateAgent";
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import UserProfile from "./Pages/User/UserProfile";
@@ -36,6 +37,7 @@ function App() {
 
             <Route path="/buy" element={<Buy />} />
             <Route path="/sell" element={<Sell />} />
+            <Route path="/sell/rateAgent" element={<RateAgent />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route
@@ -44,12 +46,14 @@ function App() {
             />
             <Route path="/agents" element={<AgentsHomePage />} />
 
-            <Route path="/admin" element={<Admin />}/>
-            <Route path="/admin/create-user" element={<AdminCreateUser />}/>
-            <Route path="/admin/view-users" element={<AdminViewUsers />}/>
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/admin/create-user" element={<AdminCreateUser />} />
+            <Route path="/admin/view-users" element={<AdminViewUsers />} />
             <Route path="/user/:userId" element={<UserProfile />} />
-            <Route path="/admin/view-listings" element={<AdminViewListings />} />
-
+            <Route
+              path="/admin/view-listings"
+              element={<AdminViewListings />}
+            />
           </Routes>
         </BrowserRouter>
       </div>
