@@ -10,12 +10,14 @@ export const listUsers = async (req, res) => {
     const dbService = new DbService(config);
 
     try {
+        await dbService.connect();
+
         console.log("List Users started");
-
+        
         // Query
-        const query = 'SELECT * FROM ${tableName}';
+        const query = `SELECT * FROM ${tableName}`;
         const params = [];
-
+        
         // Execute Query
         const results = await dbService.query(query, params);
 
@@ -39,16 +41,20 @@ export const getUser = async (req, res) => {
     // Create an instance of DBservice
     const dbService = new DbService(config);
 
-    const {userId} = req.body;
+    const { userId } = req.query;
+    console.log(req.query.userId);
 
     try {
         await dbService.connect();
 
-        console.log("GET User Started");
+        console.log("GET User By Id Started");
 
         // Query
-        const query = 'SELECT * FROM ${tableName} WHERE id = ? LIMIT 1';
+        const query = `SELECT * FROM ${tableName} WHERE userId = ? LIMIT 1`;
         const params = [userId];
+
+        console.log(query);
+        console.log(userId);
 
         // Execute Query
         const results = await dbService.query(query, params);
@@ -83,7 +89,7 @@ export const createUser = async (req, res) => {
         console.log("Create User Started");
 
         // Query
-        const query = 'INSERT INTO ${tableName} (username, email, password, role, state) VALUES (?, ?, ?, ?, Active)';
+        const query = `INSERT INTO ${tableName} (username, email, password, role, state) VALUES (?, ?, ?, ?, Active)`;
         const params = [username, email, password, role];
 
         // Execute Query
@@ -109,13 +115,15 @@ export const updateUser = async (req, res) => {
     const dbService = new DbService(config);
 
     try {
+        await dbService.connect();
+
         const { userId } = req.params;
         const { username, email, password, role } = req.body;
 
         console.log("Update User Started");
 
         // Query
-        const query = `UPDATE ${tableName} SET username = ?, email = ?, password = ?, role = ? WHERE id = ?`;
+        const query = `UPDATE ${tableName} SET userName = ?, userEmail = ?, password = ?, role = ? WHERE id = ?`;
         const params = [username, email, password, role, userId];
 
         // Execute Query
@@ -142,12 +150,14 @@ export const deleteUser = async (req, res) => {
     const dbService = new DbService(config);
 
     try {
+        await dbService.connect();
+        
         const { userId } = req.params;
 
         console.log("Delete User Started");
 
         // Query
-        const query = `DELETE FROM ${tableName} WHERE id = ?`;
+        const query = `DELETE FROM ${tableName} WHERE userId = ?`;
         const params = [userId];
 
         // Execute Query

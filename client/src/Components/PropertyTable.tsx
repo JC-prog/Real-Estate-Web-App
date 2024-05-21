@@ -26,8 +26,14 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
         return <p>No propertys available.</p>;
     }
 
-    const handlepropertyStateButton = async (propertyId: string, propertyName: string) => {
-        const propertyData = { propertyId, propertyName };
+    const viewProperty = async (propertyId: string) => {
+        const propertyData = { propertyId };
+
+        navigate(`/property/${propertyId}`);
+    }
+
+    const changePropertyState = async (propertyId: string) => {
+        const propertyData = { propertyId};
 
         try {
             const response: AxiosResponse = await api.post('api/admin/handle-property-state', propertyData);
@@ -50,8 +56,8 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
         }
     }
 
-    const handleViewButton = async (propertyId: string, propertyName: string) => {
-        const propertyData = { propertyId, propertyName };
+    const removeProperty = async (propertyId: string) => {
+        const propertyData = { propertyId };
 
         navigate(`/property/${propertyId}`);
     }
@@ -67,13 +73,24 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
                     <td>{property.propertyStatus}</td>
                     <td>
                         <div className="button-container">
-                            <button className="property-state-btn"
-                                onClick={() => handlepropertyStateButton(property.propertyId, property.propertyName)}
+                            <button 
+                                className="property-view-btn"
+                                onClick={() => viewProperty(property.propertyId)}
+                            >
+                                View
+                            </button>
+                            <button 
+                                className="property-state-btn"
+                                onClick={() => changePropertyState(property.propertyId)}
                             >
                                 {property.propertyStatus === 'Listed' ? 'Delist' : 'List'}
                             </button>
-                            <button className="property-view-btn"
-                                onClick={() => handleViewButton(property.propertyId, property.propertyName)}>View</button>
+                            <button 
+                                className="property-remove-btn"
+                                onClick={() => removeProperty(property.propertyId)}
+                            >
+                                Remove
+                            </button>
                         </div>
                     </td>
                 </tr>

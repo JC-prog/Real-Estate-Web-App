@@ -10,6 +10,8 @@ export const listProperties = async (req, res) => {
     const dbService = new DbService(config);
 
     try {
+        await dbService.connect();
+
         console.log("List Properties started");
 
         // Query
@@ -111,6 +113,8 @@ export const updateProperty = async (req, res) => {
     const dbService = new DbService(config);
 
     try {
+        await dbService.connect();
+
         const { propertyId } = req.params;
         const { propertyName } = req.body;
 
@@ -144,6 +148,8 @@ export const deleteProperty = async (req, res) => {
     const dbService = new DbService(config);
 
     try {
+        await dbService.connect();
+        
         const { PropertyId } = req.params;
 
         console.log("Delete Property Started");

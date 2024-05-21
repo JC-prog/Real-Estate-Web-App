@@ -15,6 +15,10 @@ interface Users {
     userState: string;
 }
 
+interface ApiResponse {
+    results: Users[];
+}
+
 interface UserTableProps {
     data: Users[];
 }
@@ -27,19 +31,25 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
         return <p>No users available.</p>;
     }
 
-    const handleUserStateButton = async (userId: string, userName: string) => {
-        const userData = { userId, userName };
+    // View Individual User
+    const handleViewButton = async (userId: string) => {
 
+        navigate(`/user/${userId}`);
+    }
+
+    // Change State of User
+    const handleUserStateButton = async (userId: string) => {
         try {
-            const response: AxiosResponse = await api.post('api/admin/handle-user-state', userData);
+            const response: AxiosResponse = await api.put(`api/user/${userId}`, {
+                params: {
+                    userId : `${ userId }`
+                }
+            });
 
             toast.success("User updated", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000,
             });
-
-            // Trigger re-render
-            setRefresh(prevRefresh => !prevRefresh);
 
         } catch (error) {
             console.error('Error:', error);
@@ -51,12 +61,29 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
         }
     }
 
-    const handleViewButton = async (userId: string, userName: string) => {
-        const userData = { userId, userName };
+    // Remove a User
+    const handleUserRemoveButton = async (userId: string) => {
+        try {
+            const response: AxiosResponse = await api.delete(`api/user/${userId}`, {
+                params: {
+                    userId : `${ userId }`
+                }
+            });
 
-        navigate(`/user/${userId}`);
+            toast.success("User removed", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
+
+        } catch (error) {
+            console.error('Error:', error);
+
+            toast.error("Error removing user", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
+        }
     }
-
 
     return (
         <>
@@ -69,13 +96,26 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
                     <td>{user.userState}</td>
                     <td>
                         <div className="button-container">
-                            <button className="user-state-btn"
-                                onClick={() => handleUserStateButton(user.userId, user.userName)}
+                            <button 
+                                className="user-view-btn"
+                                onClick={() => handleViewButton(user.userId)}
+                            >
+                                View
+                            </button>
+
+                            <button 
+                                className="user-state-btn"
+                                onClick={() => handleUserStateButton(user.userId)}
                             >
                                 {user.userState === 'Active' ? 'Deactivate' : 'Activate'}
                             </button>
-                            <button className="user-view-btn"
-                            onClick={() => handleViewButton(user.userId, user.userName)}>View</button>
+
+                            <button 
+                                className="user-remove-btn"
+                                onClick={() => handleUserRemoveButton(user.userId)}
+                            >
+                                Remove
+                            </button>
                         </div>
                     </td>
                 </tr>
