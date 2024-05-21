@@ -16,6 +16,18 @@ VALUES ('seller1','seller',' seller1',	92743673, 'seller1','seller1@grpnaem.com'
 INSERT INTO users (id,userType,displayName,contactNum,password,email)
 VALUES ('agent1','agent', 'agent1',95332445, 'agent1','agent1@grpnaem.com');
 
+
+CREATE TABLE shortlists(
+  shortlistId VARCHAR(255) PRIMARY KEY,
+  propertyId VARCHAR(255) NOT NULL,
+  userId VARCHAR(255) 
+  FOREIGN KEY (propertyId) REFERENCES properties(id)
+  FOREIGN KEY (userId) REFERENCES users(id)
+)
+INSERT INTO shortlists (shortlistId, propertyId, userId)
+VALUES ('sl001', 'PROP-001','buyer1');
+
+
 CREATE TABLE reviews (
   id VARCHAR(255) PRIMARY KEY,
   userId VARCHAR(255) NOT NULL,
