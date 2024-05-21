@@ -17,15 +17,7 @@ interface Users {
 }
 
 interface ApiResponse {
-    results: ApiResponseUsers[];
-}
-
-interface ApiResponseUsers {
-    id: string;
-    userName: string;
-    email: string;
-    role: string;
-    state: string;
+    results: Users[];
 }
 
 const AdminViewUsers: React.FC = () => {
@@ -39,17 +31,23 @@ const AdminViewUsers: React.FC = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await api.get<ApiResponse>('/api/admin/getUsers');
+            //const response = await api.get<ApiResponse>('/api/user');
+
+            const response = await api.get<ApiResponse>('/api/user', {
+                params: {
+
+                }
+            });
 
             console.log('API response:', response.data);
 
             // Map the response data to match the Users interface
             const mappedUsers: Users[] = response.data.results.map((item) => ({
-                userId: item.id,
+                userId: item.userId,
                 userName: item.userName,
-                userEmail: item.email,
-                userRole: item.role,
-                userState: item.state,
+                userEmail: item.userEmail,
+                userRole: item.userRole,
+                userState: item.userState,
             }));
 
             setUsers(mappedUsers);

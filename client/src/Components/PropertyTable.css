@@ -5,7 +5,8 @@
 }
 
 .property-state-btn,
-.property-view-btn {
+.property-view-btn, 
+.property-remove-btn {
     width: 120px; /* Set a static width */
     height: 40px; /* Set a static height */
     padding: 10px 20px; /* Adjust padding if needed */
@@ -17,23 +18,35 @@
     justify-content: center;
 }
 
-/* Example styles for buttons */
-.property-state-btn {
-    background-color: #4CAF50; /* Green */
-    color: white;
-}
-
-.property-state-btn:hover {
-    background-color: #45a049; /* Darker green on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
-}
-
+/* Buttons */
 .property-view-btn {
-    background-color: #008CBA; /* Blue */
+    background-color: #2196F3; /* Material Design Blue 500 */
     color: white;
 }
 
 .property-view-btn:hover {
-    background-color: #007bb5; /* Darker blue on hover */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add a shadow on hover */
+    background-color: #1976D2; /* Material Design Blue 700 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.property-state-btn {
+    background-color: #4CAF50; /* Material Design Green 500 */
+    color: white;
+}
+
+.property-state-btn:hover {
+    background-color: #388E3C; /* Material Design Green 700 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.property-remove-btn {
+    background-color: #F44336; /* Material Design Red 500 */
+    color: white;
+}
+
+.property-remove-btn:hover {
+    background-color: #D32F2F; /* Material Design Red 700 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+

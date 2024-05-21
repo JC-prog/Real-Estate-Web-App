@@ -16,14 +16,7 @@ interface Property {
 }
 
 interface ApiResponse {
-    results: ApiResponseProperties[];
-}
-
-interface ApiResponseProperties {
-    id: string;
-    propertyName: string;
-    propertyAddress: string;
-    status: string;
+    results: Property[];
 }
 
 const AdminViewListings: React.FC = () => {
@@ -43,10 +36,10 @@ const AdminViewListings: React.FC = () => {
 
             // Map the response data to match the propertys interface
             const mappedProperties: Property[] = response.data.results.map((item) => ({
-                propertyId: item.id,
+                propertyId: item.propertyId,
                 propertyName: item.propertyName,
                 propertyAddress: item.propertyAddress,
-                propertyStatus: item.status,
+                propertyStatus: item.propertyStatus,
             }));
 
             setProperties(mappedProperties);
