@@ -58,8 +58,41 @@ export const getPropertiesByAgentId = async (req, res) => {
         console.log(results);
 
         res.status(201).send({ results });
+        
+    } catch (err) {
+
+        console.log(err);
+        res.status(500).json({ message: "Failed to retrieve Property!" });
+
+    } finally {
 
         await dbService.disconnect();
+
+    }
+};
+
+// Get Properties By Keyword
+export const getPropertiesByKeyword = async (req, res) => {
+    // Create an instance of DBservice
+    const dbService = new DbService(config);
+
+    const { search } = req.query;
+
+    try {
+        await dbService.connect();
+
+        console.log("GET Property By Keyword Started");
+
+        // Query
+        const query = `SELECT * FROM ${tableName} WHERE propertyName LIKE ?`;
+        const params = [`%${search}%`];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(201).send({ results });
         
     } catch (err) {
 
@@ -95,8 +128,6 @@ export const getProperty = async (req, res) => {
         console.log(results);
 
         res.status(201).send({ results });
-
-        await dbService.disconnect();
         
     } catch (err) {
 

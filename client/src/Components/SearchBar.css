@@ -9,7 +9,7 @@
     align-items: center;
 }
 
-.searchbar-wrapper  input {
+.searchbar-wrapper input {
     background-color: transparent;
     border: none;
     height: 100%;
@@ -18,10 +18,15 @@
     margin-left: 6px;
 }
 
-.searchbar-wrapper  input:focus {
+.searchbar-wrapper input:focus {
     outline: none;
 }
 
 #search-icon {
     color: royalblue;
+}
+
+#search-icon:hover {
+    color: lightblue;
+    cursor: pointer; 
 }

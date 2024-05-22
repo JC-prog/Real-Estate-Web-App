@@ -47,9 +47,6 @@ const AgentListingCard: React.FC<PropertyTableProps> = ({ data = [] }) => {
             maximumFractionDigits: 2,
         });
     
-        console.log('Original price:', price);
-        console.log('Formatted price:', formattedPrice);
-    
         return formattedPrice;
     }
 

@@ -5,7 +5,8 @@ import {
     createProperty,
     updateProperty,
     deleteProperty,
-    getPropertiesByAgentId
+    getPropertiesByAgentId,
+    getPropertiesByKeyword
   } from '../controllers/properties-controller.js';
 
 const router = express.Router();
@@ -15,6 +16,9 @@ router.get('/', listProperties);
 
 // Get Properties By Agent Id
 router.get('/properties-agent', getPropertiesByAgentId);
+
+// Get Property by keyword
+router.get('/properties-search', getPropertiesByKeyword);
 
 // Get Property by ID
 router.get('/:propertyId', getProperty);

@@ -144,7 +144,7 @@ const AgentProfile: React.FC = () => {
                                         </label>
                                         <br />
                                         <label>
-                                        Comments:
+                                        Review:
                                         <textarea required></textarea>
                                         </label>
                                         <br />
