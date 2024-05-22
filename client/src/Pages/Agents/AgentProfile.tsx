@@ -1,8 +1,9 @@
 // UserProfile.tsx
 import React, { useEffect, useState } from 'react';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { AxiosResponse, AxiosError } from 'axios';
 import api from '../../api/loginApi';
+import AgentListingCard from "../../Components/AgentListingCard"
 import "./AgentProfile.css";
 
 interface User {
@@ -15,21 +16,38 @@ interface User {
     userState: string;
 }
 
-interface ApiResponse {
+interface Property {
+    propertyId: string;
+    propertyName: string;
+    propertyAddress: string;
+    propertyStatus: string;
+}
+
+interface ApiResponseUsers {
     results: User[];
 }
 
+interface ApiResponseProperties {
+    results: Property[];
+}
+
+
+
 const AgentProfile: React.FC = () => {
     const { agentId } = useParams();
+    const { propertiesId } = useParams();
     const [user, setUser] = useState<User>();
+    const [properties, setProperties] = useState<Property[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const navigate = useNavigate();
+    
 
     useEffect(() => {
         const fetchUser = async () => {
 
             try {
-                const response: AxiosResponse<ApiResponse> = await api.get(`api/agent/${agentId}`, {
+                const response: AxiosResponse<ApiResponseUsers> = await api.get(`api/agent/${agentId}`, {
                     params: {
                         userId : `${ agentId }`
                     }
@@ -54,14 +72,42 @@ const AgentProfile: React.FC = () => {
         fetchUser();
         
     }, [agentId]);
+    
+    useEffect(() => {
+        const fetchProperties = async () => {
 
-    if (loading) {
-        return <div>Loading...</div>;
-    }
+            try {
+                const response: AxiosResponse<ApiResponseProperties> = await api.get(`api/properties/properties-agent`, {
+                    params: {
+                        agentId : `${ agentId }`
+                    }
+                });
+    
+                console.log('API response:', response.data);
+    
+                // Map the response data to match the propertys interface
+                const mappedProperties: Property[] = response.data.results.map((item) => ({
+                    propertyId: item.propertyId,
+                    propertyName: item.propertyName,
+                    propertyAddress: item.propertyAddress,
+                    propertyStatus: item.propertyStatus,
+                }));
+    
+                setProperties(mappedProperties);
+    
+                console.log(properties);
+    
+            } catch (error) {
+                console.error('Failed to fetch property data:', error);
+                setError('Failed to fetch property data.');
+            } finally {
+                setLoading(false);
+            }
+        };
 
-    if (error) {
-        return <div>{error}</div>;
-    }
+        fetchProperties();
+    }, [propertiesId]);
+    
 
     return (
         <div>
@@ -92,53 +138,8 @@ const AgentProfile: React.FC = () => {
 
                     <div className="listing-agent">
                         <h1>Listing</h1> 
-                        <div className="listing-container">
-                            <div className="listing-picture">
-    
-                                <img src={"/HousePic.jpg"} alt={`${user.userName}'s profile`} />
-                            </div>
-
-                            <div className="listing-details">
-                                <div className="listing-name">
-                                    <h1>{ user.userDisplayName }</h1>
-
-                                    <div className="listing-description">
-                                        <h2>Description</h2>
-                                        <p>Real Estate Address</p>
-                                        <p>Price</p>
-                                    </div>
-
-                                </div>
-
-                                <div className="profile-buttons">
-                                    <button>View</button>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className="listing-container">
-                            <div className="listing-picture">
-    
-                                <img src={"/HousePic.jpg"} alt={`${user.userName}'s profile`} />
-                            </div>
-
-                            <div className="listing-details">
-                                <div className="listing-name">
-                                    <h1>{ user.userDisplayName }</h1>
-
-                                    <div className="listing-description">
-                                        <h2>Description</h2>
-                                        <p>Real Estate Address</p>
-                                        <p>Price</p>
-                                    </div>
-
-                                </div>
-
-                                <div className="profile-buttons">
-                                    <button>View</button>
-                                </div>
-                            </div>
-                        </div>
+                        <AgentListingCard data={properties} />
+                        
                     </div>
 
                     <div className="review-agent">

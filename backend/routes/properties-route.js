@@ -4,13 +4,17 @@ import {
     getProperty,
     createProperty,
     updateProperty,
-    deleteProperty
+    deleteProperty,
+    getPropertiesByAgentId
   } from '../controllers/properties-controller.js';
 
 const router = express.Router();
 
 // Get all Properties
 router.get('/', listProperties);
+
+// Get Properties By Agent Id
+router.get('/properties-agent', getPropertiesByAgentId);
 
 // Get Property by ID
 router.get('/:propertyId', getProperty);

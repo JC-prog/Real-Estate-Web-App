@@ -4,7 +4,7 @@ import config from '../database/dbConfigAzure.js';
 // Table Name
 const tableName = "properties";
 
-// Get All Propertys
+// Get All Properties
 export const listProperties = async (req, res) => {
 
     const dbService = new DbService(config);
@@ -15,7 +15,7 @@ export const listProperties = async (req, res) => {
         console.log("List Properties started");
 
         // Query
-        const query = 'SELECT * FROM ${tableName}';
+        const query = `SELECT * FROM ${tableName}`;
         const params = [];
 
         // Execute Query
@@ -33,6 +33,43 @@ export const listProperties = async (req, res) => {
         
         await dbService.disconnect();
       
+    }
+};
+
+// Get Properties By Agent Id
+export const getPropertiesByAgentId = async (req, res) => {
+    // Create an instance of DBservice
+    const dbService = new DbService(config);
+
+    const { agentId } = req.query;
+
+    try {
+        await dbService.connect();
+
+        console.log("GET Property By AgentId Started");
+
+        // Query
+        const query = `SELECT * FROM ${tableName} WHERE agentId = ?`;
+        const params = [agentId];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(201).send({ results });
+
+        await dbService.disconnect();
+        
+    } catch (err) {
+
+        console.log(err);
+        res.status(500).json({ message: "Failed to retrieve Property!" });
+
+    } finally {
+
+        await dbService.disconnect();
+
     }
 };
 
