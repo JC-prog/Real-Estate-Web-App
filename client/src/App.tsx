@@ -11,6 +11,7 @@ import "./App.css";
 import Home from "./Pages/Home";
 
 import Buy from "./Pages/User/Buy";
+import PropertySearch from "./Pages/User/PropertySearch";
 import Sell from "./Pages/User/Sell";
 import RateAgent from "./Pages/User/RateAgent";
 import Login from "./Pages/Login";
@@ -40,6 +41,7 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path="/buy" element={<Buy />} />
+            <Route path="/properties-search" element={< PropertySearch />} />
             <Route path="/sell" element={<Sell />} />
             <Route path="/sell/rateAgent" element={<RateAgent />} />
             <Route path="/login" element={<Login />} />
