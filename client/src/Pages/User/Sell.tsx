@@ -58,6 +58,7 @@ const SellPage: React.FC = () => {
     const fetchProperties = async () => {
       const sellerId = await getUserID();
       console.log(sellerId);
+      
       try {
         const response: AxiosResponse<ApiResponseProperties> = await api.get(`api/sell/getPropertiesBySellerId`, {
             params: {

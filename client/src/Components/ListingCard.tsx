@@ -3,6 +3,7 @@ import Axios from 'axios';
 import "./ListingCard.css";
 import api from "../api/loginApi";
 import { CatchingPokemonSharp } from "@mui/icons-material";
+import { useNavigate } from "react-router-dom";
 
 const getCookieValue = (name: string): string | undefined => {
   const value = `; ${document.cookie}`;
@@ -11,14 +12,7 @@ const getCookieValue = (name: string): string | undefined => {
   return undefined;
 };
 interface ListingCardProps {
-  // propertyName: string;
-  // address: string;
-  // numberOfBedrooms: number;
-  // numberOfBathrooms: number;
-  // price: number;
-  // propertyType: string;
-  // squareFootage: number;
-  propertyId: string;
+  propertyId: number;
   propertyName: string;
   propertyAddress: string;
   propertyType: string;
@@ -53,13 +47,6 @@ const formatPrice = (price: number | string) => {
 
 
 const ListingCard: React.FC<ListingCardProps> = ({
-  // propertyName,
-  // address,
-  // numberOfBedrooms,
-  // numberOfBathrooms,
-  // price,
-  // propertyType,
-  // squareFootage
   propertyId,
   propertyName,
   propertyAddress,
@@ -74,6 +61,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
   sellerId,
   listingDate,
 }) => {
+
+  const navigate = useNavigate();
 
   const getUserID = async () => {
     const token = getCookieValue('token');
@@ -98,7 +87,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
 
     try {
       console.log(buyerId)
-      const response = await Axios.post('http://localhost:8080/api/buy/updateWatchlist', {
+      const response = await api.post('api/buy/updateWatchlist', {
         propertyId: propertyId,
         userId: buyerId
       });
@@ -107,6 +96,17 @@ const ListingCard: React.FC<ListingCardProps> = ({
       console.error("Error adding to watchlist:", error);
     }
   }
+
+  const handleView = async () => {
+    try {
+      await api.post(`/api/properties/${propertyId}/increment-views`, {
+        propertyId: propertyId
+      });
+      navigate(`/property/${propertyId}`); // Redirect to property details page
+    } catch (error) {
+      console.error("Error incrementing view counter:", error);
+    }
+  };
 
   return (
     <div className="listing-div-wrapper">
@@ -128,7 +128,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <p>S${pricePerSquareFeet}PSF</p>
       </div>
       <div className="btn-wrapper">
-        <button  id="viewBtn">View</button>
+        <button onClick={handleView} id="viewBtn">View</button>
         <button onClick={handleAddWatchlist} id="watchlistBtn">Add to Watchlist</button>
       </div>
     </div>

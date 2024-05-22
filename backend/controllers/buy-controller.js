@@ -37,8 +37,7 @@ export const updateWatchlist = async (req, res) => {
         
     // Create an instance of DBservice
     const dbService = new DbService(config);
-    // const { userId, userName } = req.body;
-    
+        
     try {
 
         await dbService.connect();

@@ -6,7 +6,10 @@ import {
     updateProperty,
     deleteProperty,
     getPropertiesByAgentId,
-    getPropertiesByKeyword
+    getPropertiesByKeyword,
+    incrementViewCounter,
+    getPropertyViews,
+    getPropertyWatchlistCount,
   } from '../controllers/properties-controller.js';
 
 const router = express.Router();
@@ -31,5 +34,14 @@ router.put('/:propertyId', updateProperty);
 
 // Delete Property
 router.delete('/:propertyId', deleteProperty);
+
+//Set Property Views
+router.post('/:id/increment-views', incrementViewCounter);
+
+//Get Property Views
+router.get('/:id/views', getPropertyViews)
+
+//Get Watchlist Count
+router.get('/:id/watchlist-count', getPropertyWatchlistCount);
 
 export default router;
