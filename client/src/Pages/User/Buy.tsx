@@ -8,14 +8,7 @@ import "./Buy.css";
 
 // Interface
 interface Property {
-  // propertyName: string;
-  // address: string;
-  // numberOfBedrooms: number;
-  // numberOfBathrooms: number;
-  // price: number;
-  // propertyType: string;
-  // squareFootage: number;
-  propertyId: string;
+  propertyId: number;
   propertyName: string;
   propertyAddress: string;
   propertyType: string;
@@ -61,13 +54,6 @@ const BuyPage: React.FC = () => {
     <div className="buy-home-container">
       {properties.map((property) => (
         <ListingCard
-          // propertyName={property.propertyName}
-          // address={property.address}
-          // numberOfBedrooms={property.numberOfBedrooms}
-          // numberOfBathrooms={property.numberOfBathrooms}
-          // price={property.price}
-          // propertyType={property.propertyType}
-          // squareFootage={property.squareFootage}
           propertyId={property.propertyId}
           propertyName={property.propertyName}
           propertyAddress={property.propertyAddress}

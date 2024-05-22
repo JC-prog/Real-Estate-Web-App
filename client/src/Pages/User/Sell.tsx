@@ -37,6 +37,8 @@ const SellPage: React.FC = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [userType, setUserType] = useState<string | null>(null);
+  const navigate = useNavigate();
   
   const getUserID = async () => {
     const token = getCookieValue('token');
@@ -54,19 +56,54 @@ const SellPage: React.FC = () => {
     }
   }
 
+  const getUserType = async (userId:string) => {
+    const token = getCookieValue('token');
+    try {
+      const response = await api.get(`api/user/${userId}`, {
+        params: {
+          userId:userId
+        }
+      });
+      console.log(response.data.results[0].userType)
+      return response.data.results[0].userType; 
+    } catch (error) {
+      console.error("Error getting user type", error);
+      throw error; // Propagate the error to the caller
+    }
+  }
+
+
   useEffect(() => {
     const fetchProperties = async () => {
-      const sellerId = await getUserID();
-      console.log(sellerId);
       try {
-        const response: AxiosResponse<ApiResponseProperties> = await api.get(`api/sell/getPropertiesBySellerId`, {
-            params: {
-                sellerId : sellerId
-            }
+        const userId = await getUserID();
+        const userType = await getUserType(userId);
+        setUserType(userType);
 
-        }); 
-        console.log("API response:", response.data); // Debugging line
+        if(userType == 'admin'){
+          console.log("admin login")
+          navigate('/admin/view-listings')
+        }
 
+        else if (userType !== 'seller') {
+          setError("You are not authorized to view this page");
+          setLoading(false);
+          return;
+        }
+
+        if (userId == null) {
+          setError("You have no properties listed");
+          setLoading(false);
+          return;
+        }
+
+
+
+        const response: AxiosResponse<ApiResponseProperties> = await api.get('api/sell/getPropertiesBySellerId', {
+          params: {
+            sellerId: userId
+          }
+        });
         setProperties(response.data.results);
       } catch (error) {
         setError("Failed to fetch properties");
@@ -78,6 +115,15 @@ const SellPage: React.FC = () => {
 
     fetchProperties();
   }, []);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>{error}</div>;
+  }
+
   
     return (
       <div className="buy-home-container">

@@ -246,3 +246,73 @@ export const deleteProperty = async (req, res) => {
 
     }
 };
+
+//Set view on property
+export const incrementViewCounter = async (req, res) => {
+    const dbService = new DbService(config);
+    const { id } = req.params;
+  
+    try {
+      await dbService.connect();
+  
+      const query = 'UPDATE properties SET viewCount = viewCount + 1 WHERE propertyId = ?';
+      const params = [id];
+  
+      await dbService.query(query, params);
+      await dbService.disconnect();
+  
+      res.status(200).json({ message: 'View counter incremented' });
+    } catch (err) {
+      console.error('Error incrementing view counter:', err);
+      res.status(500).json({ message: 'Failed to increment view counter' });
+    }
+};
+
+//Get view count
+export const getPropertyViews = async (req, res) => {
+    const dbService = new DbService(config);
+    const { id } = req.params;
+  
+    try {
+      await dbService.connect();
+  
+      const query = 'SELECT viewCount FROM properties WHERE propertyId = ?';
+      const params = [id];
+  
+      const results = await dbService.query(query, params);
+      await dbService.disconnect();
+  
+      if (results.length > 0) {
+        res.status(200).json({ views: results[0].viewCount });
+      } else {
+        res.status(404).json({ message: 'Property not found' });
+      }
+    } catch (err) {
+      console.error('Error getting property views:', err);
+      res.status(500).json({ message: 'Failed to get property views' });
+    }
+};
+
+export const getPropertyWatchlistCount = async (req, res) => {
+    const dbService = new DbService(config);
+    const { id } = req.params;
+  
+    try {
+      await dbService.connect();
+  
+      const query = 'SELECT COUNT(*) as watchlistCount FROM shortlists WHERE propertyId = ?';
+      const params = [id];
+  
+      const results = await dbService.query(query, params);
+      await dbService.disconnect();
+  
+      if (results.length > 0) {
+        res.status(200).json({ watchlistCount: results[0].watchlistCount });
+      } else {
+        res.status(404).json({ message: 'Property not found' });
+      }
+    } catch (err) {
+      console.error('Error getting property watchlist count:', err);
+      res.status(500).json({ message: 'Failed to get property watchlist count' });
+    }
+  };
