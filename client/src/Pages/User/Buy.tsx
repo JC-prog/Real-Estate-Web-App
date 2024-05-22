@@ -15,7 +15,7 @@ interface Property {
   // price: number;
   // propertyType: string;
   // squareFootage: number;
-  id: string;
+  propertyId: string;
   propertyName: string;
   propertyAddress: string;
   propertyType: string;
@@ -44,6 +44,7 @@ const BuyPage: React.FC = () => {
       try {
         const response = await api.get<ApiResponse>("/api/buy"); // Adjust the URL as necessary
         console.log("API response:", response.data); // Debugging line
+        // console.log(response.data.results[0].propertyId)
         setProperties(response.data.results);
       } catch (error) {
         setError("Failed to fetch agents");
@@ -67,7 +68,7 @@ const BuyPage: React.FC = () => {
           // price={property.price}
           // propertyType={property.propertyType}
           // squareFootage={property.squareFootage}
-          id={property.id}
+          propertyId={property.propertyId}
           propertyName={property.propertyName}
           propertyAddress={property.propertyAddress}
           propertyType={property.propertyType}
@@ -78,7 +79,7 @@ const BuyPage: React.FC = () => {
           pricePerSquareFeet={property.pricePerSquareFeet}
           price={property.price}
           agentId={property.agentId}
-          sellerId={property.agentId}
+          sellerId={property.sellerId}
           listingDate={property.listingDate}
         />
       ))}
