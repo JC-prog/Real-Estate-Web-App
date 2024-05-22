@@ -102,7 +102,19 @@ const ListingCard: React.FC<ListingCardProps> = ({
       await api.post(`/api/properties/${propertyId}/increment-views`, {
         propertyId: propertyId
       });
-      navigate(`/property/${propertyId}`); // Redirect to property details page
+      navigate(`/property/${propertyId}`, { 
+        state: { 
+          propertyDetails: { 
+            propertyName: propertyName, 
+            propertyAddress: propertyAddress,
+            popertyType: propertyType,
+            numberOfRooms: numberOfRooms,
+            area : area,
+            tenure: tenure,
+            status: status,
+            pricePerSquareFeet: pricePerSquareFeet,
+            price : price,
+            listingDate: listingDate} } });  // Redirect to property details page
     } catch (error) {
       console.error("Error incrementing view counter:", error);
     }

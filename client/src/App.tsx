@@ -18,6 +18,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import UserProfile from "./Pages/User/UserProfile";
 import MortgageCalculator from "./Pages/MortgageCalculator";
+import PropertyDetailsPage from './Pages/PropertyDetailsPage';
 
 // Admin Pages
 import Admin from "./Pages/Admin/AdminHome";
@@ -62,6 +63,7 @@ function App() {
               path="/admin/view-listings"
               element={<AdminViewListings />}
             />
+            <Route path="/property/:propertyId" element={<PropertyDetailsPage />} />
           </Routes>
         </BrowserRouter>
       </div>
