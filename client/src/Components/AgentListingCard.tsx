@@ -12,6 +12,7 @@ interface Property {
     propertyName: string;
     propertyAddress: string;
     propertyStatus: string;
+    price: number;
 }
 
 interface PropertyTableProps {
@@ -33,6 +34,25 @@ const AgentListingCard: React.FC<PropertyTableProps> = ({ data = [] }) => {
         navigate(`/property/${propertyId}`);
     }
 
+    const formatPrice = (price: number | string) => {
+        const priceNumber = Number(price);
+    
+        if (isNaN(priceNumber)) {
+            console.error('Price is not a valid number:', price);
+            return '0.00'; // Return a default formatted price for invalid numbers
+        }
+    
+        const formattedPrice = priceNumber.toLocaleString('en-US', {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        });
+    
+        console.log('Original price:', price);
+        console.log('Formatted price:', formattedPrice);
+    
+        return formattedPrice;
+    }
+
     return (
         <>
             {data.map((property) => (
@@ -48,7 +68,7 @@ const AgentListingCard: React.FC<PropertyTableProps> = ({ data = [] }) => {
                             <div className="listing-description">
                                 <h2>Description</h2>
                                 <p>{ property.propertyAddress }</p>
-                                <p>Price</p>
+                                <p>$ { formatPrice(property.price) }</p>
                             </div>
                         </div>
 

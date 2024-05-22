@@ -21,6 +21,7 @@ interface Property {
     propertyName: string;
     propertyAddress: string;
     propertyStatus: string;
+    price: number;
 }
 
 interface ApiResponseUsers {
@@ -91,6 +92,7 @@ const AgentProfile: React.FC = () => {
                     propertyName: item.propertyName,
                     propertyAddress: item.propertyAddress,
                     propertyStatus: item.propertyStatus,
+                    price: item.price
                 }));
     
                 setProperties(mappedProperties);
