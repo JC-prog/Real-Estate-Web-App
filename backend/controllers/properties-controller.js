@@ -43,6 +43,8 @@ export const getPropertiesByAgentId = async (req, res) => {
 
     const { agentId } = req.query;
 
+    console.log(req.query);
+
     try {
         await dbService.connect();
 

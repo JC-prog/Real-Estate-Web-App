@@ -28,7 +28,7 @@ export const register = async (req, res) => {
         console.log("Registration Post Started");
 
         // Query
-        const query = "SELECT * FROM users WHERE username = ? OR email = ?";
+        const query = "SELECT * FROM users WHERE userName = ? OR userEmail = ?";
         const params = [username, email];
 
         // Execute Query
@@ -38,7 +38,7 @@ export const register = async (req, res) => {
 
         if (results.length == 0) {
 
-            const insertQuery = "INSERT INTO users (userName, userEmail, userPassword, userRole, userState) VALUES (?, ?, ?, ?, Active)";
+            const insertQuery = "INSERT INTO users (userName, userEmail, userPassword, userRole, userState) VALUES (?, ?, ?, ?, 'Active')";
 
             const insertParams = [username, email, password, role];
 

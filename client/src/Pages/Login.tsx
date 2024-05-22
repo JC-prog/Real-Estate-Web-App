@@ -64,8 +64,10 @@ const Login: React.FC = () => {
 
                 if (response.data.role == "Admin") {
                     navigate("/admin");
+                } else if (response.data.role == "Agent") {
+                    navigate('/agent-dashboard');
                 } else {
-                    navigate('/');
+                    navigate("/");
                 }
             }
         } catch (error) {
