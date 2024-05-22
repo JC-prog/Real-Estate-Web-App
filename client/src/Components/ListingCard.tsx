@@ -107,7 +107,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
           propertyDetails: { 
             propertyName: propertyName, 
             propertyAddress: propertyAddress,
-            popertyType: propertyType,
+            propertyType: propertyType,
             numberOfRooms: numberOfRooms,
             area : area,
             tenure: tenure,
