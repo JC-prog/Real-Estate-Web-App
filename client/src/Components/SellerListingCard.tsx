@@ -34,7 +34,7 @@ interface ListingCardProps {
 }
 
 
-const ListingCard: React.FC<ListingCardProps> = ({
+const SellerListingCard: React.FC<ListingCardProps> = ({
   // propertyName,
   // address,
   // numberOfBedrooms,
@@ -73,23 +73,6 @@ const ListingCard: React.FC<ListingCardProps> = ({
     }
   }
 
-  const handleAddWatchlist = async () => {
-    const buyerId = await getUserID();
-    console.log(propertyId);
-    console.log(buyerId);
-
-    try {
-      console.log(buyerId)
-      const response = await Axios.post('http://localhost:8080/api/buy/updateWatchlist', {
-        propertyId: propertyId,
-        userId: buyerId
-      });
-      console.log("Response:", response.data);
-    } catch (error) {
-      console.error("Error adding to watchlist:", error);
-    }
-  }
-
   return (
     <div className="listing-div-wrapper">
         <h2 className='listing-title'>{propertyName}</h2>
@@ -104,12 +87,11 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <p>${price}</p> {/* Format the price to 2 decimal places */}
         <p>S${pricePerSquareFeet}PSF</p>
       </div>
-      <div className="btn-wrapper">
-        <button  id="viewBtn">View</button>
-        <button onClick={handleAddWatchlist} id="watchlistBtn">Add to Watchlist</button>
+      <div className="stats-wrapper">
+
       </div>
     </div>
   );
 };
 
-export default ListingCard;
+export default SellerListingCard;
