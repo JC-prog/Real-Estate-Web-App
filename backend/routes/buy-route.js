@@ -5,6 +5,6 @@ const router = express.Router();
 
 router.get("/", getProperties);
 
-router.post("/updateWatchlist", updateWatchlist());
+router.post("/updateWatchlist", updateWatchlist);
 
 export default router;
