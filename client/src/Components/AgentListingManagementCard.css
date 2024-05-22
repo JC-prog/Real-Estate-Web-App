@@ -1,0 +1,50 @@
+.property-management-buttons{
+    display: flex;
+    justify-content: flex-start;
+    gap: 10px; /* Adds spacing between the buttons */
+}
+
+.property-edit-btn,
+.property-view-btn, 
+.property-remove-btn {
+    width: 120px; /* Set a static width */
+    height: 40px; /* Set a static height */
+    padding: 10px 20px; /* Adjust padding if needed */
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Buttons */
+.property-view-btn {
+    background-color: #2196F3; /* Material Design Blue 500 */
+    color: white;
+}
+
+.property-view-btn:hover {
+    background-color: #1976D2; /* Material Design Blue 700 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.property-edit-btn {
+    background-color: #4CAF50; /* Material Design Green 500 */
+    color: white;
+}
+
+.property-edit-btn:hover {
+    background-color: #388E3C; /* Material Design Green 700 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+.property-remove-btn {
+    background-color: #F44336; /* Material Design Red 500 */
+    color: white;
+}
+
+.property-remove-btn:hover {
+    background-color: #D32F2F; /* Material Design Red 700 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
