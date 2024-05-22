@@ -164,11 +164,16 @@ function RefinancingForm({
   const handleLoanTermInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const updatedDetails = {
-      ...mortgageDetails,
-      loanTerm: parseFloat(event.target.value || ""),
-    };
-    setMortgageDetails(updatedDetails);
+    const input = event.target.value;
+    if (input !== "") {
+      const updatedDetails = {
+        ...mortgageDetails,
+        loanTerm: parseFloat(input),
+      };
+      setMortgageDetails(updatedDetails);
+    } else {
+      setMortgageDetails({ ...mortgageDetails, loanTerm: 0 });
+    }
   };
 
   return (
@@ -247,7 +252,7 @@ const MortgageCalculator = () => {
 
   mortgageDetails.altMonthlyPayment = alternatepayment;
   mortgageDetails.monthlyPayment = payment;
-  mortgageDetails.totalSavings = alternatepayment - payment;
+  mortgageDetails.totalSavings = payment - alternatepayment; //calculate savings
 
   //to differentiate between refinance or mortgage
   const [currPurpose, setCurrPurpose] = useState<Purpose>(Purpose.NEW_PURCHASE);
@@ -351,6 +356,7 @@ const MortgageCalculator = () => {
                                 color="text.secondary"
                                 align="left"
                               >
+                                <br></br>
                                 <p>
                                   Monthly mortgage payment : $
                                   {mortgageDetails.monthlyPayment.toFixed(2)}
@@ -370,10 +376,10 @@ const MortgageCalculator = () => {
                                 </p>
                               </Typography>
                             </CardContent>
-                            <CardActions>
+                            {/* <CardActions>
                               <Button size="small">Share</Button>
                               <Button size="small">Learn More</Button>
-                            </CardActions>
+                            </CardActions> */}
                           </Card>
                         </div>
                       </>
@@ -416,6 +422,7 @@ const MortgageCalculator = () => {
                               color="text.secondary"
                               align="left"
                             >
+                              <br></br>
                               <p>
                                 Yearly Repayment : ${" "}
                                 {(
@@ -445,10 +452,10 @@ const MortgageCalculator = () => {
                               </p>
                             </Typography>
                           </CardContent>
-                          <CardActions>
+                          {/* <CardActions>
                             <Button size="small">Share</Button>
                             <Button size="small">Learn More</Button>
-                          </CardActions>
+                          </CardActions> */}
                         </Card>
                       </div>
                     )}

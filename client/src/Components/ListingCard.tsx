@@ -23,6 +23,24 @@ interface ListingCardProps {
   sellerId: string;
   listingDate: number;
 }
+const formatPrice = (price: number | string) => {
+  const priceNumber = Number(price);
+
+  if (isNaN(priceNumber)) {
+    console.error("Price is not a valid number:", price);
+    return "0.00"; // Return a default formatted price for invalid numbers
+  }
+
+  const formattedPrice = priceNumber.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  console.log("Original price:", price);
+  console.log("Formatted price:", formattedPrice);
+
+  return formattedPrice;
+};
 
 const ListingCard: React.FC<ListingCardProps> = ({
   // propertyName,
@@ -47,16 +65,21 @@ const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
   return (
     <div className="listing-div-wrapper">
-        <h2 className='listing-title'>{propertyName}</h2>
+      <h2 className="listing-title">{propertyName}</h2>
       <div className="listing-image-wrapper">
-        <img className='image-listing' src="./apartment-sample.jpg" alt="property" />
+        <img
+          className="image-listing"
+          src="./apartment-sample.jpg"
+          alt="property"
+        />
       </div>
       <div className="description-div">
         <p>{propertyAddress}</p>
         <p>{propertyType}</p>
         <p>{numberOfRooms} Room</p>
         <p>{area}sqft</p>
-        <p>${price}</p> {/* Format the price to 2 decimal places */}
+        <p>${formatPrice(price)}</p>{" "}
+        {/* Format the price to 2 decimal places */}
         <p>S${pricePerSquareFeet}PSF</p>
       </div>
     </div>
