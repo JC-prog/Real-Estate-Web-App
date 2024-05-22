@@ -25,17 +25,24 @@
     align-items: left;
 }
 
-.login-container label {
-    margin-bottom: 5px;
-    padding: 10px 5px;
+.username-div,
+.password-div {
+  margin-bottom: 15px;
 }
 
-.login-container input {
+.username-div label,
+.password-div label {
     width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.username-div input,
+.password-div input {
+  width: calc(100% - 20px); /* Adjust width to leave space for padding */
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
 }
 
 .button-div {

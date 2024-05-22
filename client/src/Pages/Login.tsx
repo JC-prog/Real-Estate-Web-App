@@ -104,7 +104,7 @@ const Login: React.FC = () => {
                     </div>
                     <h2>Login</h2>
                     <p>Enter your credentials to access your account</p>
-                    <div>
+                    <div className="username-div">
                         <label htmlFor="username">Username</label><br />
                         <input
                             type="text"
@@ -114,7 +114,7 @@ const Login: React.FC = () => {
                             required
                         />
                     </div>
-                    <div>
+                    <div className="password-div">
                         <label htmlFor="password">Password</label><br />
                         <input
                             type="password"
