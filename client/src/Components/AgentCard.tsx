@@ -1,23 +1,40 @@
+import { ViewAgendaOutlined } from "@mui/icons-material";
 import "./AgentCard.css";
+import { useNavigate } from 'react-router-dom';
 
-interface AgentCardProps {
-    name: string;
-    description: string;
-    location: string;
+interface Agent {
+    agentId: string;
+    agentName: string;
+    agentDescription: string;
 }
 
-const AgentCard: React.FC<AgentCardProps> = ({ name, description, location }) => {
+interface ApiResponse {
+    results: Agent[];
+}
+
+const AgentCard: React.FC<Agent> = ({ agentId, agentName, agentDescription }) => {
+    const navigate = useNavigate();
+
+        // View Individual User
+        const viewAgent = async (userId: string) => {
+
+            navigate(`/agent/${userId}`);
+        }
+    
     return (
         <div className="agent-card-container">
-            <img src="/test.jpg" alt="Agent"></img>
-            <h2>{name}</h2>
+            <div>
+                <img src="/test.jpg" alt="Agent"></img>
+            </div>
+            
+            <h2>{ agentName }</h2>
             <h2>Description</h2>
-            <p>{description}</p>
-            <h2>Location</h2>
-            <p>{location}</p>
+            <p>{ agentDescription }</p>
+            <h2>Rating</h2>
+            <p>Stars</p>
 
             <div className="agent-card-button-div">
-                <button>Contact Me</button>
+                <button  onClick={() => viewAgent(agentId)}>Contact Me</button>
             </div>
         </div>
     );

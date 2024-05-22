@@ -17,13 +17,17 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import UserProfile from "./Pages/User/UserProfile";
 import MortgageCalculator from "./Pages/MortgageCalculator";
-import AgentsHomePage from "./Pages/Agents/AgentsHome";
+
 
 // Admin Pages
 import Admin from "./Pages/Admin/AdminHome";
 import AdminCreateUser from "./Pages/Admin/AdminCreateUser";
 import AdminViewUsers from "./Pages/Admin/AdminViewUsers";
 import AdminViewListings from "./Pages/Admin/AdminViewListings";
+
+// Agent Pages
+import AgentsHomePage from "./Pages/Agents/AgentsHome";
+import AgentProfile from "./Pages/Agents/AgentProfile";
 
 function App() {
   return (
@@ -45,6 +49,7 @@ function App() {
               element={<MortgageCalculator />}
             />
             <Route path="/agents" element={<AgentsHomePage />} />
+            <Route path="/agent/:agentId" element={<AgentProfile />}  />
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/create-user" element={<AdminCreateUser />} />

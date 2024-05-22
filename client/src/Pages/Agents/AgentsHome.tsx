@@ -5,14 +5,13 @@ import api from '../../api/loginApi';
 
 // Component
 import AgentCard from "../../Components/AgentCard";
-import "./AgentsHome.css"
+import "./AgentsHome.css";
 
 // Interface
 interface Agent {
-    id: number;
-    name: string;
+    userId: string;
+    userName: string;
     description: string;
-    location: string;
   }
 
 interface ApiResponse {
@@ -26,15 +25,24 @@ const AgentHomePage: React.FC = () => {
 
     useEffect(() => {
         const fetchAgents = async () => {
+
           try {
-            const response = await api.get<ApiResponse>('/api/agents'); // Adjust the URL as necessary
-            console.log('API response:', response.data); // Debugging line
+            const response = await api.get<ApiResponse>('/api/agent'); 
+
+            console.log('API response:', response.data); 
+
             setAgents(response.data.results);
+
           } catch (error) {
+
             setError('Failed to fetch agents');
+
             console.error('Error fetching agents:', error);
+
           } finally {
+
             setLoading(false);
+
           }
         };
     
@@ -45,10 +53,10 @@ const AgentHomePage: React.FC = () => {
         <div className="agents-home-container">
             {agents.map((agent) => (
                 <AgentCard
-                key={agent.name}
-                name={agent.name}
-                description={agent.description}
-                location={agent.location}
+                key={agent.userId}
+                agentId={agent.userId}
+                agentName={agent.userName}
+                agentDescription={ "Test" }
                 />
             ))}
         </div>

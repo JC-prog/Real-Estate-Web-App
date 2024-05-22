@@ -2,7 +2,7 @@ import express from  "express";
 import {
     listAgents,
     getAgent,
-  } from '../controllers/properties-controller.js';
+  } from '../controllers/agent-controller.js';
 
 const router = express.Router();
 

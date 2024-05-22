@@ -9,8 +9,10 @@
 }
 
 .agent-card-container img {
-    width: 100%;
-    height: auto;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
 .agent-card-container h2 p{
