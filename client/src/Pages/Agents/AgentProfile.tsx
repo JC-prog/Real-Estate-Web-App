@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { AxiosResponse, AxiosError } from 'axios';
 import api from '../../api/loginApi';
-import AgentListingCard from "../../Components/AgentListingCard"
+import AgentListingCard from "../../Components/AgentListingCard";
+import Popup from "../../Components/Popup";
 import "./AgentProfile.css";
 
 interface User {
@@ -41,6 +42,7 @@ const AgentProfile: React.FC = () => {
     const [properties, setProperties] = useState<Property[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [buttonPopup, setButtonPopup] = useState(false);
     const navigate = useNavigate();
     
 
@@ -128,11 +130,31 @@ const AgentProfile: React.FC = () => {
                                     <h2>Description</h2>
                                     <p>Real Estate Agent for 2 Years</p>
                                 </div>
-
                             </div>
 
                             <div className="profile-buttons">
-                                <button>Rate Agent</button>
+                                <button onClick={() => setButtonPopup(true)}>Rate Agent</button>
+
+                                <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                                    <h2>Rate Agent</h2>
+                                    <form>
+                                        <label>
+                                        Rating:
+                                        <input type="number" min="1" max="5" required />
+                                        </label>
+                                        <br />
+                                        <label>
+                                        Comments:
+                                        <textarea required></textarea>
+                                        </label>
+                                        <br />
+                                        <div className="button-group">
+                                        <button type="submit">Submit</button>
+                                        <button type="button" className="close-btn" onClick={() => setButtonPopup(false)}>Close</button>
+                                        </div>
+                                    </form>
+                                </Popup>
+
                                 <button>Contact Agent</button>
                             </div>
                         </div>
