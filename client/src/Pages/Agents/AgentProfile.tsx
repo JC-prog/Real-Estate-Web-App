@@ -8,6 +8,7 @@ import "./AgentProfile.css";
 interface User {
     userId: string;
     userName: string;
+    userDisplayName: string;
     userContactNum: string;
     userEmail: string;
     userRole: string;
@@ -65,19 +66,85 @@ const AgentProfile: React.FC = () => {
     return (
         <div>
             {user && (
-                <>
-                    <div className="profile-picture">
-                        <img src={"/test.jpg"} alt={`${user.userName}'s profile`} />
+                <div className="profile-container">
+                    <div className="profile-agent">
+                        <div className="profile-picture">
+                            <img src={"/test.jpg"} alt={`${user.userName}'s profile`} />
+                        </div>
+
+                        <div className="profile-details">
+                            <div className="profile-name">
+                                <h1>{ user.userDisplayName }</h1>
+
+                                <div className="profile-description">
+                                    <h2>Description</h2>
+                                    <p>Real Estate Agent for 2 Years</p>
+                                </div>
+
+                            </div>
+
+                            <div className="profile-buttons">
+                                <button>Rate Agent</button>
+                                <button>Contact Agent</button>
+                            </div>
+                        </div>
                     </div>
-                    <div className="profile-details">
-                        <h1>{user.userName}'s Profile</h1>
-                        <p><strong>User ID:</strong> {user.userId}</p>
-                        <p><strong>Contact:</strong> {user.userContactNum}</p>
-                        <p><strong>Email:</strong> {user.userEmail}</p>
-                        <p><strong>Role:</strong> {user.userRole}</p>
-                        <p><strong>State:</strong> {user.userState}</p>
+
+                    <div className="listing-agent">
+                        <h1>Listing</h1> 
+                        <div className="listing-container">
+                            <div className="listing-picture">
+    
+                                <img src={"/HousePic.jpg"} alt={`${user.userName}'s profile`} />
+                            </div>
+
+                            <div className="listing-details">
+                                <div className="listing-name">
+                                    <h1>{ user.userDisplayName }</h1>
+
+                                    <div className="listing-description">
+                                        <h2>Description</h2>
+                                        <p>Real Estate Address</p>
+                                        <p>Price</p>
+                                    </div>
+
+                                </div>
+
+                                <div className="profile-buttons">
+                                    <button>View</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="listing-container">
+                            <div className="listing-picture">
+    
+                                <img src={"/HousePic.jpg"} alt={`${user.userName}'s profile`} />
+                            </div>
+
+                            <div className="listing-details">
+                                <div className="listing-name">
+                                    <h1>{ user.userDisplayName }</h1>
+
+                                    <div className="listing-description">
+                                        <h2>Description</h2>
+                                        <p>Real Estate Address</p>
+                                        <p>Price</p>
+                                    </div>
+
+                                </div>
+
+                                <div className="profile-buttons">
+                                    <button>View</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </>
+
+                    <div className="review-agent">
+                        <h1>Reviews</h1>
+                    </div>
+                </div>
             )}
         </div>
     );

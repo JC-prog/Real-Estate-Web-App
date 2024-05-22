@@ -43,8 +43,6 @@ const Login: React.FC = () => {
         try {
             const response: AxiosResponse = await api.post('/api/auth/login', userData);
 
-            console.log(response.data.role);
-
             if (response.data == 'No Data') {
 
                 toast.error("Login Failed. Please check your credentials.", {
@@ -64,7 +62,6 @@ const Login: React.FC = () => {
                 const token = response.data.token;
                 setCookie('token', token, { path: '/' });
 
-                console.log(response.data.role);
                 if (response.data.role == "Admin") {
                     navigate("/admin");
                 } else {

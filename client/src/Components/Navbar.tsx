@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useCookies } from 'react-cookie';
 import { Link } from "react-router-dom";
+import api from '../api/loginApi';
+import axios from 'axios';
 
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
@@ -31,6 +33,14 @@ const Navbar: React.FC = () => {
     useEffect(() => {
         // Check if the user is logged in by checking local storage
         const token = getCookieValue('token');
+
+        const response = api.get('api/auth/check-auth', {
+            params: {
+              token: token
+            }
+        });
+
+        console.log(response);
 
         console.log(token);
 

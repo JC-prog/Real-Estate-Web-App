@@ -10,7 +10,7 @@ import "./AgentsHome.css";
 // Interface
 interface Agent {
     userId: string;
-    userName: string;
+    userDisplayName: string;
     description: string;
   }
 
@@ -55,7 +55,7 @@ const AgentHomePage: React.FC = () => {
                 <AgentCard
                 key={agent.userId}
                 agentId={agent.userId}
-                agentName={agent.userName}
+                agentName={agent.userDisplayName}
                 agentDescription={ "Test" }
                 />
             ))}

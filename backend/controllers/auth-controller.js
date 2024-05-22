@@ -4,16 +4,17 @@ import DbService from "../service/dbService.js";
 import config from '../database/dbConfigAzure.js'// uncomment this to connect to azure db
 
 // Create JWT
+const SECRET_KEY = "secret-key"
 const maxAge = 3 * 24 * 60 * 60;
-const createToken = (id) => {
+const createToken = (userId) => {
 
-     return jwt.sign({ id }, 'randomKey', {
+     return jwt.sign({ userId }, SECRET_KEY, {
 
     expiresIn: maxAge
   });
 };
 
-
+// Register
 export const register = async (req, res) => {
   
     // Create an instance of DBservice
@@ -37,7 +38,7 @@ export const register = async (req, res) => {
 
         if (results.length == 0) {
 
-            const insertQuery = "INSERT INTO users (username, email, password, role, state) VALUES (?, ?, ?, ?, Active)";
+            const insertQuery = "INSERT INTO users (userName, userEmail, userPassword, userRole, userState) VALUES (?, ?, ?, ?, Active)";
 
             const insertParams = [username, email, password, role];
 
@@ -58,6 +59,7 @@ export const register = async (req, res) => {
     }
 };
 
+// Login
 export const login = async (req, res) => {
     const dbService = new DbService(config);
     const { username, password } = req.body;
@@ -66,7 +68,7 @@ export const login = async (req, res) => {
         await dbService.connect();
 
         // Check for user
-        const query = "SELECT * FROM users WHERE username = ? AND password = ? LIMIT 1";
+        const query = "SELECT * FROM users WHERE userName = ? AND userPassword = ? LIMIT 1";
         const params = [username, password];
 
         const results = await dbService.query(query, params);
@@ -74,13 +76,14 @@ export const login = async (req, res) => {
         if (results.length > 0) {
             console.log("User Exist");
 
-            const token = createToken(results.id);
-            console.log("token" + token);
-            console.log(results[0].role);
+            const token = createToken(results[0].userId);
+            
+            console.log("token: " + token);
+
             // Create a JSON object with the user details
             const userJson = {
                 username: username,
-                role: results[0].role,
+                role: results[0].userRole,
                 token: token // Optionally include the token if needed
             };
 
@@ -99,6 +102,35 @@ export const login = async (req, res) => {
     }
   };
   
+  // Logout
   export const logout = (req, res) => {
-    res.clearCookie("token").status(200).json({ message: "Logout Successful" });
+        res.clearCookie("token").status(200).json({ message: "Logout Successful" });
   };
+
+  // User Authentication
+  export const checkAuth = (req, res) => {
+        
+        const token = req.query.token;
+
+        console.log("User Authentication Started")
+
+        console.log(token);
+
+        if (!token) {
+            return res.status(200).json({ message: 'Not authenticated' });
+        }
+
+        try {
+            const decoded = jwt.verify(token, SECRET_KEY);
+
+            console.log(decoded);
+
+            res.json({ message: 'Authenticated', userId: decoded.userId });
+
+        } catch (error) {
+
+            res.status(401).json({ message: 'Invalid token' });
+
+        }
+
+  }
