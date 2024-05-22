@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useCookies } from 'react-cookie';
 import { Link } from "react-router-dom";
 import api from '../api/loginApi';
-import axios from 'axios';
+import { AxiosResponse } from 'axios';
 
 import Logo from "./Logo";
 import SearchBar from "./SearchBar";
@@ -16,9 +16,9 @@ const getCookieValue = (name: string): string | undefined => {
     return undefined;
 };
 
-
 const Navbar: React.FC = () => {
     const [visibleDropdown, setVisibleDropdown] = useState<string | null>(null);
+    const [userId, setUserId] = useState('');
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [, , removeCookie] = useCookies(['token']);
 
@@ -38,16 +38,14 @@ const Navbar: React.FC = () => {
             params: {
               token: token
             }
+        }).then(response => {
+            console.log(response.data.userId);
+            setUserId(response.data.userId);
+            
+            if (token) {
+                setIsAuthenticated(true);
+            }
         });
-
-        console.log(response);
-
-        console.log(token);
-
-        console.log(token);
-        if (token) {
-            setIsAuthenticated(true);
-        }
     }, []);
 
     const handleLogout = () => {
