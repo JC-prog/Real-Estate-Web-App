@@ -17,19 +17,19 @@ const AdminCreateUser: React.FC = () => {
 	const [role, setRole] = useState('admin');
     const navigate = useNavigate();
 
-    const handleUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const setUserName = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setUsername(event.target.value);
 	};
 
-	const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const setUserEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setEmail(event.target.value);
 	};
 
-	const handlePasswordChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+	const setUserPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setPassword(event.target.value);
 	};
 
-    const handleRoleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const setUserRole = (event: React.ChangeEvent<HTMLInputElement>) => {
 		setRole(event.target.value);
 	};
 
@@ -62,7 +62,7 @@ const AdminCreateUser: React.FC = () => {
 		}
 	};
 
-	const handleSubmit = async (event: React.FormEvent) => {
+	const submitCreateUserForm = async (event: React.FormEvent) => {
 		event.preventDefault();
 
 		if (role == "initialValue")
@@ -92,13 +92,13 @@ const AdminCreateUser: React.FC = () => {
         <div className="admin-create-user-container">
             <div className="admin-create-user-wrapper">
                 <h1>Create a User</h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={submitCreateUserForm}>
                     <div className="admin-create-user-role-wrapper">
-                        <label><input type="radio" name="role" value="admin" onChange={handleRoleChange} checked={role === 'admin'}></input>Admin</label>
+                        <label><input type="radio" name="role" value="admin" onChange={setUserRole} checked={role === 'admin'}></input>Admin</label>
 
-                        <label><input type="radio" name="role" value="user" onChange={handleRoleChange} checked={role === 'user'}></input>User</label>
+                        <label><input type="radio" name="role" value="user" onChange={setUserRole} checked={role === 'user'}></input>User</label>
 
-                        <label><input type="radio" name="role" value="agent" onChange={handleRoleChange} checked={role === 'agent'}></input>Agent</label>
+                        <label><input type="radio" name="role" value="agent" onChange={setUserRole} checked={role === 'agent'}></input>Agent</label>
 					</div>
 
 					<div>
@@ -107,7 +107,7 @@ const AdminCreateUser: React.FC = () => {
 							type="text"
 							id="username"
 							value={username}
-							onChange={handleUsernameChange}
+							onChange={setUserName}
 							required
 						/>
 					</div>
@@ -117,7 +117,7 @@ const AdminCreateUser: React.FC = () => {
 							type="email"
 							id="email"
 							value={email}
-							onChange={handleEmailChange}
+							onChange={setUserEmail}
 							required
 						/>
 					</div>
@@ -127,7 +127,7 @@ const AdminCreateUser: React.FC = () => {
 							type="password"
 							id="password"
 							value={password}
-							onChange={handlePasswordChange}
+							onChange={setUserPassword}
 							required
 						/>
 					</div>

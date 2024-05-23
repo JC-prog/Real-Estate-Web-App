@@ -45,10 +45,13 @@ export const register = async (req, res) => {
             dbService.query(insertQuery, insertParams);
 
             console.log("Registration Successful");
-            res.status(200).json({mesage: "Registration Successful"});
+            res.status(200).json({message: "Registration Successful"});
+
         } else {
+
             console.log("User already exist");
             res.status(400).json({message: "Registration Failed"});
+            
         }
 
         await dbService.disconnect();

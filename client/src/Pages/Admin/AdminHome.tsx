@@ -5,8 +5,16 @@ import "./AdminHome.css"
 const Admin: React.FC = () => {
     const navigate = useNavigate();
 
-    const handleClick = (path: string) => {
-        navigate(path);
+    const createUser = () => {
+        navigate("/admin/create-user");
+    };
+
+    const viewUsers = () => {
+        navigate("/admin/view-users");
+    };
+
+    const viewListings = () => {
+        navigate("/admin/view-listings");
     };
 
     return (
@@ -15,15 +23,15 @@ const Admin: React.FC = () => {
             <div className="section">
                 <h2>Account Management</h2>
                 <div className="button-container">
-                    <button className="admin-btn" onClick={() => handleClick("/admin/create-user")}>Create User</button>
-                    <button className="admin-btn" onClick={() => handleClick("/admin/view-users")}>View Users</button>
+                    <button className="admin-btn" onClick={() => createUser()}>Create User</button>
+                    <button className="admin-btn" onClick={() => viewUsers()}>View Users</button>
                 </div>
             </div>
 
             <div className="section">
                 <h2>Listing Management</h2>
                 <div className="button-container">
-                    <button className="admin-btn" onClick={() => handleClick("/admin/view-listings")}>View Listings</button>
+                    <button className="admin-btn" onClick={() => viewListings()}>View Listings</button>
                 </div>
             </div>
 
