@@ -6,12 +6,20 @@ import api from '../../api/loginApi';
 
 // Interface
 interface Property {
-    propertyId: string;
+    propertyId: number;
     propertyName: string;
     propertyAddress: string;
-    propertyStatus: string;
+    propertyType: string;
+    numberOfRooms: string;
+    area: number;
+    tenure: string;
+    status: string;
+    pricePerSquareFeet: number;
     price: number;
-}
+    agentId: string;
+    sellerId: string;
+    listingDate: number;
+  }
 
 interface ApiResponseProperties {
     results: any[];
@@ -55,22 +63,24 @@ const AgentDashboard = () => {
 
             console.log('API response:', response);
 
-            console.log(response.data);
-
-            // Map the response data to match the propertys interface
             const mappedProperties: Property[] = response.data.results.map((item:any) => ({
                 propertyId: item.propertyId,
                 propertyName: item.propertyName,
                 propertyAddress: item.propertyAddress,
-                propertyStatus: item.propertyStatus,
-                price: item.price
+                propertyType: item.propertyType,
+                numberOfRooms: item.numberOfRooms,
+                area: item.area,
+                tenure: item.tenure,
+                status: item.status,
+                pricePerSquareFeet: item.pricePerSquareFeet,
+                price: item.price,
+                agentId: item.agentI,
+                sellerId: item.sellerId,
+                listingDate: item.listingDate
             }));
 
-            console.log(properties);
-
             setProperties(mappedProperties);
-
-            
+            console.log(properties);
 
         } catch (error) {
             console.error('Failed to fetch property data:', error);

@@ -38,11 +38,19 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
     }
 
     // Change State of User
-    const handleUserStateButton = async (userId: string) => {
+    const handleUserStateButton = async (userId: string, userState: string) => {
         try {
-            const response: AxiosResponse = await api.put(`api/user/${userId}`, {
+            if (userState == 'Active')
+            {
+                userState = 'Inactive';
+            } else {
+                userState = 'Active';
+            }
+            
+            const response: AxiosResponse = await api.put(`api/user/${userId}/state-update`, {
                 params: {
-                    userId : `${ userId }`
+                    userId : `${ userId }`,
+                    userState: userState
                 }
             });
 
@@ -50,6 +58,8 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000,
             });
+
+            window.location.reload();
 
         } catch (error) {
             console.error('Error:', error);
@@ -74,6 +84,8 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000,
             });
+
+            window.location.reload();
 
         } catch (error) {
             console.error('Error:', error);
@@ -105,7 +117,7 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
 
                             <button 
                                 className="user-state-btn"
-                                onClick={() => handleUserStateButton(user.userId)}
+                                onClick={() => handleUserStateButton(user.userId, user.userState)}
                             >
                                 {user.userState === 'Active' ? 'Deactivate' : 'Activate'}
                             </button>

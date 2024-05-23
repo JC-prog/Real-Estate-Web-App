@@ -6,9 +6,9 @@ import config from '../database/dbConfigAzure.js'// uncomment this to connect to
 // Create JWT
 const SECRET_KEY = "secret-key"
 const maxAge = 3 * 24 * 60 * 60;
-const createToken = (userId) => {
+const createToken = (userId, userRole) => {
 
-     return jwt.sign({ userId }, SECRET_KEY, {
+     return jwt.sign({ userId, userRole }, SECRET_KEY, {
 
     expiresIn: maxAge
   });
@@ -81,7 +81,7 @@ export const login = async (req, res) => {
         if (results.length > 0) {
             console.log("User Exist");
 
-            const token = createToken(results[0].userId);
+            const token = createToken(results[0].userId, results[0].userRole);
             
             console.log("token: " + token);
 
@@ -126,7 +126,9 @@ export const login = async (req, res) => {
         try {
             const decoded = jwt.verify(token, SECRET_KEY);
 
-            res.json({ message: 'Authenticated', userId: decoded.userId });
+            console.log(decoded);
+
+            res.json({ message: 'Authenticated', userId: decoded.userId, userRole: decoded.userRole });
 
         } catch (error) {
 

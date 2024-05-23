@@ -4,6 +4,7 @@ import {
     getProperty,
     createProperty,
     updateProperty,
+    updatePropertyStatus,
     deleteProperty,
     getPropertiesByAgentId,
     getPropertiesByKeyword,
@@ -31,6 +32,9 @@ router.post('/', createProperty);
 
 // Update Property
 router.put('/:propertyId', updateProperty);
+
+// Update Property Status
+router.put('/:propertyId/update-status', updatePropertyStatus);
 
 // Delete Property
 router.delete('/:propertyId', deleteProperty);

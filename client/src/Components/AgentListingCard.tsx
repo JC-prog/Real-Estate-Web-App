@@ -45,7 +45,7 @@ const AgentListingCard: React.FC<PropertyTableProps> = ({ data = [] }) => {
           });
 
           const propertyData = response.data.results[0];
-
+          console.log(propertyData);
           navigate(`/property/${propertyId}`, {
             state: {
               propertyDetails: {

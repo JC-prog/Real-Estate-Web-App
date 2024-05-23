@@ -117,8 +117,10 @@ export const updateUser = async (req, res) => {
     try {
         await dbService.connect();
 
-        const { userId } = req.params;
+        const { userId } = req.body.params;
         const { username, email, password, role } = req.body;
+
+        console.log(userId);
 
         console.log("Update User Started");
 
@@ -145,6 +147,43 @@ export const updateUser = async (req, res) => {
     }
 };
 
+// Update User Status
+export const updateUserState = async (req, res) => {
+    const dbService = new DbService(config);
+
+    try {
+        await dbService.connect();
+
+        const { userId, userState } = req.body.params;
+
+        console.log(userId);
+        console.log(userState);
+
+        console.log("Update User State Started");
+
+        // Query
+        const query = `UPDATE ${tableName} SET userState = ? WHERE userId = ?`;
+        const params = [userState, userId];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(200).json({ message: "Update User State Successful" });
+
+    } catch (err) {
+
+        console.error('Error updating user:', err);
+        res.status(500).json({ message: "Update User State Failed!" });
+
+    } finally {
+
+        await dbService.disconnect();
+
+    }
+};
+
 // Delete User
 export const deleteUser = async (req, res) => {
     const dbService = new DbService(config);
@@ -152,7 +191,7 @@ export const deleteUser = async (req, res) => {
     try {
         await dbService.connect();
         
-        const { userId } = req.params;
+        const { userId } = req.query;
 
         console.log("Delete User Started");
 

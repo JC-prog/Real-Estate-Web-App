@@ -4,6 +4,7 @@ import {
     getUser,
     createUser,
     updateUser,
+    updateUserState,
     deleteUser
   } from '../controllers/user-controller.js';
 
@@ -20,6 +21,9 @@ router.post('/', createUser);
 
 // Update user
 router.put('/:userId', updateUser);
+
+// Update User Status
+router.put('/:userId/state-update', updateUserState)
 
 // Delete user
 router.delete('/:userId', deleteUser);

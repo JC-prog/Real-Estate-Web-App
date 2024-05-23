@@ -8,12 +8,20 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Interface
 interface Property {
-    propertyId: string;
+    propertyId: number;
     propertyName: string;
     propertyAddress: string;
-    propertyStatus: string;
+    propertyType: string;
+    numberOfRooms: string;
+    area: number;
+    tenure: string;
+    status: string;
+    pricePerSquareFeet: number;
     price: number;
-}
+    agentId: string;
+    sellerId: string;
+    listingDate: number;
+  }
 
 interface PropertyTableProps {
     data: Property[];
@@ -24,14 +32,38 @@ const AgentListingManagementCard: React.FC<PropertyTableProps> = ({ data = [] })
     const [properties, setProperties] = useState<Property[]>([]);
     const navigate = useNavigate();
 
+    console.log(data);
+
     if (data.length === 0) {
         return <p>No properties available.</p>;
     }
 
-    const viewListing = async (propertyId: string) => {
-        const propertyData = { propertyId };
+    const viewListing = async (propertyId: number) => {
 
-        navigate(`/property/${propertyId}`);
+        const response = await api.get('/api/properties/${propertyId}', {
+			params: {
+			  propertyId: propertyId
+			},
+		  });
+
+        const propertyData = response.data.results[0];
+
+        navigate(`/property/${propertyId}`, {
+            state: {
+              propertyDetails: {
+                propertyName: propertyData.propertyName,
+                propertyAddress: propertyData.propertyAddress,
+                propertyType: propertyData.propertyType,
+                numberOfRooms: propertyData.numberOfRooms,
+                area: propertyData.area,
+                tenure: propertyData.tenure,
+                status: propertyData.propertyStatus,
+                pricePerSquareFeet: propertyData.pricePerSquareFeet,
+                price: propertyData.price,
+                listingDate: propertyData.listingDate,
+              },
+            },
+          });
     }
 
     const formatPrice = (price: number | string) => {

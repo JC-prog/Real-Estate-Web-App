@@ -27,24 +27,62 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
     }
 
     const viewProperty = async (propertyId: string) => {
-        const propertyData = { propertyId };
 
         navigate(`/property/${propertyId}`);
     }
 
-    const changePropertyState = async (propertyId: string) => {
-        const propertyData = { propertyId};
+    const removeListing = async (propertyId: string) => {
 
         try {
-            const response: AxiosResponse = await api.post('api/admin/handle-property-state', propertyData);
+            const response: any = await api.delete(`api/properties/${propertyId}`, {
+                params: {
+                    propertyId : propertyId
+                }
+            });
+
+            console.log('API response:', response);
+
+            toast.success("Delete Listing Successful", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
+
+            window.location.reload();
+
+        } catch (error) {
+            console.error('Failed to fetch property data:', error);
+
+            toast.error("Delete Listing Failed", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
+           
+        }
+    }
+
+    const changePropertyStatus = async (propertyId: string, propertyStatus: string) => {
+        if (propertyStatus == "Sold")
+        {
+            propertyStatus = "New";
+        } else 
+        {
+            propertyStatus = "Sold";
+        }
+
+        try {
+            const response: AxiosResponse = await api.put(`api/properties/${propertyId}/update-status`, {
+                params: {
+                    propertyId : `${ propertyId }`,
+                    propertyStatus: `${ propertyStatus }`
+                }
+            });
 
             toast.success("property updated", {
                 position: toast.POSITION.TOP_RIGHT,
                 autoClose: 2000,
             });
 
-            // Trigger re-render
-            setRefresh(prevRefresh => !prevRefresh);
+            window.location.reload();
 
         } catch (error) {
             console.error('Error:', error);
@@ -55,13 +93,6 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
             });
         }
     }
-
-    const removeListing = async (propertyId: string) => {
-        const propertyData = { propertyId };
-
-        navigate(`/property/${propertyId}`);
-    }
-
 
     return (
         <>
@@ -81,9 +112,9 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
                             </button>
                             <button 
                                 className="property-state-btn"
-                                onClick={() => changePropertyState(property.propertyId)}
+                                onClick={() => changePropertyStatus(property.propertyId, property.propertyStatus)}
                             >
-                                {property.propertyStatus === 'Listed' ? 'Delist' : 'List'}
+                                {property.propertyStatus === 'Sold' ? 'Re-List' : 'De-List'}
                             </button>
                             <button 
                                 className="property-remove-btn"

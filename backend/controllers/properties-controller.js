@@ -222,6 +222,40 @@ export const updateProperty = async (req, res) => {
     }
 };
 
+// Update Property Status
+export const updatePropertyStatus = async (req, res) => {
+    const dbService = new DbService(config);
+
+    try {
+        await dbService.connect();
+
+        const { propertyId, propertyStatus } = req.body.params;
+
+        console.log("Update Property Status Started");
+
+        // Query
+        const query = `UPDATE ${tableName} SET propertyStatus = ? WHERE propertyId = ?`;
+        const params = [propertyStatus, propertyId];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(200).json({ message: "Update Property Status Successful" });
+
+    } catch (err) {
+
+        console.error('Error updating user:', err);
+        res.status(500).json({ message: "Update Property Status Failed!" });
+
+    } finally {
+
+        await dbService.disconnect();
+
+    }
+};
+
 // Delete Property
 export const deleteProperty = async (req, res) => {
     const dbService = new DbService(config);
@@ -229,12 +263,12 @@ export const deleteProperty = async (req, res) => {
     try {
         await dbService.connect();
         
-        const { PropertyId } = req.params;
+        const { propertyId } = req.query;
 
         console.log("Delete Property Started");
 
         // Query
-        const query = `DELETE FROM ${tableName} WHERE id = ?`;
+        const query = `DELETE FROM ${tableName} WHERE propertyId = ?`;
         const params = [propertyId];
 
         // Execute Query
