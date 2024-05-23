@@ -77,7 +77,7 @@ export const updateWatchlist = async (req, res) => {
     }
 };
 
-export const viewBuyerWatchlist = async (req, res) => {
+export const getBuyerWatchlist = async (req, res) => {
         
     // Create an instance of DBservice
     const dbService = new DbService(config);
