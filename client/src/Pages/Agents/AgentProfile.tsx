@@ -51,7 +51,7 @@ const AgentProfile: React.FC = () => {
     const [properties, setProperties] = useState<Property[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    const [buttonPopup, setButtonPopup] = useState(false);
+    const [buttonPopup, rateReviewPopup] = useState(false);
     const [rating, setRating] = useState<number | ''>('');
     const [review, setReview] = useState<string>('');
     const navigate = useNavigate();
@@ -146,7 +146,7 @@ const AgentProfile: React.FC = () => {
                     autoClose: 2000,
                 });
 
-                setButtonPopup(false);
+                rateReviewPopup(false);
 
             } else {
                 // Handle error response
@@ -186,9 +186,9 @@ const AgentProfile: React.FC = () => {
                             </div>
 
                             <div className="profile-buttons">
-                                <button onClick={() => setButtonPopup(true)}>Rate Agent</button>
+                                <button onClick={() => rateReviewPopup(true)}>Rate Agent</button>
 
-                                <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                                <Popup trigger={buttonPopup} setTrigger={rateReviewPopup}>
                                     <h2>Review Agent</h2>
                                     <form onSubmit={submitReview}>
                                         <label>
@@ -212,7 +212,7 @@ const AgentProfile: React.FC = () => {
                                         <br />
                                         <div className="button-group">
                                         <button type="submit">Submit</button>
-                                        <button type="button" className="close-btn" onClick={() => setButtonPopup(false)}>Close</button>
+                                        <button type="button" className="close-btn" onClick={() => rateReviewPopup(false)}>Close</button>
                                         </div>
                                     </form>
                                 </Popup>

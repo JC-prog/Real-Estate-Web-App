@@ -57,22 +57,6 @@ const BuyerWatchListCard: React.FC<ListingCardProps> = ({
   sellerId,
   listingDate,
 }) => {
-  const getUserID = async () => {
-    const token = getCookieValue("token");
-    try {
-      const response = await api.get("api/auth/check-auth", {
-        params: {
-          token: token,
-        },
-      });
-      console.log(response.data.userId);
-      return response.data.userId;
-    } catch (error) {
-      console.error("Error getting userID", error);
-      throw error; // Propagate the error to the caller
-    }
-  };
-
   return (
     <div className="listing-div-wrapper">
       <h2 className="listing-title">{propertyName}</h2>
