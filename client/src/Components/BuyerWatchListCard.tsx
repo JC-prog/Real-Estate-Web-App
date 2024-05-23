@@ -26,6 +26,22 @@ interface ListingCardProps {
   listingDate: number;
 }
 
+const formatPrice = (price: number | string) => {
+  const priceNumber = Number(price);
+
+  if (isNaN(priceNumber)) {
+    console.error("Price is not a valid number:", price);
+    return "0.00"; // Return a default formatted price for invalid numbers
+  }
+
+  const formattedPrice = priceNumber.toLocaleString("en-US", {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  return formattedPrice;
+};
+
 const BuyerWatchListCard: React.FC<ListingCardProps> = ({
   propertyId,
   propertyName,
@@ -63,7 +79,7 @@ const BuyerWatchListCard: React.FC<ListingCardProps> = ({
       <div className="listing-image-wrapper">
         <img
           className="image-listing"
-          src="./apartment-sample.jpg"
+          src="/apartment-sample.jpg"
           alt="property"
         />
       </div>
@@ -72,7 +88,8 @@ const BuyerWatchListCard: React.FC<ListingCardProps> = ({
         <p>{propertyType}</p>
         <p>{numberOfRooms} Room</p>
         <p>{area}sqft</p>
-        <p>${price}</p> {/* Format the price to 2 decimal places */}
+        <p>${formatPrice(price)}</p>{" "}
+        {/* Format the price to 2 decimal places */}
         <p>S${pricePerSquareFeet}PSF</p>
       </div>
     </div>

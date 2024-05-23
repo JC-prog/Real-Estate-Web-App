@@ -4,9 +4,15 @@
     flex-direction: row;
 } */
 
-.buy-home-container{
-    display: grid;
-    gap: 5rem;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    padding: 2% 5%;
+.buy-home-container {
+  display: grid;
+  gap: 5rem;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  padding: 2% 5%;
+}
+
+.view-watchlist {
+  display: grid;
+  align-content: center;
+  justify-content: center;
 }

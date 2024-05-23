@@ -6,6 +6,8 @@ import api from "../../api/loginApi";
 import ListingCard from "../../Components/ListingCard";
 import "./Buy.css";
 import { useNavigate } from "react-router-dom";
+import { Fab } from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 
 // Interface
 interface Property {
@@ -53,28 +55,33 @@ const BuyPage: React.FC = () => {
   }, []);
 
   return (
-    <div className="buy-home-container">
-      <button onClick={() => navigate("/buy/watchlist")}>
-        View your WatchList
-      </button>
-      {properties.map((property) => (
-        <ListingCard
-          propertyId={property.propertyId}
-          propertyName={property.propertyName}
-          propertyAddress={property.propertyAddress}
-          propertyType={property.propertyType}
-          numberOfRooms={property.numberOfRooms}
-          area={property.area}
-          tenure={property.tenure}
-          status={property.status}
-          pricePerSquareFeet={property.pricePerSquareFeet}
-          price={property.price}
-          agentId={property.agentId}
-          sellerId={property.sellerId}
-          listingDate={property.listingDate}
-        />
-      ))}
-    </div>
+    <>
+      <div className="view-watchlist">
+        <Fab variant="extended" onClick={() => navigate("/buy/watchlist")}>
+          <FavoriteIcon sx={{ mr: 1 }} />
+          View WatchList
+        </Fab>
+      </div>
+      <div className="buy-home-container">
+        {properties.map((property) => (
+          <ListingCard
+            propertyId={property.propertyId}
+            propertyName={property.propertyName}
+            propertyAddress={property.propertyAddress}
+            propertyType={property.propertyType}
+            numberOfRooms={property.numberOfRooms}
+            area={property.area}
+            tenure={property.tenure}
+            status={property.status}
+            pricePerSquareFeet={property.pricePerSquareFeet}
+            price={property.price}
+            agentId={property.agentId}
+            sellerId={property.sellerId}
+            listingDate={property.listingDate}
+          />
+        ))}
+      </div>
+    </>
   );
 };
 

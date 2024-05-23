@@ -4,6 +4,9 @@ import "./ListingCard.css";
 import api from "../api/loginApi";
 import { CatchingPokemonSharp } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
+import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { Box, Fab } from "@mui/material";
 
 const getCookieValue = (name: string): string | undefined => {
   const value = `; ${document.cookie}`;
@@ -155,12 +158,21 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <p>S${pricePerSquareFeet}PSF</p>
       </div>
       <div className="btn-wrapper">
-        <button onClick={handleView} id="viewBtn">
+        <Box sx={{ "& > :not(style)": { m: 1 } }}>
+          <Fab aria-label="View">
+            <InfoRoundedIcon fontSize="medium" onClick={handleView} />
+          </Fab>
+          {/* <button onClick={handleView} id="viewBtn">
           View
-        </button>
-        <button onClick={handleAddWatchlist} id="watchlistBtn">
+        </button> */}
+          <Fab variant="extended" aria-label="like">
+            <FavoriteIcon onClick={handleAddWatchlist} sx={{ mr: 1 }} />
+            Add to watchlist
+          </Fab>
+        </Box>
+        {/* <button onClick={handleAddWatchlist} id="watchlistBtn">
           Add to Watchlist
-        </button>
+        </button> */}
       </div>
     </div>
   );
