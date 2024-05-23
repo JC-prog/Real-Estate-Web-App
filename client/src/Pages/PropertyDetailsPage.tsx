@@ -28,14 +28,17 @@ const PropertyDetailsPage: React.FC = () => {
             <p className="address">{propertyDetails.propertyAddress}</p>
         </div>
 
-        <p>{propertyDetails.propertyType}</p>
-        <p>{propertyDetails.numberOfRooms}</p>
-        <p>{propertyDetails.area}</p>
-        <p>{propertyDetails.tenure}</p>
-        <p>{propertyDetails.status}</p>
-        <p>{propertyDetails.pricePerSquareFeet}</p>
-        <p>{propertyDetails.price}</p>
-        <p>{formattedListingDate}</p>
+        <div className="details">
+          <p>{propertyDetails.propertyType}</p>
+          <p>{propertyDetails.numberOfRooms} Rooms</p>
+          <p>{propertyDetails.area} Sqft</p>
+          <p>{propertyDetails.tenure}</p>
+          <p>{propertyDetails.status}</p>
+          <p>${propertyDetails.pricePerSquareFeet} Psqft</p>
+          <p>${propertyDetails.price}</p>
+          <p>Listed on {formattedListingDate}</p>
+        </div>
+
 
       </div>
       <p className="About"> About This Property: Lorem ipsum dolor sit amet, consectetur adipiscing elit, 

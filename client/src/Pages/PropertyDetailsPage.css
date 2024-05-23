@@ -22,10 +22,15 @@
     display: flex;
     flex-flow: column wrap;
     align-items: flex-start;
-    width:  fit-content
+    width:  fit-content;
+}
+
+.details{
+    margin-top: 30%;
 }
 
 .About{
     width: 20%;
     height:100px;
+    padding-top: 2%;
 }
