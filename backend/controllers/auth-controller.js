@@ -38,9 +38,11 @@ export const register = async (req, res) => {
 
         if (results.length == 0) {
 
-            const insertQuery = "INSERT INTO users (userName, userEmail, userPassword, userRole, userState) VALUES (?, ?, ?, ?, 'Active')";
+            const insertQuery = "INSERT INTO users (userRole, userType, userName, userDisplayName, userPassword, userEmail, userState ) VALUES (?, ?, ?, ?, ?, ?, 'Active')";
 
-            const insertParams = [username, email, password, role];
+            const capsRole = role.charAt(0).toUpperCase()
+
+            const insertParams = [capsRole, role, username, username, password, email];
 
             dbService.query(insertQuery, insertParams);
 
@@ -51,7 +53,7 @@ export const register = async (req, res) => {
 
             console.log("User already exist");
             res.status(400).json({message: "Registration Failed"});
-            
+
         }
 
         await dbService.disconnect();
