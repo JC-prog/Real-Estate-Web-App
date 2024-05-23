@@ -14,29 +14,16 @@ const AgentCreateListing: React.FC = () => {
     const [propertyName, setName] = useState('');
     const [propertyAddress, setAddress] = useState('');
     const [propertyType, setType] = useState('');
-    const 
 
     const navigate = useNavigate();
 
     const setPropertyName = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setPropertyname(event.target.value);
-	};
-
-	const setUserEmail = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setEmail(event.target.value);
-	};
-
-	const setUserPassword = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setPassword(event.target.value);
-	};
-
-    const setUserRole = (event: React.ChangeEvent<HTMLInputElement>) => {
-		setRole(event.target.value);
+		setName(event.target.value);
 	};
 
     const handleApiResponse = async () => {
 
-		const userData = { username, email, password, role };
+		const userData = { };
 
 		try {
 			const response: AxiosResponse = await api.post('api/auth/register', userData);
@@ -65,12 +52,6 @@ const AgentCreateListing: React.FC = () => {
 
 	const submitCreateUserForm = async (event: React.FormEvent) => {
 		event.preventDefault();
-
-		if (role == "initialValue")
-		{
-			alert("Please enter a role");
-			return;
-		}
 
 		try {
 			const testReceived = handleApiResponse();
@@ -110,8 +91,7 @@ const AgentCreateListing: React.FC = () => {
 						<input
 							type="text"
 							id="address"
-							value={email}
-							onChange={setUserEmail}
+
 							required
 						/>
 					</div>
@@ -119,8 +99,7 @@ const AgentCreateListing: React.FC = () => {
                             <input
                                 type="text"
                                 id="address"
-                                value={email}
-                                onChange={setUserEmail}
+
                                 required
                             />
                     <div>
