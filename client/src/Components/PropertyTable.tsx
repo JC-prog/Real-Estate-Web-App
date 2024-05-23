@@ -47,7 +47,10 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
                 autoClose: 2000,
             });
 
-            window.location.reload();
+            // Delay the page reload by 2 seconds (2000 milliseconds)
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
 
         } catch (error) {
             console.error('Failed to fetch property data:', error);
@@ -82,7 +85,10 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
                 autoClose: 2000,
             });
 
-            window.location.reload();
+            // Delay the page reload by 2 seconds (2000 milliseconds)
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
 
         } catch (error) {
             console.error('Error:', error);

@@ -59,7 +59,10 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
                 autoClose: 2000,
             });
 
-            window.location.reload();
+            // Delay the page reload by 2 seconds (2000 milliseconds)
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
 
         } catch (error) {
             console.error('Error:', error);
@@ -85,7 +88,10 @@ const UserTable: React.FC<UserTableProps> = ({ data = [] }) => {
                 autoClose: 2000,
             });
 
-            window.location.reload();
+            // Delay the page reload by 2 seconds (2000 milliseconds)
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
 
         } catch (error) {
             console.error('Error:', error);
