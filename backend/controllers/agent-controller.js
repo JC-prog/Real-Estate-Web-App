@@ -4,7 +4,6 @@ import config from '../database/dbConfigAzure.js'// uncomment this to connect to
 // Table Name
 const tableName = "users";
 
-
 export const listAgents = async (req, res) => {
     // Create an instance of DBservice
     const dbService = new DbService(config);

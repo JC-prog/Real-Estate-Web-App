@@ -1,5 +1,5 @@
 // UserProfile.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, FormEvent} from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { AxiosResponse, AxiosError } from 'axios';
 import api from '../../api/loginApi';
@@ -43,6 +43,8 @@ const AgentProfile: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [buttonPopup, setButtonPopup] = useState(false);
+    const [rating, setRating] = useState<number | ''>('');
+    const [review, setReview] = useState<string>('');
     const navigate = useNavigate();
     
 
@@ -113,6 +115,36 @@ const AgentProfile: React.FC = () => {
     }, [propertiesId]);
     
 
+    // Rate and Review agent
+    const submitReview = async (event: FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+    
+        const reviewData = {
+            agentId,
+            rating,
+            review,
+        };
+    
+        try {
+            const response: AxiosResponse = await api.post('api/review', reviewData);
+
+            if (response.status == 200) {
+                // Handle successful response
+                console.log('Review submitted successfully');
+
+            } else {
+                // Handle error response
+                console.error('Error submitting review');
+
+            }
+
+        } catch (error) {
+        console.error('Error:', error);
+
+        }
+    };
+      
+
     return (
         <div>
             {user && (
@@ -136,17 +168,26 @@ const AgentProfile: React.FC = () => {
                                 <button onClick={() => setButtonPopup(true)}>Rate Agent</button>
 
                                 <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
-                                    <h2>Rate Agent</h2>
-                                    <form>
+                                    <h2>Review Agent</h2>
+                                    <form onSubmit={submitReview}>
                                         <label>
                                         Rating:
-                                        <input type="number" min="1" max="5" required />
+                                        <input 
+                                            type="number" min="1" max="5"
+                                            value={rating}
+                                            onChange={(e) => setRating(e.target.value === '' ? '' : parseInt(e.target.value))}
+                                        />
                                         </label>
                                         <br />
+                                        
                                         <label>
-                                        Review:
-                                        <textarea required></textarea>
+                                            Review:
+                                            <textarea 
+                                                value={review}
+                                                onChange={(e) => setReview(e.target.value)}
+                                            ></textarea>
                                         </label>
+
                                         <br />
                                         <div className="button-group">
                                         <button type="submit">Submit</button>

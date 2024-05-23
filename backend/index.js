@@ -11,7 +11,8 @@ import sellRoute from "./routes/sell-route.js";
 import agentsRoute from "./routes/agents-route.js";
 import agentRoute from "./routes/agent-route.js";
 import userRoute from "./routes/user-route.js";
-import propertiesRoute from "./routes/properties-route.js"
+import propertiesRoute from "./routes/properties-route.js";
+import reviewRoute from "./routes/review-route.js";
 
 const port = 8080;
 
@@ -38,6 +39,7 @@ app.use("/api/agents", agentsRoute);
 app.use("/api/agent", agentRoute);
 app.use("/api/user", userRoute)
 app.use("/api/properties", propertiesRoute);
+app.use("/api/review", reviewRoute);
 
 app.listen(port, ()=>{
 	console.log("Connected to server!")
