@@ -56,7 +56,7 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
         }
     }
 
-    const removeProperty = async (propertyId: string) => {
+    const removeListing = async (propertyId: string) => {
         const propertyData = { propertyId };
 
         navigate(`/property/${propertyId}`);
@@ -87,7 +87,7 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
                             </button>
                             <button 
                                 className="property-remove-btn"
-                                onClick={() => removeProperty(property.propertyId)}
+                                onClick={() => removeListing(property.propertyId)}
                             >
                                 Remove
                             </button>
