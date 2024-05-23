@@ -8,12 +8,20 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Interface
 interface Property {
-    propertyId: string;
+    propertyId: number;
     propertyName: string;
     propertyAddress: string;
-    propertyStatus: string;
+    propertyType: string;
+    numberOfRooms: string;
+    area: number;
+    tenure: string;
+    status: string;
+    pricePerSquareFeet: number;
     price: number;
-}
+    agentId: string;
+    sellerId: string;
+    listingDate: number;
+  }
 
 interface PropertyTableProps {
     data: Property[];
@@ -28,11 +36,36 @@ const AgentListingCard: React.FC<PropertyTableProps> = ({ data = [] }) => {
         return <p>No properties available.</p>;
     }
 
-    const viewProperty = async (propertyId: string) => {
-        const propertyData = { propertyId };
+    const viewProperty = async (propertyId: number) => {
+        try {
+          const response = await api.get(`/api/properties/${propertyId}`, {
+            params: {
+                propertyId : `${ propertyId }`
+            }
+          });
 
-        navigate(`/property/${propertyId}`);
-    }
+          const propertyData = response.data.results[0];
+
+          navigate(`/property/${propertyId}`, {
+            state: {
+              propertyDetails: {
+                propertyName: propertyData.propertyName,
+                propertyAddress: propertyData.propertyAddress,
+                propertyType: propertyData.propertyType,
+                numberOfRooms: propertyData.numberOfRooms,
+                area: propertyData.area,
+                tenure: propertyData.tenure,
+                status: propertyData.status,
+                pricePerSquareFeet: propertyData.pricePerSquareFeet,
+                price: propertyData.price,
+                listingDate: propertyData.listingDate,
+              },
+            },
+          }); // Redirect to property details page
+        } catch (error) {
+          console.error("Error incrementing view counter:", error);
+        }
+      };
 
     const formatPrice = (price: number | string) => {
         const priceNumber = Number(price);

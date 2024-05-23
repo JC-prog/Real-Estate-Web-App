@@ -3,11 +3,19 @@ import { useLocation } from 'react-router-dom';
 import AgentListingCard from "../../Components/AgentListingCard";
 
 interface Property {
-    propertyId: string;
+    propertyId: number;
     propertyName: string;
     propertyAddress: string;
-    propertyStatus: string;
+    propertyType: string;
+    numberOfRooms: string;
+    area: number;
+    tenure: string;
+    status: string;
+    pricePerSquareFeet: number;
     price: number;
+    agentId: string;
+    sellerId: string;
+    listingDate: number;
 }
 
 const PropertySearch: React.FC = () => {

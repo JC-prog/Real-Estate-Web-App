@@ -6,6 +6,7 @@ const PropertyDetailsPage: React.FC = () => {
   const location = useLocation();
   const propertyDetails = location.state.propertyDetails;
 
+  console.log(propertyDetails);
 
   if (!propertyDetails) {
     return <div>No property details found.</div>;

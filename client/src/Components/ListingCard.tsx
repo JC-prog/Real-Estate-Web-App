@@ -16,6 +16,7 @@ const getCookieValue = (name: string): string | undefined => {
   if (parts.length === 2) return parts.pop()?.split(";").shift();
   return undefined;
 };
+
 interface ListingCardProps {
   propertyId: number;
   propertyName: string;

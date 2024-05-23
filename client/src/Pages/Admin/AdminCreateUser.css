@@ -1,72 +1,87 @@
-.admin-create-user-role-container {
-    height: 100%;
-    margin: 10vh;
+/* Apply styles to the entire container */
+.admin-create-user-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.admin-create-user-wrapper {
-    width: 80%; /* Adjust width as needed */
-    max-width: 400px; /* Maximum width to maintain readability */
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-}
-
-.admin-create-user-wrapper form {
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full height of the viewport */
+    background-color: #f0f0f0; /* Optional: Add a background color */
+  }
+  
+  /* Style the wrapper div inside the container */
+  .admin-create-user-wrapper {
+    background-color: white; /* Background color for the form wrapper */
+    padding: 20px; /* Space inside the form wrapper */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for depth */
+    max-width: 400px; /* Optional: Set a maximum width for the form */
+    width: 100%; /* Full width for responsiveness */
+  }
+  
+  /* Style the form and its elements */
+  form {
     display: flex;
     flex-direction: column;
-    align-items: left;
-}
-
-.admin-create-user-role-wrapper {
+  }
+  
+  form div {
     display: flex;
-    width: 100%
-}
-
-.admin-create-user-role-wrapper label {
-    width: 10rem;
-    justify-content: left;
-    align-items: left;
-}
-
-.admin-create-user-role-wrapper input {
-    width: 1px;
-}
-
-.admin-create-user-wrapper label {
+    flex-direction: column; /* Stack label on top of input */
+    margin-bottom: 15px;
+  }
+  
+  form label {
     margin-bottom: 5px;
-    padding: 10px 5px;
-}
-
-.admin-create-user-wrapper input {
-    width: 100%;
+    font-weight: bold;
+  }
+  
+  form input {
     padding: 10px;
-    margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
-}
-
-.admin-create-user-button-div {
+  }
+  
+  /* Style the radio button group */
+  .admin-create-user-role-wrapper {
     display: flex;
-    gap: 5rem;
-}
-
-.admin-create-user-button-div button {
-    width: 50%;
-    height: 100%;
-    margin: 0px 2rem;
+    flex-direction: column; /* Stack radio buttons vertically */
+    margin-bottom: 15px;
+  }
+  
+  .admin-create-user-role-wrapper label {
+    margin-bottom: 5px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+  }
+  
+  .admin-create-user-role-wrapper input {
+    margin-right: 10px; /* Space between the radio button and the label */
+  }
+  
+  /* Style the button container */
+  .admin-create-user-button-div {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .admin-create-user-button-div button {
     padding: 10px 20px;
-    background-color: #007bff;
-    color: #fff;
     border: none;
-    border-radius: 6rem;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.admin-create-user-button-div button:hover {
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .admin-create-user-button-div button:hover {
     background-color: #0056b3;
-}
+  }
+  
+  .admin-create-user-button-div button:nth-child(2) {
+    background-color: #6c757d;
+  }
+  
+  .admin-create-user-button-div button:nth-child(2):hover {
+    background-color: #5a6268;
+  }
+  

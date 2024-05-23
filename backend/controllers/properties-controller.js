@@ -113,7 +113,7 @@ export const getProperty = async (req, res) => {
     // Create an instance of DBservice
     const dbService = new DbService(config);
 
-    const {PropertyId} = req.body;
+    const { propertyId } = req.query;
 
     try {
         await dbService.connect();
@@ -121,7 +121,7 @@ export const getProperty = async (req, res) => {
         console.log("GET Property Started");
 
         // Query
-        const query = 'SELECT * FROM ${tableName} WHERE id = ? LIMIT 1';
+        const query = `SELECT * FROM ${tableName} WHERE propertyId = ? LIMIT 1`;
         const params = [propertyId];
 
         // Execute Query
@@ -152,13 +152,21 @@ export const createProperty = async (req, res) => {
     try {
         await dbService.connect();
 
-        const {Propertyname, email, password, role} = req.body;
+        const { propertyName, propertyAddress, propertyType, numberOfRooms, area, tenure, price, sellerId, agentId} = req.body;
+
+        console.log(req.body);
 
         console.log("Create Property Started");
 
+        // Computation
+        const currentDateTime = new Date();
+        const status = 'New';
+        const viewCount = 0;
+        const pricePerSqft = parseFloat(price) / parseFloat(area);
+
         // Query
-        const query = '';
-        const params = [];
+        const query = `INSERT INTO ${tableName} (propertyName, propertyAddress, propertyType, numberOfRooms, area, tenure, propertyStatus, pricePerSquareFeet, price, agentId, sellerId, listingDate, viewCount) Values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+        const params = [propertyName, propertyAddress, propertyType, numberOfRooms, area, tenure, status, pricePerSqft, price, agentId, sellerId, currentDateTime, viewCount];
 
         // Execute Query
         const results = await dbService.query(query, params);
@@ -169,6 +177,7 @@ export const createProperty = async (req, res) => {
 
     } catch (err) {
 
+        console.log(err);
         res.status(500).json({ message: "Create Property Fail!" });
 
     } finally {

@@ -40,7 +40,7 @@ export const register = async (req, res) => {
 
             const insertQuery = "INSERT INTO users (userRole, userType, userName, userDisplayName, userPassword, userEmail, userState ) VALUES (?, ?, ?, ?, ?, ?, 'Active')";
 
-            const capsRole = role.charAt(0).toUpperCase()
+            const capsRole = role.charAt(0).toUpperCase() + role.slice(1);
 
             const insertParams = [capsRole, role, username, username, password, email];
 
@@ -119,16 +119,12 @@ export const login = async (req, res) => {
 
         console.log("User Authentication Started")
 
-        console.log(token);
-
         if (!token) {
             return res.status(200).json({ message: 'Not authenticated' });
         }
 
         try {
             const decoded = jwt.verify(token, SECRET_KEY);
-
-            console.log(decoded);
 
             res.json({ message: 'Authenticated', userId: decoded.userId });
 

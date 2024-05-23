@@ -19,12 +19,20 @@ interface User {
 }
 
 interface Property {
-    propertyId: string;
+    propertyId: number;
     propertyName: string;
     propertyAddress: string;
-    propertyStatus: string;
+    propertyType: string;
+    numberOfRooms: string;
+    area: number;
+    tenure: string;
+    status: string;
+    pricePerSquareFeet: number;
     price: number;
-}
+    agentId: string;
+    sellerId: string;
+    listingDate: number;
+  }
 
 interface ApiResponseUsers {
     results: User[];
@@ -92,15 +100,15 @@ const AgentProfile: React.FC = () => {
                 console.log('API response:', response.data);
     
                 // Map the response data to match the propertys interface
-                const mappedProperties: Property[] = response.data.results.map((item) => ({
+                /*const mappedProperties: Property[] = response.data.results.map((item) => ({
                     propertyId: item.propertyId,
                     propertyName: item.propertyName,
                     propertyAddress: item.propertyAddress,
-                    propertyStatus: item.propertyStatus,
+                    propertyStatus: item.status,
                     price: item.price
-                }));
+                })); */
     
-                setProperties(mappedProperties);
+                setProperties(response.data.results);
     
                 console.log(properties);
     

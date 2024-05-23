@@ -1,0 +1,68 @@
+/* Apply styles to the entire container */
+.agent-create-user-container {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    height: 100vh; /* Full height of the viewport */
+    background-color: #f0f0f0; /* Optional: Add a background color */
+  }
+  
+  /* Style the wrapper div inside the container */
+  .agent-create-user-wrapper {
+    background-color: white; /* Background color for the form wrapper */
+    padding: 20px; /* Space inside the form wrapper */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Optional: Add a shadow for depth */
+    max-width: 400px; /* Optional: Set a maximum width for the form */
+    width: 100%; /* Full width for responsiveness */
+  }
+  
+  /* Style the form and its elements */
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  form div {
+    display: flex;
+    flex-direction: column; /* Stack label on top of input */
+    margin-bottom: 15px;
+  }
+  
+  form label {
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .agent-create-user-button-div {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .agent-create-user-button-div button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #007bff;
+    color: white;
+  }
+  
+  .agent-create-user-button-div button:hover {
+    background-color: #0056b3;
+  }
+  
+  .agent-create-user-button-div button:nth-child(2) {
+    background-color: #6c757d;
+  }
+  
+  .agent-create-user-button-div button:nth-child(2):hover {
+    background-color: #5a6268;
+  }
+  
