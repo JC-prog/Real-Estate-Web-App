@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from "react-router-dom";
 import { AxiosResponse, AxiosError } from 'axios';
 import api from '../../api/loginApi';
+import './UserProfile.css';
 
 interface User {
     userId: string;
@@ -58,18 +59,37 @@ const UserProfile: React.FC = () => {
     }
 
     return (
-        <div>
-            <h1>User Profile</h1>
-            {user && (
-                <>
-                    <p>User ID: {user.userId}</p>
-                    <p>User Name: {user.userName}</p>
-                    <p>Contact : {user.userContactNum}</p>
-                    <p>Email : {user.userEmail} </p>
-                    <p>Role: {user.userRole}</p>
-                    <p>State: {user.userState}</p>
-                </>
-            )}
+        <div className="user-profile-container">
+            <h2 className="user-profile-header">User Profile</h2>
+            <div className="user-profile-content">
+                <div className="user-profile-image">
+                    <img src="/cat-pic.jpeg" alt="User" />
+                </div>
+                <div className="user-profile-info">
+                    {user && (
+                        <>
+                            <p>
+                                <span>User ID:</span> {user.userId}
+                            </p>
+                            <p>
+                                <span>User Name:</span> {user.userName}
+                            </p>
+                            <p>
+                                <span>Contact:</span> {user.userContactNum}
+                            </p>
+                            <p>
+                                <span>Email:</span> {user.userEmail}
+                            </p>
+                            <p>
+                                <span>Role:</span> {user.userRole}
+                            </p>
+                            <p>
+                                <span>State:</span> {user.userState}
+                            </p>
+                        </>
+                    )}
+                </div>
+            </div>
         </div>
     );
 }

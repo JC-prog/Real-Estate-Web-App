@@ -31,7 +31,7 @@ const AgentCard: React.FC<Agent> = ({ agentId, agentName, agentDescription }) =>
             <h2>Description</h2>
             <p>{ agentDescription }</p>
             <h2>Rating</h2>
-            <p>Stars</p>
+            <p>3 Stars</p>
 
             <div className="agent-card-button-div">
                 <button  onClick={() => viewAgent(agentId)}>Contact Me</button>
