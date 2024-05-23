@@ -48,7 +48,7 @@ export const updateWatchlist = async (req, res) => {
         
         // Query
         // const query = "SELECT id, username, state FROM users WHERE id = ? AND username = ? LIMIT 1";
-        const query = "INSERT INTO shortlists (propertyId, userId) VALUES (?, ?)";
+        const query = "INSERT INTO shortlists (propertyId, userId) VALUES (?, ?) ON DUPLICATE KEY UPDATE propertyId=propertyId";
         const params = [propertyId, userId];
 
         console.log(params);
@@ -74,5 +74,42 @@ export const updateWatchlist = async (req, res) => {
         
         console.log(err);
         res.status(500).json({ message: "Failed to update shortlist" });
+    }
+};
+
+export const viewBuyerWatchlist = async (req, res) => {
+        
+    // Create an instance of DBservice
+    const dbService = new DbService(config);
+        
+    try {
+
+        await dbService.connect();
+
+        console.log("View watchlist Started");
+        const { buyerId } = req.query;
+
+        // Query
+        // const query = "SELECT id, username, state FROM users WHERE id = ? AND username = ? LIMIT 1";
+        const query = "SELECT p.* FROM properties p JOIN shortlists s ON p.propertyId = s.propertyId WHERE s.userId = ?";
+        const params = [buyerId];
+
+        console.log("params is",params);
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        await dbService.disconnect();
+
+        res.status(201).send({
+            results
+        });
+        
+    } catch (err) {
+        
+        console.log(err);
+        res.status(500).json({ message: "Failed to retrieve any views" });
     }
 };

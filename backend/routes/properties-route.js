@@ -44,4 +44,5 @@ router.get('/:id/views', getPropertyViews)
 //Get Watchlist Count
 router.get('/:id/watchlist-count', getPropertyWatchlistCount);
 
+
 export default router;

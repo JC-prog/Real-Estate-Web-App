@@ -11,6 +11,7 @@ import "./App.css";
 import Home from "./Pages/Home";
 
 import Buy from "./Pages/User/Buy";
+import BuyerWatchList from "./Pages/User/BuyerWatchList";
 import PropertySearch from "./Pages/User/PropertySearch";
 import Sell from "./Pages/User/Sell";
 import RateAgent from "./Pages/User/RateAgent";
@@ -18,7 +19,7 @@ import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import UserProfile from "./Pages/User/UserProfile";
 import MortgageCalculator from "./Pages/MortgageCalculator";
-import PropertyDetailsPage from './Pages/PropertyDetailsPage';
+import PropertyDetailsPage from "./Pages/PropertyDetailsPage";
 
 // Admin Pages
 import Admin from "./Pages/Admin/AdminHome";
@@ -42,7 +43,8 @@ function App() {
             <Route path="/" element={<Home />} />
 
             <Route path="/buy" element={<Buy />} />
-            <Route path="/properties-search" element={< PropertySearch />} />
+            <Route path="/buy/watchlist" element={<BuyerWatchList />} />
+            <Route path="/properties-search" element={<PropertySearch />} />
             <Route path="/sell" element={<Sell />} />
             <Route path="/sell/rateAgent" element={<RateAgent />} />
             <Route path="/login" element={<Login />} />
@@ -52,8 +54,8 @@ function App() {
               element={<MortgageCalculator />}
             />
             <Route path="/agents" element={<AgentsHomePage />} />
-            <Route path="/agent/:agentId" element={<AgentProfile />}  />
-            <Route path="/agent-dashboard" element={ <AgentDashboard /> } />
+            <Route path="/agent/:agentId" element={<AgentProfile />} />
+            <Route path="/agent-dashboard" element={<AgentDashboard />} />
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/create-user" element={<AdminCreateUser />} />
@@ -63,7 +65,10 @@ function App() {
               path="/admin/view-listings"
               element={<AdminViewListings />}
             />
-            <Route path="/property/:propertyId" element={<PropertyDetailsPage />} />
+            <Route
+              path="/property/:propertyId"
+              element={<PropertyDetailsPage />}
+            />
           </Routes>
         </BrowserRouter>
       </div>

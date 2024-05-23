@@ -1,5 +1,5 @@
-import React,{useState} from "react";
-import Axios from 'axios';
+import React, { useState } from "react";
+import Axios from "axios";
 import "./ListingCard.css";
 import api from "../api/loginApi";
 import { CatchingPokemonSharp } from "@mui/icons-material";
@@ -7,8 +7,10 @@ import { useNavigate } from "react-router-dom";
 
 const getCookieValue = (name: string): string | undefined => {
   const value = `; ${document.cookie}`;
+
   const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop()?.split(';').shift();
+
+  if (parts.length === 2) return parts.pop()?.split(";").shift();
   return undefined;
 };
 interface ListingCardProps {
@@ -39,12 +41,8 @@ const formatPrice = (price: number | string) => {
     maximumFractionDigits: 2,
   });
 
-  console.log("Original price:", price);
-  console.log("Formatted price:", formattedPrice);
-
   return formattedPrice;
 };
-
 
 const ListingCard: React.FC<ListingCardProps> = ({
   propertyId,
@@ -61,60 +59,77 @@ const ListingCard: React.FC<ListingCardProps> = ({
   sellerId,
   listingDate,
 }) => {
-
   const navigate = useNavigate();
 
   const getUserID = async () => {
-    const token = getCookieValue('token');
+    const token = getCookieValue("token");
     try {
-        const response = await api.get('api/auth/check-auth', {
-            params: {
-                token: token
-            }
-        });
-        console.log(response.data.userId);
-        return response.data.userId;
+      const response = await api.get("api/auth/check-auth", {
+        params: {
+          token: token,
+        },
+      });
+      console.log("response", response.data);
+      console.log("this one returns the user id", response.data.userId);
+      console.log("this one is the usertype", response.data.user);
+      return response.data.userId;
     } catch (error) {
-        console.error("Error getting userID", error);
-        throw error; // Propagate the error to the caller
+      console.error("Error getting userID", error);
+      throw error; // Propagate the error to the caller
     }
-  }
+  };
 
   const handleAddWatchlist = async () => {
     const buyerId = await getUserID();
-    console.log(propertyId);
-    console.log(buyerId);
+    console.log("propertyId", propertyId);
+    console.log("buyerId", buyerId);
 
     try {
-      console.log(buyerId)
-      const response = await api.post('api/buy/updateWatchlist', {
+      console.log("buyerid", buyerId);
+      const response = await api.post("api/buy/updateWatchlist", {
         propertyId: propertyId,
-        userId: buyerId
+        userId: buyerId,
       });
       console.log("Response:", response.data);
     } catch (error) {
       console.error("Error adding to watchlist:", error);
     }
-  }
+  };
+
+  //get the data from the backend using post from where it gets the databse
+  const buyerViewWatchlist = async () => {
+    const buyerId = await getUserID();
+    try {
+      const response = await api.post("api/buy/updateWatchList", {
+        propertyId: propertyId,
+        userId: buyerId,
+      });
+    } catch (error) {
+      console.error("error getting the view for user buyer");
+    }
+  };
 
   const handleView = async () => {
     try {
       await api.post(`/api/properties/${propertyId}/increment-views`, {
-        propertyId: propertyId
+        propertyId: propertyId,
       });
-      navigate(`/property/${propertyId}`, { 
-        state: { 
-          propertyDetails: { 
-            propertyName: propertyName, 
+      navigate(`/property/${propertyId}`, {
+        state: {
+          propertyDetails: {
+            propertyName: propertyName,
             propertyAddress: propertyAddress,
             propertyType: propertyType,
             numberOfRooms: numberOfRooms,
-            area : area,
+            area: area,
             tenure: tenure,
             status: status,
             pricePerSquareFeet: pricePerSquareFeet,
-            price : price,
-            listingDate: listingDate} } });  // Redirect to property details page
+            price: price,
+            listingDate: listingDate,
+          },
+        },
+      }); // Redirect to property details page
     } catch (error) {
       console.error("Error incrementing view counter:", error);
     }
@@ -140,8 +155,12 @@ const ListingCard: React.FC<ListingCardProps> = ({
         <p>S${pricePerSquareFeet}PSF</p>
       </div>
       <div className="btn-wrapper">
-        <button onClick={handleView} id="viewBtn">View</button>
-        <button onClick={handleAddWatchlist} id="watchlistBtn">Add to Watchlist</button>
+        <button onClick={handleView} id="viewBtn">
+          View
+        </button>
+        <button onClick={handleAddWatchlist} id="watchlistBtn">
+          Add to Watchlist
+        </button>
       </div>
     </div>
   );

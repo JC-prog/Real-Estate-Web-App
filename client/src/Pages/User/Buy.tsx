@@ -5,6 +5,7 @@ import api from "../../api/loginApi";
 // Component
 import ListingCard from "../../Components/ListingCard";
 import "./Buy.css";
+import { useNavigate } from "react-router-dom";
 
 // Interface
 interface Property {
@@ -31,6 +32,7 @@ const BuyPage: React.FC = () => {
   const [properties, setProperties] = useState<Property[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -52,6 +54,9 @@ const BuyPage: React.FC = () => {
 
   return (
     <div className="buy-home-container">
+      <button onClick={() => navigate("/buy/watchlist")}>
+        View your WatchList
+      </button>
       {properties.map((property) => (
         <ListingCard
           propertyId={property.propertyId}
