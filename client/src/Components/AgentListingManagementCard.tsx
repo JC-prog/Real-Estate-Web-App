@@ -28,7 +28,7 @@ const AgentListingManagementCard: React.FC<PropertyTableProps> = ({ data = [] })
         return <p>No properties available.</p>;
     }
 
-    const viewProperty = async (propertyId: string) => {
+    const viewListing = async (propertyId: string) => {
         const propertyData = { propertyId };
 
         navigate(`/property/${propertyId}`);
@@ -70,7 +70,7 @@ const AgentListingManagementCard: React.FC<PropertyTableProps> = ({ data = [] })
                         </div>
 
                         <div className="property-management-buttons">
-                            <button className="property-view-btn" onClick={() => viewProperty(property.propertyId)}>View</button>
+                            <button className="property-view-btn" onClick={() => viewListing(property.propertyId)}>View</button>
                             <button className="property-edit-btn">Edit</button>
                             <button className="property-remove-btn">Remove</button>
                         </div>

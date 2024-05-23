@@ -2,6 +2,7 @@
 import React, { useEffect, useState, FormEvent} from 'react';
 import { useParams, useNavigate } from "react-router-dom";
 import { AxiosResponse, AxiosError } from 'axios';
+import { ToastContainer, toast } from 'react-toastify';
 import api from '../../api/loginApi';
 import AgentListingCard from "../../Components/AgentListingCard";
 import Popup from "../../Components/Popup";
@@ -132,9 +133,21 @@ const AgentProfile: React.FC = () => {
                 // Handle successful response
                 console.log('Review submitted successfully');
 
+                toast.success("Review submitted successfully", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 2000,
+                });
+
+                setButtonPopup(false);
+
             } else {
                 // Handle error response
                 console.error('Error submitting review');
+                
+                toast.success("Review submit fail", {
+                    position: toast.POSITION.TOP_RIGHT,
+                    autoClose: 2000,
+                });
 
             }
 

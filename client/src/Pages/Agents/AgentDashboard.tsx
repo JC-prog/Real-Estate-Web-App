@@ -28,6 +28,7 @@ const AgentDashboard = () => {
     const [userId, setUserId] = useState('');
     const [properties, setProperties] = useState<Property[]>([]);
     const { propertiesId } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         // Check if the user is logged in by checking local storage
@@ -77,6 +78,10 @@ const AgentDashboard = () => {
         }
     };
 
+    const createListing = async () => {
+        navigate("/agent-create-listing");
+    }
+
   return (
     <>
         <div className="agent-dashboard-container">
@@ -85,6 +90,7 @@ const AgentDashboard = () => {
                 <h2>Listing Management</h2>
                 <div className="button-container">
                     <button className="agent-btn" onClick={fetchProperties}>View Listings</button>
+                    <button className="agent-btn" onClick={createListing}>Create Listing</button>
                 </div>
                 <AgentListingManagementCard data={properties} />
             </div>
