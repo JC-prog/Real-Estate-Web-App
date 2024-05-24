@@ -381,7 +381,7 @@ export const updateListing = async (req, res) => {
             price,
             sellerId,
             agentId,
-            propertyStatus
+            status
         } = req.body;
 
         numberOfRooms = parseInt(numberOfRooms, 10);
@@ -412,7 +412,7 @@ export const updateListing = async (req, res) => {
             price || null,
             sellerId || null,
             agentId || null,
-            propertyStatus || null,
+            status || null,
             parseFloat(price) / parseFloat(area) || null,
             propertyId
         ];
