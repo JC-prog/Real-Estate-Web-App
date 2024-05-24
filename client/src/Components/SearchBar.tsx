@@ -10,7 +10,6 @@ export const SearchBar: React.FC = () => {
 
   const searchProperties = async () => {
 
-    
     try {
       const response = await api.get('api/properties/properties-search', {
         params: {

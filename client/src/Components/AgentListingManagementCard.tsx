@@ -73,6 +73,38 @@ const AgentListingManagementCard: React.FC<PropertyTableProps> = ({ data = [] })
         });
     };
     
+    const removeListing = async (propertyId: number) => {
+
+        try {
+            const response: any = await api.delete(`api/properties/${propertyId}`, {
+                params: {
+                    propertyId : propertyId
+                }
+            });
+
+            console.log('API response:', response);
+
+            toast.success("Delete Listing Successful", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
+
+            // Delay the page reload by 2 seconds (2000 milliseconds)
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+
+        } catch (error) {
+            console.error('Failed to fetch property data:', error);
+
+            toast.error("Delete Listing Failed", {
+                position: toast.POSITION.TOP_RIGHT,
+                autoClose: 2000,
+            });
+           
+        }
+    }
+
 
     const formatPrice = (price: number | string) => {
         const priceNumber = Number(price);
@@ -112,7 +144,7 @@ const AgentListingManagementCard: React.FC<PropertyTableProps> = ({ data = [] })
                         <div className="property-management-buttons">
                             <button className="property-view-btn" onClick={() => viewListing(property.propertyId)}>View</button>
                             <button className="property-edit-btn" onClick={() => editListing(property)}>Edit</button>
-                            <button className="property-remove-btn">Remove</button>
+                            <button className="property-remove-btn" onClick={() => removeListing(property.propertyId)}>Remove</button>
                         </div>
                     </div>
                 </div>
