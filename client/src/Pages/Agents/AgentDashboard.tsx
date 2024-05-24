@@ -71,16 +71,16 @@ const AgentDashboard = () => {
                 numberOfRooms: item.numberOfRooms,
                 area: item.area,
                 tenure: item.tenure,
-                status: item.status,
+                status: item.propertyStatus,
                 pricePerSquareFeet: item.pricePerSquareFeet,
                 price: item.price,
-                agentId: item.agentI,
+                agentId: item.agentId,
                 sellerId: item.sellerId,
                 listingDate: item.listingDate
             }));
 
             setProperties(mappedProperties);
-            console.log(properties);
+            console.log('properties: ',mappedProperties);
 
         } catch (error) {
             console.error('Failed to fetch property data:', error);

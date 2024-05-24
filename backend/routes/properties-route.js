@@ -11,6 +11,7 @@ import {
     incrementViewCounter,
     getPropertyViews,
     getPropertyWatchlistCount,
+    updateListing,
   } from '../controllers/properties-controller.js';
 
 const router = express.Router();
@@ -31,7 +32,7 @@ router.get('/:propertyId', getProperty);
 router.post('/', createProperty);
 
 // Update Property
-router.put('/:propertyId', updateProperty);
+router.put('/update-listing/:propertyId', updateListing);
 
 // Update Property Status
 router.put('/:propertyId/update-status', updatePropertyStatus);

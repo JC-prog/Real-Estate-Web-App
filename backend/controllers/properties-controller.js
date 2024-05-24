@@ -359,3 +359,75 @@ export const getPropertyWatchlistCount = async (req, res) => {
       res.status(500).json({ message: 'Failed to get property watchlist count' });
     }
   };
+
+  // Update Property Function
+export const updateListing = async (req, res) => {
+    console.log('req bod', req.body)
+    const dbService = new DbService(config);
+    
+
+    try {
+        await dbService.connect();
+
+
+        const { propertyId } = req.params;
+        let {
+            propertyName,
+            propertyAddress,
+            propertyType,
+            numberOfRooms,
+            area,
+            tenure,
+            price,
+            sellerId,
+            agentId,
+            propertyStatus
+        } = req.body;
+
+        numberOfRooms = parseInt(numberOfRooms, 10);
+        console.log("Update Property Started");
+
+        // Query
+        const query = `UPDATE properties SET 
+                        propertyName = ?, 
+                        propertyAddress = ?, 
+                        propertyType = ?, 
+                        numberOfRooms = ?, 
+                        area = ?, 
+                        tenure = ?, 
+                        price = ?, 
+                        sellerId = ?, 
+                        agentId = ?, 
+                        propertyStatus = ?, 
+                        pricePerSquareFeet = ? 
+                       WHERE propertyId = ?`;
+        const pricePerSqft = parseFloat(price) / parseFloat(area);
+        const params = [
+            propertyName || null,
+            propertyAddress || null,
+            propertyType || null,
+            numberOfRooms || null,
+            area || null,
+            tenure || null,
+            price || null,
+            sellerId || null,
+            agentId || null,
+            propertyStatus || null,
+            parseFloat(price) / parseFloat(area) || null,
+            propertyId
+        ];
+
+        // Execute Query
+        const results = await dbService.query(query, params);
+
+        console.log(results);
+
+        res.status(200).json({ message: "Update Property Successful" });
+
+    } catch (err) {
+        console.error('Error updating Property:', err);
+        res.status(500).json({ message: "Update Property Failed!" });
+    } finally {
+        await dbService.disconnect();
+    }
+};

@@ -32,6 +32,7 @@ import AgentsHomePage from "./Pages/Agents/AgentsHome";
 import AgentProfile from "./Pages/Agents/AgentProfile";
 import AgentDashboard from "./Pages/Agents/AgentDashboard";
 import AgentCreateListing from "./Pages/Agents/AgentCreateListing";
+import AgentEditListing from "./Pages/Agents/AgentEditListing";
 
 function App() {
   return (
@@ -58,6 +59,7 @@ function App() {
             <Route path="/agent/:agentId" element={<AgentProfile />} />
             <Route path="/agent-dashboard" element={<AgentDashboard />} />
             <Route path="/agent-create-listing" element={<AgentCreateListing />} />
+            <Route path="/agent/edit-listing/:propertyId" element={<AgentEditListing />} />
 
             <Route path="/admin" element={<Admin />} />
             <Route path="/admin/create-user" element={<AdminCreateUser />} />

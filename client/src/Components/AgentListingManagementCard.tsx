@@ -65,6 +65,14 @@ const AgentListingManagementCard: React.FC<PropertyTableProps> = ({ data = [] })
             },
           });
     }
+    
+    
+    const editListing = (property: Property) => {
+        navigate(`/agent/edit-listing/${property.propertyId}`, {
+            state: { propertyDetails: property },
+        });
+    };
+    
 
     const formatPrice = (price: number | string) => {
         const priceNumber = Number(price);
@@ -103,7 +111,7 @@ const AgentListingManagementCard: React.FC<PropertyTableProps> = ({ data = [] })
 
                         <div className="property-management-buttons">
                             <button className="property-view-btn" onClick={() => viewListing(property.propertyId)}>View</button>
-                            <button className="property-edit-btn">Edit</button>
+                            <button className="property-edit-btn" onClick={() => editListing(property)}>Edit</button>
                             <button className="property-remove-btn">Remove</button>
                         </div>
                     </div>
