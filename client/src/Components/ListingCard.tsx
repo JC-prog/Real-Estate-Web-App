@@ -112,8 +112,13 @@ const ListingCard: React.FC<ListingCardProps> = ({
       if (userType === "buyer") {
         const response = await api.post("api/buy/updateWatchlist", {
           propertyId: propertyId,
+          propertyName: propertyName,
           userId: buyerId,
         });
+        toast.success(
+          `Property ${propertyName} has been added by User id ${buyerId}`,
+          { autoClose: 2000 }
+        );
         console.log("Response:", response.data);
       } else {
         toast.error("Only buyers can add Properties to Watchlist");
@@ -172,8 +177,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
       </div>
       <div className="btn-wrapper">
         <Box sx={{ "& > :not(style)": { m: 1 } }}>
-          <Fab aria-label="View">
-            <InfoRoundedIcon fontSize="medium" onClick={handleView} />
+          <Fab aria-label="View" onClick={handleView}>
+            <InfoRoundedIcon fontSize="medium" />
           </Fab>
           {/* <button onClick={handleView} id="viewBtn">
           View
