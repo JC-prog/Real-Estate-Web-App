@@ -9,7 +9,7 @@ import "./AdminViewListings.css";
 
 // Interface
 interface Property {
-    propertyId: string;
+    propertyId: number;
     propertyName: string;
     propertyAddress: string;
     propertyStatus: string;

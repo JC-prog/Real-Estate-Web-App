@@ -8,7 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 // Interface
 interface Property {
-    propertyId: string;
+    propertyId: number;
     propertyName: string;
     propertyAddress: string;
     propertyStatus: string;
@@ -23,15 +23,38 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
     const navigate = useNavigate();
 
     if (data.length === 0) {
-        return <p>No propertys available.</p>;
+        return <p>No properties available.</p>;
     }
 
-    const viewProperty = async (propertyId: string) => {
+    const viewProperty = async (propertyId: number) => {
 
-        navigate(`/property/${propertyId}`);
+        const response = await api.get(`/api/properties/${propertyId}`, {
+			params: {
+			  propertyId: propertyId
+			},
+		  });
+
+        const propertyData = response.data.results[0];
+
+        navigate(`/property/${propertyId}`, {
+            state: {
+              propertyDetails: {
+                propertyName: propertyData.propertyName,
+                propertyAddress: propertyData.propertyAddress,
+                propertyType: propertyData.propertyType,
+                numberOfRooms: propertyData.numberOfRooms,
+                area: propertyData.area,
+                tenure: propertyData.tenure,
+                status: propertyData.propertyStatus,
+                pricePerSquareFeet: propertyData.pricePerSquareFeet,
+                price: propertyData.price,
+                listingDate: propertyData.listingDate,
+              },
+            },
+          });
     }
 
-    const removeListing = async (propertyId: string) => {
+    const removeListing = async (propertyId: number) => {
 
         try {
             const response: any = await api.delete(`api/properties/${propertyId}`, {
@@ -63,7 +86,7 @@ const PropertyTable: React.FC<PropertyTableProps> = ({ data = [] }) => {
         }
     }
 
-    const changePropertyStatus = async (propertyId: string, propertyStatus: string) => {
+    const changePropertyStatus = async (propertyId: number, propertyStatus: string) => {
         if (propertyStatus == "Sold")
         {
             propertyStatus = "New";
