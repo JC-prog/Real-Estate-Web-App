@@ -8,7 +8,7 @@ export const SearchBar: React.FC = () => {
   const [search, setSearch] = useState<string>('');
   const navigate = useNavigate();
 
-  const handleSearch = async () => {
+  const searchProperties = async () => {
 
     
     try {
@@ -30,7 +30,7 @@ export const SearchBar: React.FC = () => {
 
   return (
     <div className="searchbar-wrapper">
-      <FaSearch id='search-icon' onClick={handleSearch} />
+      <FaSearch id='search-icon' onClick={ searchProperties } />
       <input
         type="text"
         placeholder="Type to search"

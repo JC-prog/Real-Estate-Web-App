@@ -40,7 +40,7 @@ const BuyPage: React.FC = () => {
     const fetchProperties = async () => {
       try {
         const response = await api.get<ApiResponse>("/api/buy"); // Adjust the URL as necessary
-        console.log("API response:", response.data); // Debugging line
+        // console.log("API response:", response.data); // Debugging line
         // console.log(response.data.results[0].propertyId)
         setProperties(response.data.results);
       } catch (error) {

@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import InfoRoundedIcon from "@mui/icons-material/InfoRounded";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { Box, Fab } from "@mui/material";
+import { toast } from "react-toastify";
 
 const getCookieValue = (name: string): string | undefined => {
   const value = `; ${document.cookie}`;
@@ -74,8 +75,6 @@ const ListingCard: React.FC<ListingCardProps> = ({
         },
       });
       console.log("response", response.data);
-      console.log("this one returns the user id", response.data.userId);
-      console.log("this one is the usertype", response.data.user);
       return response.data.userId;
     } catch (error) {
       console.error("Error getting userID", error);
@@ -83,33 +82,51 @@ const ListingCard: React.FC<ListingCardProps> = ({
     }
   };
 
-  const handleAddWatchlist = async () => {
-    const buyerId = await getUserID();
-    console.log("propertyId", propertyId);
-    console.log("buyerId", buyerId);
-
+  const getUserType = async (userId: string) => {
+    const token = getCookieValue("token");
     try {
-      console.log("buyerid", buyerId);
-      const response = await api.post("api/buy/updateWatchlist", {
-        propertyId: propertyId,
-        userId: buyerId,
+      const response = await api.get(`api/user/${userId}`, {
+        params: {
+          userId: userId,
+        },
       });
-      console.log("Response:", response.data);
+      console.log(response.data.results[0].userType);
+      return response.data.results[0].userType;
     } catch (error) {
-      console.error("Error adding to watchlist:", error);
+      console.error("Error getting user type", error);
+      throw error; // Propagate the error to the caller
     }
   };
 
-  //get the data from the backend using post from where it gets the databse
-  const buyerViewWatchlist = async () => {
-    const buyerId = await getUserID();
+  const handleAddWatchlist = async () => {
     try {
-      const response = await api.post("api/buy/updateWatchList", {
-        propertyId: propertyId,
-        userId: buyerId,
-      });
+      const buyerId = await getUserID();
+      console.log("propertyId", propertyId);
+      console.log("buyerId", buyerId);
+
+      const userType = await getUserType(buyerId);
+
+      console.log("usertype is", userType);
+
+      //if userType is buyer then only the watchlist will be added
+      if (userType === "buyer") {
+        const response = await api.post("api/buy/updateWatchlist", {
+          propertyId: propertyId,
+          propertyName: propertyName,
+          userId: buyerId,
+        });
+        toast.success(
+          `Property ${propertyName} has been added by User id ${buyerId}`,
+          { autoClose: 2000 }
+        );
+        console.log("Response:", response.data);
+      } else {
+        toast.error("Only buyers can add Properties to Watchlist");
+      }
     } catch (error) {
-      console.error("error getting the view for user buyer");
+      navigate("/login");
+      toast.error("Login to add Properties to your Watchlist");
+      console.error("Error adding to watchlist:", error);
     }
   };
 
@@ -160,14 +177,18 @@ const ListingCard: React.FC<ListingCardProps> = ({
       </div>
       <div className="btn-wrapper">
         <Box sx={{ "& > :not(style)": { m: 1 } }}>
-          <Fab aria-label="View">
-            <InfoRoundedIcon fontSize="medium" onClick={handleView} />
+          <Fab aria-label="View" onClick={handleView}>
+            <InfoRoundedIcon fontSize="medium" />
           </Fab>
           {/* <button onClick={handleView} id="viewBtn">
           View
         </button> */}
-          <Fab variant="extended" aria-label="like">
-            <FavoriteIcon onClick={handleAddWatchlist} sx={{ mr: 1 }} />
+          <Fab
+            variant="extended"
+            aria-label="Add to WatchList"
+            onClick={handleAddWatchlist}
+          >
+            <FavoriteIcon sx={{ mr: 1 }} />
             Add to watchlist
           </Fab>
         </Box>

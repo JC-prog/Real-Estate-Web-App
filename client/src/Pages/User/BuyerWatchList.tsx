@@ -77,8 +77,14 @@ const BuyerWatchList: React.FC = () => {
   useEffect(() => {
     const fetchPropertiesInWatchList = async () => {
       try {
+        console.log("Start fetching userId");
         const userId = await getUserID();
+        console.log("Fetched userId:", userId);
+
+        console.log("Start fetching userType");
         const userType = await getUserType(userId);
+        console.log("Fetched userType:", userType);
+
         setUserType(userType);
 
         if (userType == "admin") {
@@ -90,7 +96,7 @@ const BuyerWatchList: React.FC = () => {
           return;
         }
 
-        if (userId == null) {
+        if (userId == undefined) {
           navigate("/login");
           setError("Login to add Properties to your watchlist");
           setLoading(false);
@@ -108,7 +114,8 @@ const BuyerWatchList: React.FC = () => {
         console.log(response.data.results);
         setProperties(response.data.results);
       } catch (error) {
-        setError("Failed to fetch WatchList");
+        navigate("/login");
+        toast.error("Login to add Properties to your Watchlist");
         console.error("Error fetching WatchList:", error);
       } finally {
         setLoading(false);

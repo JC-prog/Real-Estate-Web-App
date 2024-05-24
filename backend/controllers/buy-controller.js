@@ -19,7 +19,7 @@ export const getProperties = async (req, res) => {
         // Execute Query
         const results = await dbService.query(query, params);
 
-        console.log(results);
+        // console.log(results);
 
         res.status(201).send({
            results
@@ -99,7 +99,7 @@ export const getBuyerWatchlist = async (req, res) => {
         // Execute Query
         const results = await dbService.query(query, params);
 
-        console.log(results);
+        // console.log(results);
 
         await dbService.disconnect();
 
